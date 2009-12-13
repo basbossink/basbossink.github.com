@@ -6,12 +6,50 @@
     <title>{{ page.title }}</title>
     <link rel="stylesheet" type="text/css" href="css/default.css" />
 <body>
-  <div id="container">
-    {{ content }}  
-    <div class="footer">
-        <hr>
-        Last updated on : {{ site.time | date_to_xmlshema  }}
+    <div id="container">
+        {{ content }}  
+        <div class="footer">
+            <hr>
+            Last updated on : {{ site.time | date_to_xmlshema  }}
+        </div>
     </div>
-  </div>
+    <div id="linkList">
+        <h3>Profiles</h3>
+        <ul>
+            <li>
+                <iframe src="http://stackoverflow.com/users/flair/74198.html?theme=clean" marginwidth="0" marginheight="0" 
+                    frameborder="0"  scrolling="no" width="210" height="60">
+                </iframe>
+            </li>
+            <li>
+                <iframe src="http://serverfault.com/users/flair/9949.html?theme=clean" marginwidth="0" marginheight="0" 
+                    frameborder="0"  scrolling="no" width="210" height="60">
+                </iframe>
+            </li><li>
+                <iframe src="http://superuser.com/users/flair/9297.html?theme=clean" marginwidth="0" marginheight="0" 
+                    frameborder="0"  scrolling="no" width="210" height="60">
+                </iframe>
+            </li>
+            <li>
+                <a href="http://nl.linkedin.com/in/basbossink">
+                    <img src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" width="160" height="33" 
+                        border="0" alt="View Bas Bossink's profile on LinkedIn">
+                </a>
+            </li>
+            <li>
+                <a href="http://www.twitter.com/basbossink">
+                    <img src="http://twitter-badges.s3.amazonaws.com/follow_me-a.png" alt="Follow basbossink on Twitter"/>
+                </a>
+            </li>
+            <li>
+                <a href="http://nl-nl.facebook.com/people/Bas-Bossink/1820090791" title="Bas Bossink" target="_TOP">Facebook</a>
+            </li>
+        </ul>
+        <h3>Projects</h3>
+        <ul>
+            <li><a href="http://github.com/basbossink/gitready/tree/nl">gitready (dutch translation)</a></li>
+            <li><a href="http://basbossink.github.com/skelhs/">skelhs</a></li>
+        </ul>
+    </div>
 </body>
 </html>
