@@ -4,8 +4,8 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>{{ page.title }}</title>
-    <link rel="stylesheet" type="text/css" href="css/default.css" />
-<body>
+    <link rel="stylesheet" type="text/css" href="/css/default.css" />
+    <body>
     <div id="container">
         {{ content }}  
         <div class="footer">
@@ -14,6 +14,12 @@
         </div>
     </div>
     <div id="linkList">
+        <h3>Posts</h3>
+        <ul>
+            {% for post in site.posts limit: 5 %}
+                <li><a href="{{ post.url }}">{{ post.title | truncate: 120 }}</a></li>
+            {% endfor %}
+        </ul>
         <h3>Profiles</h3>
         <ul>
             <li>
@@ -42,7 +48,9 @@
                 </a>
             </li>
             <li>
-                <a href="http://nl-nl.facebook.com/people/Bas-Bossink/1820090791" title="Bas Bossink" target="_TOP">Facebook</a>
+                <a href="http://nl-nl.facebook.com/people/Bas-Bossink/1820090791" title="Bas Bossink" target="_TOP">
+                    <img src="/images/facebook.png" width="79" height="23" />
+                </a>
             </li>
         </ul>
         <h3>Projects</h3>

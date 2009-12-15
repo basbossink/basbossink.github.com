@@ -29,8 +29,20 @@ h1 {
 h1 .small { 
     font-size: 0.4em;
 }
-h1 a { 
-    text-decoration: none
+a:link {
+    text-decoration:none;
+}
+a:visited {
+    text-decoration:none;
+}
+a:hover {
+    text-decoration:underline;
+}
+a:active {
+    text-decoration:underline;
+}
+a { 
+    color: #8470FF; 
 }
 h2 { 
     font-size: 1.5em;  
@@ -40,9 +52,6 @@ h3 {
     font-size: 1.2em;
     color: #8470FF; 
 	margin-bottom: 0; 
-}
-a { 
-    color: #08846f; 
 }
 pre { 
     background: #aaaaaa; 
@@ -55,23 +64,25 @@ hr {
 }
 /* specific divs */
 #container { 
-	padding: 10px;  
-    margin: 0;
     width: 400px;
-	position: absolute;
-    top: 135px;
-    left: 135px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 135px;
+}
+#date { 
+    text-align: right; 
+	font-size: 0.8em;
+    padding-top: 50px;
 }
 .footer { 
     text-align: right; 
-	font-size: 0.8em;
+	font-size: 0.6em;
     padding-top: 30px;
 }
 #linkList {
-	margin-left: 60px; 
-	position: absolute;
-    top: 175px;
-    left: 500px; 
+    position: absolute;
+    right: 100px;
+    top: 150px
 }
 #linkList ul {
 	margin: 0;
@@ -83,4 +94,7 @@ hr {
 	padding-top: 5px; 
 	margin-bottom: 5px;
 	list-style-type: none;
+}
+#linkList img { 
+    border-width: 0;
 }
