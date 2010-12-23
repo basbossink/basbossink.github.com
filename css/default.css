@@ -1,4 +1,4 @@
-/* css Zen Garden default style v1.02 */
+:/* css Zen Garden default style v1.02 */
 /* css released under Creative Commons License - http://creativecommons.org/licenses/by-nc-sa/1.0/  */
 /* This file based on 'Tranquille' by Dave Shea */
 /* You may use this file as a foundation for any new work, but you may find it easier to start from scratch. */
@@ -6,33 +6,34 @@
 /* Your images should be linked as if the CSS file sits in the same folder as the images. ie. no paths. */
 /* basic elements */
 html {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 body { 
     margin-top: 1.0em;
-    background-color: #FFFFF;
+    background-color: #CDCDCD;
     font-family: "Helvetica,Arial,FreeSans"; 
-    color: #000000;
-	margin: 0; 
-	padding: 0;
+    margin: 0; 
+    padding: 0;
 }
 p { 
-	margin-top: 0; 
-	text-align: justify;
+    margin-top: 0; 
+    text-align: justify;
 }
 h1 { 
     font-size: 2.0em;
-    color: #8470FF;
+    color: #008B00;
     margin-bottom: 3px;
 }
 h1 .small { 
     font-size: 0.4em;
 }
 a:link {
+    color: #00138B;
     text-decoration:none;
 }
 a:visited {
+    color: #6019FF;
     text-decoration:none;
 }
 a:hover {
@@ -41,17 +42,14 @@ a:hover {
 a:active {
     text-decoration:underline;
 }
-a { 
-    color: #8470FF; 
-}
 h2 { 
     font-size: 1.5em;  
-    color: #8470FF; 
+    color: #008B00;
 }
 h3 { 
     font-size: 1.2em;
-    color: #8470FF; 
-	margin-bottom: 0; 
+    color: #008B00;
+    margin-bottom: 0; 
 }
 pre { 
     background: #aaaaaa; 
@@ -71,12 +69,12 @@ hr {
 }
 #date { 
     text-align: right; 
-	font-size: 0.8em;
+    font-size: 0.8em;
     padding-top: 50px;
 }
 .footer { 
     text-align: right; 
-	font-size: 0.6em;
+    font-size: 0.6em;
     padding-top: 30px;
 }
 #linkList {
@@ -85,15 +83,15 @@ hr {
     top: 150px
 }
 #linkList ul {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 #linkList li {
-	line-height: 2.5ex; 
-	display: block; 
-	padding-top: 5px; 
-	margin-bottom: 5px;
-	list-style-type: none;
+    line-height: 2.5ex; 
+    display: block; 
+    padding-top: 5px; 
+    margin-bottom: 5px;
+    list-style-type: none;
 }
 #linkList img { 
     border-width: 0;

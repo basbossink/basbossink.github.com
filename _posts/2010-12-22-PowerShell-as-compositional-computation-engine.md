@@ -1,5 +1,5 @@
 ---
-published: true
+published: false
 title: PowerShell as a compositional computation engine
 layout: post
 categories: [PowerShell,extendibillity]
