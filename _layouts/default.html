@@ -1,70 +1,104 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>{{ page.title }}</title>
     <link rel="stylesheet" type="text/css" href="/css/default.css" />
-    <body>
+  </head>
+  <body>
+    <div id="banner">
+      <h1>Move along, nothing to see here</h1>
+      <h2>Ramblings about my programming escapades.</h2>
+    </div>
     <div id="container">
-        {{ content }}  
-        <div class="footer">
-            <hr>
-            Last updated on : {{ site.time | date_to_xmlshema  }}
-        </div>
+      {{ content }}  
+      <div class="footer">
+        <hr/>
+        <a href="http://validator.w3.org/check?uri=referer">
+          <img src="/images/w3c-xhtml.png"
+               alt="Valid XHTML 1.0 Strict" />
+        </a>
+        <a href="http://jigsaw.w3.org/css-validator/check/referer">
+          <img src="/images/w3c-css.png"
+               alt="Valid CSS!" />
+        </a>
+        <a href="http://www.gnu.org/software/emacs/">
+          <img src="/images/emacs-powered.png" 
+               alt="Powered by GNU Emacs" />
+        </a>
+        <a href="http://www.anybrowser.org/campaign/">
+          <img src="/images/anybrowser.png" 
+               alt="Best viewed with any browser." />
+        </a>
+        <a rel="license"
+           href="http://creativecommons.org/licenses/by/3.0/nl/">
+          <img alt="Creative Commons License" 
+               src="http://i.creativecommons.org/l/by/3.0/nl/80x15.png"
+               />
+        </a><br/>
+        Hosted by <a href='http://github.com/basbossink/basbossink.github.com/' target='_blank'>GitHub</a> and powered by <a href='http://github.com/mojombo/jekyll'>Jekyll</a>.<br/>
+        This work is licensed under a 
+        <a rel="license"
+           href="http://creativecommons.org/licenses/by/3.0/nl/">Creative
+          Commons Attribution 3.0 Netherlands License</a>.<br/>
+        Copyright &copy; {{ site.time | date: "%Y" }} Bas Bossink<br/>
+        Last updated on: {{ site.time | date_to_xmlschema  }}
+      </div>
     </div>
     <div id="linkList">
-        <a href="/"><h3>Home</h3></a>
-        <h3>Posts</h3>
-        <ul>
-            {% for post in site.posts limit: 5 %}
-                <li><a href="{{ post.url }}">{{ post.title | truncate: 120 }}</a></li>
-            {% endfor %}
-        </ul>
-        <h3>Profiles</h3>
-        <ul>
-            <li>
-                  <a href="http://stackexchange.com">
-<img src="http://stackflair.somee.com/Generate/dc8c294c-3f8f-4465-851d-a4b380defb73.png" width="208" height="58" alt="combined Stack Exchange profile for Bas Bossink" title="combined Stack Exchange profiles for Bas Bossink">
-</a>
-            </li>
-            <li>
-                <a href="http://nl.linkedin.com/in/basbossink">
-                    <img src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" width="160" height="33" 
-                        border="0" alt="View Bas Bossink's profile on LinkedIn">
-                </a>
-            </li>
-            <li>
-                <a href="http://www.twitter.com/basbossink">
-                    <img src="http://twitter-badges.s3.amazonaws.com/follow_me-a.png" alt="Follow basbossink on Twitter"/>
-                </a>
-            </li>
-            <li>
-                <a href="http://nl-nl.facebook.com/people/Bas-Bossink/1820090791">
-                    <img src="/images/facebook.png" width="79" height="23" alt="follow Bas Bossink on Facebook" />
-                </a>
-            </li>
-            <li>
-                <a href="http://friendfeed.com/basbossink">
-                    <img src="http://friendfeed.com/static/images/chiclet.png" 
-                    alt="Subscribe to me on FriendFeed" title="Subscribe to me on FriendFeed"/>
-                </a>
-            </li>
-        </ul>
-        <h3>Projects</h3>
-        <ul>
-            <li><a href="http://nl.gitready.com">gitready (dutch translation)</a></li>
-            <li><a href="http://basbossink.github.com/skelhs/">skelhs</a></li>
-            <li><a href="http://github.com/basbossink/hspec">hspec</a></li>
-            <li><a href="http://github.com/basbossink/presentations">presentations</a></li>
-            <li><a href="http://github.com/basbossink/dot-files">dot-files</a></li>
-            <li><a href="https://bitbucket.org/basbossink/pygments-main">Pygments
+      <a href="/atom.xml"><img alt="subscribe" src="/images/feed-icon.png"/></a>
+      <h3><a href="/">Home</a></h3>
+      <h3>Posts</h3>
+      <ul>
+        {% for post in site.posts limit: 5 %}
+        <li><a href="{{ post.url }}">{{ post.title | truncate: 120 }}</a></li>
+        {% endfor %}
+      </ul>
+      <h3>Profiles</h3>
+      <ul>
+        <li>
+          <a href="http://stackexchange.com">
+            <img src="http://stackflair.somee.com/Generate/dc8c294c-3f8f-4465-851d-a4b380defb73.png" width="208" height="58" alt="combined Stack Exchange profile for Bas Bossink" title="combined Stack Exchange profiles for Bas Bossink"/>
+          </a>
+        </li>
+        <li>
+          <a href="http://nl.linkedin.com/in/basbossink">
+            <img src="http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif" width="160" height="33" 
+                 alt="View Bas Bossink's profile on LinkedIn"/>
+          </a>
+        </li>
+        <li>
+          <a href="http://www.twitter.com/basbossink">
+            <img src="http://twitter-badges.s3.amazonaws.com/follow_me-a.png" alt="Follow basbossink on Twitter"/>
+          </a>
+        </li>
+        <li>
+          <a href="http://nl-nl.facebook.com/people/Bas-Bossink/1820090791">
+            <img src="/images/facebook.png" width="79" height="23" alt="follow Bas Bossink on Facebook" />
+          </a>
+        </li>
+        <li>
+          <a href="http://friendfeed.com/basbossink">
+            <img src="http://friendfeed.com/static/images/chiclet.png" 
+                 alt="Subscribe to me on FriendFeed" title="Subscribe to me on FriendFeed"/>
+          </a>
+        </li>
+      </ul>
+      <h3>Projects</h3>
+      <ul>
+        <li><a href="http://nl.gitready.com">gitready (dutch translation)</a></li>
+        <li><a href="http://basbossink.github.com/skelhs/">skelhs</a></li>
+        <li><a href="http://github.com/basbossink/hspec">hspec</a></li>
+        <li><a href="http://github.com/basbossink/presentations">presentations</a></li>
+        <li><a href="http://github.com/basbossink/dot-files">dot-files</a></li>
+        <li><a href="https://bitbucket.org/basbossink/pygments-main">Pygments
             fork</a> to add <a href="http://technet.microsoft.com/nl-nl/scriptcenter/powershell(en-us).aspx">PowerShell </a>support</li>
-        </ul>
+      </ul>
     </div>
-</body>
+  </body>
 </html>
-
+      
 
 
 

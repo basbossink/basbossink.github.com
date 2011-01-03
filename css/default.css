@@ -1,20 +1,16 @@
-:/* css Zen Garden default style v1.02 */
-/* css released under Creative Commons License - http://creativecommons.org/licenses/by-nc-sa/1.0/  */
-/* This file based on 'Tranquille' by Dave Shea */
-/* You may use this file as a foundation for any new work, but you may find it easier to start from scratch. */
-/* Not all elements are defined in this file, so you'll most likely want to refer to the xhtml as well. */
-/* Your images should be linked as if the CSS file sits in the same folder as the images. ie. no paths. */
-/* basic elements */
 html {
     margin: 0;
     padding: 0;
+    background-color: #ffffff;
+    color: #000000;
+    font-family: "Helvetica,FreeSans,Arial,sans-serif"; 
+    border: 0px solid black;
+}
+img {
+    border: 0;
 }
 body { 
     margin-top: 1.0em;
-    background-color: #CDCDCD;
-    font-family: "Helvetica,Arial,FreeSans"; 
-    margin: 0; 
-    padding: 0;
 }
 p { 
     margin-top: 0; 
@@ -22,50 +18,62 @@ p {
 }
 h1 { 
     font-size: 2.0em;
-    color: #008B00;
+    color: #483d8b;
     margin-bottom: 3px;
 }
 h1 .small { 
     font-size: 0.4em;
 }
 a:link {
-    color: #00138B;
+    color: #4b0082;
     text-decoration:none;
 }
 a:visited {
-    color: #6019FF;
+    color: #483d8b;
     text-decoration:none;
-}
-a:hover {
-    text-decoration:underline;
 }
 a:active {
     text-decoration:underline;
 }
 h2 { 
     font-size: 1.5em;  
-    color: #008B00;
+    color: #483d8b;
 }
 h3 { 
     font-size: 1.2em;
-    color: #008B00;
+    color: #483d8b;
     margin-bottom: 0; 
 }
 pre { 
     background: #aaaaaa; 
-    color:#eeeeee 
+    color: #eeeeee;
     padding: 5px;
 }
 hr { 
-    border: 0; 
-    border-bottom: 1px solid #aaa
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: gray;
 }
 /* specific divs */
-#container { 
-    width: 400px;
+#banner {
+    background-color: #483d8b;
+    padding: 10px;
+    width: 35%;
+    text-align: center;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 135px;
+    border-style: double;
+    border-width: medium;
+    border-color: #4b0082;
+}
+#banner h1,h2 {
+    color: #fffaf0;
+}
+#container {
+    width: 35%;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
 }
 #date { 
     text-align: right; 
@@ -79,8 +87,8 @@ hr {
 }
 #linkList {
     position: absolute;
-    right: 100px;
-    top: 150px
+    top: 250px;
+    right: 5px;
 }
 #linkList ul {
     margin: 0;
@@ -93,6 +101,4 @@ hr {
     margin-bottom: 5px;
     list-style-type: none;
 }
-#linkList img { 
-    border-width: 0;
-}
+
