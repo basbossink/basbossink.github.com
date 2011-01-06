@@ -1,0 +1,113 @@
+$em-color: #483d8b;
+$border-size: 0;
+$body-to-footer-distance: 50px;
+$default-margin: 0;
+$default-padding: 0;
+
+@mixin right-small($size) {
+  text-align: right; 
+  font-size: $size;
+  padding-top: $body-to-footer-distance;
+}
+
+@mixin centrate {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+html {
+  margin: $default-margin;
+  padding: $default-padding;
+  background-color: #ffffff;
+  color: #000000;
+  font-family: "Helvetica,FreeSans,Arial,sans-serif"; 
+  border: $border-size solid black;
+}
+img {
+  border: $border-size;
+}
+body { 
+  margin-top: 1.0em;
+}
+p { 
+  margin-top: $default-margin; 
+  text-align: justify;
+}
+h1 { 
+  font-size: 2.0em;
+  color: $em-color;
+  margin-bottom: 3px;
+}
+h1 .small { 
+  font-size: 0.4em;
+}
+a {
+  color: $em-color;
+  &:link { text-decoration: none; }
+  &:visited { text-decoration: none; }
+  &:active { text-decoration: none; }
+}
+h2 { 
+  font-size: 1.5em;  
+  color: $em-color;
+}
+h3 { 
+  font-size: 1.2em;
+  color: $em-color;
+  margin-bottom: 0; 
+}
+pre { 
+  background: #aaaaaa; 
+  color: #eeeeee;
+  padding: 5px;
+}
+hr { 
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: gray;
+}
+/* specific divs */
+#banner {
+  @include centrate;
+  background-color: $em-color;
+  padding: 10px;
+  width: 35%;
+  text-align: center;
+  border-style: double;
+  border-width: medium;
+  border-color: #4b0082;
+}
+#banner h1,h2 {
+  color: #fffaf0;
+}
+#container {
+  @include centrate;
+  width: 35%;
+  padding: 5px;
+}
+#date { 
+  @include right-small(0.8em);
+}
+.footer { 
+  @include right-small(0.6em);
+}
+#linkList {
+  $interspacing: 5px;
+
+  position: absolute;
+  top: 250px;
+  right: 5px;
+
+  ul { 
+    margin: $default-margin; 
+    padding: $default-padding;
+  }
+  li {
+    line-height: 2.5ex; 
+    display: block; 
+    padding-top: $interspacing; 
+    margin-bottom: $interspacing;
+    list-style-type: none;
+  }
+}
+
