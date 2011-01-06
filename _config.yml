@@ -1,4 +1,9 @@
 destination: ./_site
 auto:   true
-lsi: fals
+lsi: false
 pygments: true
+maruku:
+        use_tex: true
+
+kramdown:
+        use_coderay: true
