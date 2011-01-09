@@ -6,6 +6,6 @@
   %a{ :href => "{{ page.url }}"} {{ page.title }}
 {{ content }}
 %div#date 
-  {{ page.date | date_to_string }}
+  {{ page.date | date: "%a %d %b %Y" }}
 
 

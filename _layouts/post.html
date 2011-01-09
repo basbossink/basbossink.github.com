@@ -6,5 +6,5 @@ layout: default
 </h2>
 {{ content }}
 <div id='date'>
-  {{ page.date | date_to_string }}
+  {{ page.date | date: "%a %d %b %Y" }}
 </div>

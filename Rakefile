@@ -16,12 +16,19 @@ rule '.html' => ['.haml'] do |t|
     sh %{ haml -E utf-8 #{t.source} #{t.name} }
 end
 
-rule '.scss' => ['.css'] do |t|
+rule '.css' => ['.scss'] do |t|
     sh %{ sass -t compressed #{t.source} #{t.name} }
 end
 
 desc 'Generate html and css from sources'
 task :build => LAYOUT do
+end
+
+desc 'commpress html'
+task :shrink => :build do
+  FileList['_layouts/default.html'].each do |file|
+    sh %{ java -jar c:/Users/bas/programs/htmlcompressor/htmlcompressor-0.9.8.jar --remove-intertag-spaces --remove-quotes #{file} -o #{file}}
+  end
 end
 
 desc 'Build and start server'

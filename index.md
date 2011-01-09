@@ -8,7 +8,7 @@ This page is a placeholder for various sources of information about my persona. 
 
 ## Latest posts
 
-{% for post in site.posts limit: 5 %}
+{% for post in site.posts limit: 3 %}
 <h3><a href="{{ post.url }}">{{ post.title }} </a></h3>
   {{ post.content }}
 {% endfor %}  

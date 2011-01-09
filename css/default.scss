@@ -26,8 +26,11 @@ html {
 img {
   border: $border-size;
 }
-body { 
-  margin-top: 1.0em;
+a {
+  color: $em-color;
+  &:link { text-decoration: none; }
+  &:visited { text-decoration: none; }
+  &:active { text-decoration: none; }
 }
 p { 
   margin-top: $default-margin; 
@@ -38,15 +41,6 @@ h1 {
   color: $em-color;
   margin-bottom: 3px;
 }
-h1 .small { 
-  font-size: 0.4em;
-}
-a {
-  color: $em-color;
-  &:link { text-decoration: none; }
-  &:visited { text-decoration: none; }
-  &:active { text-decoration: none; }
-}
 h2 { 
   font-size: 1.5em;  
   color: $em-color;
@@ -54,7 +48,6 @@ h2 {
 h3 { 
   font-size: 1.2em;
   color: $em-color;
-  margin-bottom: 0; 
 }
 pre { 
   background: #aaaaaa; 
@@ -76,10 +69,10 @@ hr {
   border-style: double;
   border-width: medium;
   border-color: #4b0082;
-}
-#banner h1,h2 {
-  font-family: 'Cherry Cream Soda', arial, serif;
-  color: #fffaf0;
+  h1, h2 {
+    font-family: 'Cherry Cream Soda', arial, serif;
+    color: #fffaf0;
+  }
 }
 #container {
   @include centrate;
