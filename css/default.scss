@@ -20,7 +20,7 @@ html {
   padding: $default-padding;
   background-color: #ffffff;
   color: #000000;
-  font-family: "Helvetica,FreeSans,Arial,sans-serif"; 
+  font-family: 'PT Sans', arial, serif;
   border: $border-size solid black;
 }
 img {
@@ -78,6 +78,7 @@ hr {
   border-color: #4b0082;
 }
 #banner h1,h2 {
+  font-family: 'Cherry Cream Soda', arial, serif;
   color: #fffaf0;
 }
 #container {
@@ -89,7 +90,7 @@ hr {
   @include right-small(0.8em);
 }
 .footer { 
-  @include right-small(0.6em);
+  @include right-small(0.7em);
 }
 #linkList {
   $interspacing: 5px;

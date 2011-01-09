@@ -1,0 +1,100 @@
+!!! XML utf-8
+!!! Strict
+%html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en"}
+  %head
+    %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}
+    %title {{ page.title }}
+    %link{ :rel => "stylesheet", :type => "text/css", :href => "/css/default.css"}
+    %link{ :rel => "alternate", :type => "application/atom+xml",
+           :href => "/atom.xml", :title => "Sitewide ATOM Feed"}
+    - ["Cherry+Cream+Soda", "PT+Sans",].each do |fam| 
+      %link{ :href => "http://fonts.googleapis.com/css?family=#{fam}", 
+           :rel => "stylesheet", :type =>"text/css"}
+  %body
+    %div#banner
+      %h1 Move along, nothing to see here
+      %h2 Ramblings about my programming escapades.
+    
+    %div#container
+      {{ content }}
+      %div.footer  
+        %hr
+        %a{ :href => "http://validator.w3.org/check?uri=referer"}
+          %img{ :src => "/images/w3c-xhtml.png", :alt => "Valid XHTML 1.0 Strict"}
+        %a{ :href => "http://jigsaw.w3.org/css-validator/check/referer"}
+          %img{ :src => "/images/w3c-css.png", :alt => "Valid CSS"}
+        %a{ :href => "http://feed2.w3.org/check.cgi?url=http%3A//basbossink.github.com/atom.xml"}
+          %img{ :src => "/images/valid-atom.png", :alt => "Valid Atom 1.0"}
+        %a{ :href => "http://www.gnu.org/software/emacs/"}
+          %img{ :src => "/images/emacs-powered.png", :alt => "Powered by GNU Emacs"}
+        %a{ :href => "http://www.anybrowser.org/campaign/"}
+          %img{ :src => "/images/anybrowser.png", :alt => "Best viewed with any browser."}
+        %a{ :href => "http://creativecommons.org/licenses/by/3.0/nl/", :rel => "license"}
+          %img{ :src => "http://i.creativecommons.org/l/by/3.0/nl/80x15.png", 
+                :alt => "Creative Commons License"}
+        %br>
+        Hosted by 
+        %a{ :href => "http://github.com/basbossink/basbossink.github.com/"} GitHub
+        and powered by&#32;
+        %a{ :href => "http://github.com/mojombo/jekyll"}> Jekyll
+        ,&#32;
+        %a{ :href => "http://haml-lang.com/"} Haml
+        &amp;&#32;
+        %a{ :href => "http://sass-lang.com/"}> Sass
+        \.
+        %br>
+        This work is licensed under a&#32;
+        %a{ :rel => "license", :href => "http://creativecommons.org/licenses/by/3.0/nl/"}> |
+        Creative Commons Attribution 3.0 Netherlands License |
+        \.
+        %br>
+        Copyright &copy; {{ site.time | date: "%Y" }} Bas Bossink
+        %br>
+        Last updated on: {{ site.time | date_to_xmlschema }}
+
+    %div#linkList
+      %a{ :href => "/atom.xml"}
+        %img{ :alt => "subcribe", :src => "/images/feed-icon.png"}
+      %h3
+        %a{ :href => "/"} Home
+      %h3 Posts
+      %ul
+        :plain
+            {% for post in site.posts limit: 5 %}
+            <li><a href="{{ post.url }}">{{ post.title | truncate: 120 }}</a></li>
+            {% endfor %}
+      %h3 Profiles
+      %ul
+        %li
+          %a{ :href => "http://stackoverflow.com/users/74198/bas-bossink"}
+            %img{ :src => "http://stackoverflow.com/users/flair/74198.png",
+                  :width => "208", :height =>"58", 
+                  :alt => "Stack Overflow profile for Bas Bossink" }
+        %li
+          %a{ :href => "http://nl.linkedin.com/in/basbossink"}
+            %img{ :src => "http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif",
+                  :width => "160", :height => "33", 
+                  :alt => "View Bas Bossink's profile on LinkedIn"}
+        %li 
+          %a{ :href => "http://www.twitter.com/basbossink"}
+            %img{ :src => "http://twitter-badges.s3.amazonaws.com/follow_me-a.png",
+                  :alt => "Follow basbossink on Twitter"}
+        %li
+          %a{ :href => "http://nl-nl.facebook.com/people/Bas-Bossink/1820090791"}
+            %img{ :src => "/images/facebook.png", :width => "79", :height=> "23",
+                  :alt => "follow Bas Bossink on Facebook"}
+        %li
+          %a{ :href => "http://friendfeed.com/basbossink"}
+            %img{ :src => "http://friendfeed.com/static/images/chiclet.png",
+                  :alt => "Subscribe to me on FriendFeed"}
+      %h3 Projects
+      %ul
+        - [[ "http://nl.gitready.com", "git ready (dutch translation)"],
+           [ "http://basbossink.github.com/skelhs/", "Skelhs"],
+           [ "http://github.com/basbossink/hspec", "hspec"],
+           [ "http://github.com/basbossink/presentations", "presentations"],
+           [ "http://github.com/basbossink/dot-files", "dot-files"],
+           [ "https://bitbucket.org/basbossink/pygments-main", "Pygments fork"]].each do |ref,txt| 
+          %li
+            %a{ :href => "#{ref}"}#{txt}
+

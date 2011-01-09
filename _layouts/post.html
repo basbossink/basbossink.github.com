@@ -1,7 +1,10 @@
 ---
 layout: default
 ---
-<h2><a href="{{ page.url }}"> {{ page.title }} </a></h2>
+<h2>
+  <a href='{{ page.url }}'>{{ page.title }}</a>
+</h2>
 {{ content }}
-<div id="date">{{ page.date | date_to_string }}<h3><a href="/">Home</a></h3></div>
-
+<div id='date'>
+  {{ page.date | date_to_string }}
+</div>
