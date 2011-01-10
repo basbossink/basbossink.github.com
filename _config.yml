@@ -1,9 +1,10 @@
 destination: ./_site
-auto:   true
+auto: true
 lsi: false
 pygments: true
-maruku:
+maruku: {
         use_tex: true
-
-kramdown:
+}
+kramdown: {
         use_coderay: true
+}

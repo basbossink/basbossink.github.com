@@ -1,0 +1,14 @@
+:plain
+  ---
+  layout: default
+  ---
+{% for post in site.posts limit: 3 %}
+%h2
+  %a{ :href => "{{ post.url }}"}{{ post.title }}
+
+{{ post.content }}
+
+%div#date 
+  {{ post.date | date: "%a %d %b %Y" }}
+{% endfor %}  
+

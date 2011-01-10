@@ -59,10 +59,10 @@
         %a{ :href => "/"} Home
       %h3 Posts
       %ul
-        :plain
-            {% for post in site.posts limit: 5 %}
-            <li><a href="{{ post.url }}">{{ post.title | truncate: 120 }}</a></li>
-            {% endfor %}
+        {% for post in site.posts limit: 5 %}
+        %li>
+          %a{ :href =>"{{ post.url }}"}>{{ post.title | truncate: 120 }}
+        {% endfor %}
       %h3 Profiles
       %ul
         %li

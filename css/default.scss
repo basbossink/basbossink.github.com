@@ -37,16 +37,20 @@ p {
   text-align: justify;
 }
 h1 { 
-  font-size: 2.0em;
+  font-size: 2.5em;
   color: $em-color;
   margin-bottom: 3px;
 }
 h2 { 
-  font-size: 1.5em;  
+  font-size: 1.8em;  
   color: $em-color;
 }
 h3 { 
-  font-size: 1.2em;
+  font-size: 1.3em;
+  color: $em-color;
+}
+h4 { 
+  font-size: 1.1em;
   color: $em-color;
 }
 pre { 

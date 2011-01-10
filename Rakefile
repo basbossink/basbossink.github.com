@@ -6,7 +6,7 @@ CLEAN.include('_layouts/*.html')
 CLEAN.include('css/*.css')
 CLOBBER.include('_site')
 
-LAYOUT_SRC = FileList['_layouts/*.haml']
+LAYOUT_SRC = FileList['**/*.haml']
 LAYOUT_HTML = LAYOUT_SRC.ext('html')
 CSS_SRC = FileList['css/*.scss']
 CSS = CSS_SRC.ext('css')
