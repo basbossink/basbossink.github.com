@@ -1,8 +1,10 @@
 $em-color: #483d8b;
+$visited-color: #483d7a;
 $border-size: 0;
 $body-to-footer-distance: 50px;
-$default-margin: 0;
+$default-margin: 3px;
 $default-padding: 0;
+$footnote-size: 0.7em;
 
 @mixin right-small($size) {
   text-align: right; 
@@ -29,8 +31,12 @@ img {
 a {
   color: $em-color;
   &:link { text-decoration: none; }
-  &:visited { text-decoration: none; }
-  &:active { text-decoration: none; }
+  &:visited { 
+    color: $visited-color;
+    text-decoration: none; 
+  }
+  &:hover { text-decoration: underline;}  
+  &:active { text-decoration: underline; }
 }
 p { 
   margin-top: $default-margin; 
@@ -41,17 +47,18 @@ h1 {
   color: $em-color;
   margin-bottom: 3px;
 }
-h2 { 
-  font-size: 1.8em;  
+h2,h3,h4 { 
   color: $em-color;
+  margin: $default-margin;  
+}
+h2 {
+  font-size: 1.8em;  
 }
 h3 { 
   font-size: 1.3em;
-  color: $em-color;
 }
 h4 { 
   font-size: 1.1em;
-  color: $em-color;
 }
 pre { 
   background: #aaaaaa; 
@@ -87,7 +94,14 @@ hr {
   @include right-small(0.8em);
 }
 .footer { 
-  @include right-small(0.7em);
+  @include right-small($footnote-size);
+}
+.footnotes {
+  font-size: $footnote-size;
+  p,ol,li {
+    margin: $default-margin;
+    padding: $default-padding;
+  }
 }
 #linkList {
   $interspacing: 5px;
@@ -103,9 +117,10 @@ hr {
   li {
     line-height: 2.5ex; 
     display: block; 
-    padding-top: $interspacing; 
-    margin-bottom: $interspacing;
     list-style-type: none;
   }
+  img { 
+    padding-top: $interspacing; 
+    margin-bottom: $interspacing;
+  }
 }
-

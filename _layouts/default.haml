@@ -1,8 +1,18 @@
 !!! XML utf-8
 !!! Strict
-%html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en"}
+:plain
+  {% assign lang = 'en' %}{% capture timestamp %}{{site.time | date: "%a, %d %b %y %H:%M:%S +0100" }}{% endcapture %}
+%html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "{{ lang }}", :lang => "{{ lang }}" }>
   %head
-    %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}
+    %meta{ "http-equiv" => "Content-Type", :content => "text/html; charset=utf-8" }
+    %meta{ "http-equiv" => "Date", :content => "{{ timestamp }}" }
+    %meta{ "http-equiv" => "Last-Modified", :content => "{{ timestamp }}" }
+    %meta{ :name => "description", :content => "A personal blog about programming." }
+    %meta{ :name => "author", :content => "Bas Bossink" }
+    {% if page.categories %}
+    %meta{ :name => "keywords", :content => "{{ page.categories | join: ',' }}" }>
+    {% endif %}
+    %meta{ :name => "keywords", :content => "Programming, Functional Programming" }
     %title {{ page.title }}
     %link{ :rel => "stylesheet", :type => "text/css", :href => "/css/default.css"}
     %link{ :rel => "alternate", :type => "application/atom+xml",
@@ -97,4 +107,18 @@
            [ "https://bitbucket.org/basbossink/pygments-main", "Pygments fork"]].each do |ref,txt| 
           %li
             %a{ :href => "#{ref}"}#{txt}
-
+      %h3 Categories
+      %ul
+        :ruby
+          require 'rubygems'
+          require 'jekyll'
+          puts "<!--"
+          options = Jekyll.configuration({})
+          site = Jekyll::Site.new(options)
+          site.read_posts('')
+          puts "-->"
+          site.categories.sort.each do |category, posts|
+              puts "<li>"
+              puts "<a href=\"/tags/#{category.gsub(/\s+/,'-')}.html\">#{category} (#{posts.length})</a>"
+              puts "</li>"
+          end

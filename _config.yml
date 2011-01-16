@@ -3,8 +3,5 @@ auto: true
 lsi: false
 pygments: true
 maruku: {
-        use_tex: true
-}
-kramdown: {
-        use_coderay: true
+  use_tex: true
 }

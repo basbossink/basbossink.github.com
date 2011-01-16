@@ -1,12 +1,9 @@
 ---
-published: true
-title: NL FP day 2011
-layout: post
-categories:
- - Haskell
- - Clean
- - Functioneel Programmeren dag
+layout: default
+title: Posts tagged Clean
 ---
+<h2><a href="/Haskell/Clean/Functioneel Programmeren dag/2011/01/09/NLFP-day.html">NL FP day 2011</a></h2>
+{% assign my_date = ' Sun 09 Jan 2011' %}
 Last Friday I attended the [Nederlandse Functioneel Programmeren dag][nlfp]. 
 The program showed a wide variety of short (20 min.) talks. This
 appeared to be a nice low barrier of entry opportunity to see what's
@@ -208,4 +205,5 @@ and functionally rewired.
 [cash]: http://clash.ewi.utwente.nl/ClaSH/Index.html "C&#955;aSH" 
 [mus]: http://caes.ewi.utwente.nl/External/NLFP/#functionalmodelingofmusicalharmony "Functional Modeling of Musical Harmony"
 [gadt]: http://www.haskell.org/haskellwiki/GADT "Generalised algebraic datatype"
+
 
