@@ -3,7 +3,7 @@ layout: default
 title: Posts tagged NL-FP day
 keywords: [Clean,Haskell,NL-FP day]
 ---
-<h2><a href="/2011-01-09/NLFP-day">NL FP day 2011</a></h2>
+<h2><a href="/2011-01-09/NLFP-day/">NL FP day 2011</a></h2>
 {% assign my_date = ' Sun 09 Jan 2011' %}
 Last Friday I attended the [Nederlandse Functioneel Programmeren dag][nlfp]. 
 The program showed a wide variety of short (20 min.) talks. This
@@ -183,7 +183,7 @@ and functionally rewired.
 [mon]: http://www.haskell.org/haskellwiki/Monad "Monad"
 [hascl]:http://caes.ewi.utwente.nl/External/NLFP/#cleanhaskell "Clean Haskell"
 [expr]: http://www.daimi.au.dk/~madst/tool/papers/expression.txt "Expression problem paper"
-[clja]: http://caes.ewi.utwente.nl/Exertnal/NLFP/#fromcleantojavascriptviasapl "From Clean to JavaScript via Sapl"
+[clja]: http://caes.ewi.utwente.nl/External/NLFP/#fromcleantojavascriptviasapl "From Clean to JavaScript via Sapl"
 [jqhas]: http://caes.ewi.utwente.nl/External/NLFP/#jqueryprogrammingwithhaskell "jQuery Programming with Haskell"
 [clean]: http://wiki.clean.cs.ru.nl/Clean "Clean"
 [mvvm]: http://en.wikipedia.org/wiki/MVVM "Model View ViewModel"

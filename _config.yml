@@ -1,7 +1,7 @@
 destination: ./_site
 auto: true
 lsi: false
-permalink: /:year-:month-:day/:title
+permalink: /:year-:month-:day/:title/
 pygments: true
 maruku: {
   use_tex: true

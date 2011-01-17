@@ -185,7 +185,7 @@ If you'd like to use any of the code quoted above
 [sass]: http://sass-lang.com/ "Sass"
 [raketag]: https://gist.github.com/143571 "Gist to generate tag cloud using Rake"
 [rake]: http://rake.rubyforge.org/ "Rake"
-[dlay]: https://github.com/basbossink/basbossink.github.com/blob/master/_layouts/default.haml "Default layout"
+[dlay]: https://github.com/basbossink/basbossink.github.com/blob/master/_layouts/default_haml.haml "Default layout"
 [rails]:http://rubyonrails.org/ "Ruby on Rails" 
 [haml]: http://haml-lang.com/ "Haml"
 [jekp]: https://github.com/mojombo/jekyll/wiki/Plugins "Jekyll Plugins"
@@ -196,3 +196,4 @@ If you'd like to use any of the code quoted above
 [git]: http://git-scm.com/ "Git"
 [gith]: http://github.com/ "GitHub"
 [githp]: http://pages.github.com/ "GitHub Pages"
+
