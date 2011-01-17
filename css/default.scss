@@ -1,9 +1,9 @@
 $em-color: #483d8b;
 $visited-color: #483d7a;
-$border-size: 0;
+$border-size: 0px;
 $body-to-footer-distance: 50px;
 $default-margin: 3px;
-$default-padding: 0;
+$default-padding: 0px;
 $footnote-size: 0.7em;
 
 @mixin right-small($size) {
@@ -22,7 +22,7 @@ html {
   padding: $default-padding;
   background-color: #ffffff;
   color: #000000;
-  font-family: 'PT Sans', arial, serif;
+  font-family: arial, sans-serif;
   border: $border-size solid black;
 }
 img {
@@ -61,8 +61,9 @@ h4 {
   font-size: 1.1em;
 }
 pre { 
-  background: #aaaaaa; 
-  color: #eeeeee;
+  font-family: "Courier New", monospace;
+  color: #ffffff; 
+  background-color: #333333;
   padding: 5px;
 }
 hr { 
@@ -81,7 +82,8 @@ hr {
   border-width: medium;
   border-color: #4b0082;
   h1, h2 {
-    font-family: 'Cherry Cream Soda', arial, serif;
+    font-weight: bold; 
+    font-family: Tahoma, sans-serif;
     color: #fffaf0;
   }
 }
@@ -90,7 +92,7 @@ hr {
   width: 35%;
   padding: 5px;
 }
-#date { 
+.date { 
   @include right-small(0.8em);
 }
 .footer { 

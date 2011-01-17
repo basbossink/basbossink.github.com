@@ -1,4 +1,4 @@
-<div id="date">
+<div class="date">
 {% if page.date %}
    {{ page.date | date: "%a %d %b %Y" }}
 {% endif %}

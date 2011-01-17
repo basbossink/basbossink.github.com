@@ -8,12 +8,24 @@
     <meta content='A personal blog about programming.' name='description' />
     <meta content='Bas Bossink' name='author' />
     {% if page.categories %}<meta content="{{ page.categories | join: ',' }}" name='keywords' />{% endif %}
-    <meta content='Programming, Functional Programming' name='keywords' />
+    {% if page.keywords %}<meta content="{{ page.keywords | join: ',' }}" name='keywords' />{% endif %}
     <title>{{ page.title }}</title>
     <link href='/css/default.css' rel='stylesheet' type='text/css' />
+    <link href='/css/syntax.css' rel='stylesheet' type='text/css' />
     <link href='/atom.xml' rel='alternate' title='Sitewide ATOM Feed' type='application/atom+xml' />
-    <link href='http://fonts.googleapis.com/css?family=Cherry+Cream+Soda' rel='stylesheet' type='text/css' />
-    <link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css' />
+    <script type='text/javascript'>
+      //<![CDATA[
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-20785819-1']);
+        _gaq.push(['_trackPageview']);
+        
+        (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      //]]>
+    </script>
   </head>
   <body>
     <div id='banner'>
@@ -108,21 +120,12 @@
           <a href='https://bitbucket.org/basbossink/pygments-main'>Pygments fork</a>
         </li>
       </ul>
-      <h3>Categories</h3>
+      <h3>Tags</h3>
       <ul>
 <!--
 Configuration from C:/Users/bas/Documents/My Dropbox/projects/basbossink.github.com/_config.yml
 -->
-<li>
-<a href="/tags/Clean.html">Clean (1)</a>
-</li>
-<li>
-<a href="/tags/Functioneel-Programmeren-dag.html">Functioneel Programmeren dag (1)</a>
-</li>
-<li>
-<a href="/tags/Haskell.html">Haskell (1)</a>
-</li>
-      </ul>
+<li><a href='/tags/GitHub-Pages.html'>GitHub Pages (1)</a></li><li><a href='/tags/Haml.html'>Haml (1)</a></li><li><a href='/tags/Jekyll.html'>Jekyll (1)</a></li><li><a href='/tags/NL-FP-day.html'>NL-FP day (1)</a></li><li><a href='/tags/Sass.html'>Sass (1)</a></li>      </ul>
     </div>
   </body>
 </html>

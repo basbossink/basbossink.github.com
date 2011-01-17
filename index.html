@@ -1,11 +1,14 @@
 ---
 layout: default
 title: Move along, nothing to see here
-words: [programming, functional programming]
 ---
+{% assign counter = 0 %}
 {% for post in site.posts limit: 3 %}
 <h2>
   <a href='{{ post.url }}'>{{ post.title }}</a>
 </h2>
 {{ post.content }}
+{% unless forloop.last %}
+<hr />
+{% endunless %}
 {% endfor %}

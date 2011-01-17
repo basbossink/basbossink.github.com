@@ -1,26 +1,39 @@
 require 'rake/clean'
 
-CLEAN.include('_layouts/*.html')
-CLEAN.include('css/*.css')
-CLEAN.include('tags/*.*')
-CLOBBER.include('_site')
-
-LAYOUT_SRC = FileList['**/*.haml']
+LAYOUT_SRC = FileList.new('_layouts/*.haml', 'index.haml')
 LAYOUT_HTML = LAYOUT_SRC.ext('html')
-CSS_SRC = FileList['css/*.scss']
-CSS = CSS_SRC.ext('css')
+SCSS = FileList.new('css/*.scss')
+CSS = SCSS.ext('css')
 LAYOUT = LAYOUT_HTML + CSS
 
+CLOBBER.include('_site')
+CLEAN.include('tags/*.*')
+CLEAN.include(LAYOUT)
+
 rule '.html' => ['.haml'] do |t|
-    sh %{ haml -E utf-8 #{t.source} #{t.name} }
+    sh %{ haml -E utf-8 #{t.source} #{t.name.sub(/_haml\./,'.')} }
 end
 
 rule '.css' => ['.scss'] do |t|
     sh %{ sass -t compressed #{t.source} #{t.name} }
 end
 
+def aggregate_keywords(category,posts)
+  keywords = SortedSet.new()
+  keywords << category
+  posts.each do |post|
+    post_data = post.to_liquid
+    if post_data.has_key? 'keywords' 
+      post_data['keywords'].each do |word|
+        keywords << word
+      end
+    end
+  end
+  return keywords.to_a.join(',')
+end
 
 namespace :tags do
+
   task :clean do 
     rm_rf "tags"
     mkdir "tags"
@@ -36,10 +49,12 @@ namespace :tags do
     site = Jekyll::Site.new(options)
     site.read_posts('')
     site.categories.sort.each do |category, posts|
+      keywords = aggregate_keywords(category, posts)
       html= <<-HTML
 ---
 layout: default
 title: Posts tagged #{category}
+keywords: [#{keywords}]
 ---
 HTML
       posts.each do |post|
@@ -70,7 +85,7 @@ end
 
 desc 'Build and start server'
 task :server => :build do
-  sh %{ jekyll --server }
+  sh %{ jekyll --server --safe }
 end
 
 desc "Create per tag pages and rest"
