@@ -18,7 +18,7 @@ layout: nil
    <title>{{ post.title }}</title>
    <link href="http://basbossink.github.com{{ post.url | replace: ' ', '%20'  }}"/>
    <updated>{{ post.date | date_to_xmlschema }}</updated>
-   <id>http://basbossink.github.com{{ post.id }}</id>
+   <id>http://basbossink.github.com{{ post.id | replace: ' ', '%20' }}</id>
    <content type="html">{{ post.content | xml_escape }}</content>
  </entry>
  {% endfor %}

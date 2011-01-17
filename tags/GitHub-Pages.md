@@ -3,10 +3,10 @@ layout: default
 title: Posts tagged GitHub Pages
 keywords: [GitHub Pages,categories,git,rake,ruby]
 ---
-<h2><a href="/Jekyll/Sass/Haml/GitHub Pages/2011/01/16/blog-setup.html">Combining Jekyll, Haml and Sass with GitHub Pages</a></h2>
+<h2><a href="/2011-01-16/blog-setup">Combining Jekyll, Haml and Sass with GitHub Pages</a></h2>
 {% assign my_date = ' Sun 16 Jan 2011' %}
 Using [Git][git] introduced me to the wonderful services of
-[GitHub][gith] one of the many great features of [GitHub][gith] is
+[GitHub][gith]. One of the many great features of [GitHub][gith] is
 something known as [GitHub Pages][githp]. To quote the
 [GitHub Pages][githp] intro:
 > The GitHub Pages feature allows you to publish content to the web by
@@ -18,13 +18,14 @@ based static site generator.
 
 ## Enter Haml
 
-Writing HTML by hand is somewhat tiresome [Jekyll][jek] relieves this
-burden for the most part but the layout pages still require you to
-write HTML. [Haml][haml] is [Rails][rails] view engine that has
+Writing HTML by hand is somewhat tiresome, [Jekyll][jek] relieves this
+burden for the most part by providing rendering of [Markdown][md] or
+[Textilize][text] if that's what you prefer. The layout pages still require you to
+write HTML though. [Haml][haml] is a [Rails][rails] view engine that has
 a really nice syntax and has the ability to execute [Ruby][ruby] code.
 After converting my [default layout][dlay] from HTML to [Haml][haml],
-is was really happy with the result. The structure was much more clear
-and no more of those missing end tags. Because [Haml][haml] is not
+I was really happy with the result. The structure was much more clear
+and no more of those missing end tags. [Haml][haml] is not
 integrated into the stock [Jekyll][jek] version, [here][hamlp] is a
 [Jekyll plugin][jekp], that does the trick. This plugin works great
 for the content and stylesheets but does not work for the `_layout`
@@ -45,7 +46,7 @@ chooses any file in the `_layout` directory with the correct base
 name. With this rule in place I can generate my layout using
 [Haml][haml]. Since I was rendering the layout HTML locally I decided
 to skip the plugin altogether and generate the CSS with [Sass][sass]
-locallly as well since this also give my more control and I can be
+locallly as well. Since this also gives me more control and I can be
 sure that the page rendered locally will look exactly the same once
 everything is committed. For generating the CSS I use the following rule:
 
@@ -62,8 +63,8 @@ end
 Using [Haml][haml] in the layout page opens some interesting
 possibilities since we can embed [Ruby][ruby] code inside the
 template. I found some [Rake][rake] [snippets][raketag] to generate
-tag lists using [Jekyll][jek]'s api. Adapt them a bit and [Haml][haml]
-can generate the tag cloud using [Jekyll][jek] which gets used as part
+tag lists using [Jekyll][jek]'s api. Adapt that code a bit and [Haml][haml]
+can generate the tag cloud using [Jekyll][jek]. This in turn gets used as part
 of the layout for each post. Isn't that a wonderful self referential
 system. Here's the [Haml][haml] code to produce the tag list you see
 in the right column.
@@ -88,11 +89,16 @@ in the right column.
   end
 {% endhighlight %}
 
+Apparently `site.read_posts` outputs to stdout to avoid it from
+clogging up the page it's output gets rendered as an HTML comment
+(line 6 and 10).
+
 ### Generating pages for posts per tag
 
 Also inspired by [this gist][raketag] I added a [Rake][rake] task to
 generate a page for each used tag in the site containing all posts
 that refer to the tag. Here's the code:
+
 {% highlight ruby linenos %}
 
 namespace :tags do
@@ -134,9 +140,11 @@ HTML
 end
 
 {% endhighlight %}
-
-The function `aggregate_keywords` just puts all keywords from all posts
-in one set and returns them as a comma separated list, like so:
+To be able to fill the `<meta keywords...` each post puts keywords
+appropriate for the post in the [Yaml Front Matter][yfm].
+The function `aggregate_keywords` just puts the category at hand
+and all the keywords from all posts in one set and returns them as a comma
+separated list, like so:
 
 {% highlight ruby linenos %}
 
@@ -157,10 +165,15 @@ end
 {% endhighlight %}
 
 Next up from my blog setup backlog is a comments facility.
-
+If you'd like to use any of the code quoted above
+[fork me on GitHub][me].
 
 {% include date.inc %}
 
+[me]: https://github.com/basbossink/basbossink.github.com "Github Pages repository"
+[md]: http://daringfireball.net/projects/markdown/ "Markdown"
+[text]: http://www.textism.com/tools/textile/ "Textile"
+[yfm]: https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter "YAML front matter"
 [sass]: http://sass-lang.com/ "Sass"
 [raketag]: https://gist.github.com/143571 "Gist to generate tag cloud using Rake"
 [rake]: http://rake.rubyforge.org/ "Rake"

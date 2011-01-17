@@ -3,7 +3,7 @@ layout: default
 title: Posts tagged NL-FP day
 keywords: [Clean,Haskell,NL-FP day]
 ---
-<h2><a href="/NL-FP day/2011/01/09/NLFP-day.html">NL FP day 2011</a></h2>
+<h2><a href="/2011-01-09/NLFP-day">NL FP day 2011</a></h2>
 {% assign my_date = ' Sun 09 Jan 2011' %}
 Last Friday I attended the [Nederlandse Functioneel Programmeren dag][nlfp]. 
 The program showed a wide variety of short (20 min.) talks. This
