@@ -35,8 +35,13 @@ a {
     color: $visited-color;
     text-decoration: none; 
   }
-  &:hover { text-decoration: underline;}  
+  &:hover { text-decoration: underline; }  
   &:active { text-decoration: underline; }
+}
+div.comment_count {
+  font-size: 0.5em;
+  padding-left: 1em;
+  margin-bottom: 0.3ex;
 }
 p { 
   margin-top: $default-margin; 
@@ -117,7 +122,6 @@ hr {
     padding: $default-padding;
   }
   li {
-    line-height: 2.5ex; 
     display: block; 
     list-style-type: none;
   }

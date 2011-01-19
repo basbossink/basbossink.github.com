@@ -55,7 +55,7 @@
           <img alt='Creative Commons License' src='http://i.creativecommons.org/l/by/3.0/nl/80x15.png' />
         </a><br />Hosted by
         <a href='https://github.com/basbossink/basbossink.github.com/'>GitHub</a>
-        and powered by&#32;<a href='https://github.com/mojombo/jekyll'>Jekyll</a>,&#32;
+        and powered by&#32;<a href='https://github.com/mojombo/jekyll/'>Jekyll</a>,&#32;
         <a href='http://haml-lang.com/'>Haml</a>
         &amp;&#32;<a href='http://sass-lang.com/'>Sass</a>.<br />This work is licensed under a&#32;<a href='http://creativecommons.org/licenses/by/3.0/nl/' rel='license'>Creative Commons Attribution 3.0 Netherlands License</a>.<br />Copyright &copy; {{ site.time | date: "%Y" }} Bas Bossink<br />Last updated on: {{ site.time | date_to_xmlschema }}
       </div>
@@ -68,8 +68,12 @@
         <a href='/'>Home</a>
       </h3>
       <h3>Posts</h3>
-      <ul>
-        {% for post in site.posts limit: 5 %}<li><a href='{{ post.url }}'>{{ post.title | truncate: 120 }}</a></li>{% endfor %}
+      <ul class='posts'>
+        {% for post in site.posts limit: 5 %}<li><a href='{{ post.url }}'>
+            {{ post.title | truncate: 120 }}
+          </a><br />
+          <div class='comment_count'><a data-disqus-identifier='{{ post.id }}' href='{{ post.url }}#disqus_thread'></a></div>
+        </li>{% endfor %}
       </ul>
       <h3>Profiles</h3>
       <ul>
@@ -102,22 +106,22 @@
       <h3>Projects</h3>
       <ul>
         <li>
-          <a href='http://nl.gitready.com'>git ready (dutch translation)</a>
+          <a href='http://nl.gitready.com/'>git ready (dutch translation)</a>
         </li>
         <li>
           <a href='http://basbossink.github.com/skelhs/'>Skelhs</a>
         </li>
         <li>
-          <a href='https://github.com/basbossink/hspec'>hspec</a>
+          <a href='https://github.com/basbossink/hspec/'>hspec</a>
         </li>
         <li>
-          <a href='https://github.com/basbossink/presentations'>presentations</a>
+          <a href='https://github.com/basbossink/presentations/'>presentations</a>
         </li>
         <li>
-          <a href='https://github.com/basbossink/dot-files'>dot-files</a>
+          <a href='https://github.com/basbossink/dot-files/'>dot-files</a>
         </li>
         <li>
-          <a href='https://bitbucket.org/basbossink/pygments-main'>Pygments fork</a>
+          <a href='https://bitbucket.org/basbossink/pygments-main/'>Pygments fork</a>
         </li>
       </ul>
       <h3>Tags</h3>
@@ -128,4 +132,18 @@ Configuration from C:/Users/bas/Documents/My Dropbox/projects/basbossink.github.
 <li><a href='/tags/GitHub-Pages.html'>GitHub Pages (1)</a></li><li><a href='/tags/Haml.html'>Haml (1)</a></li><li><a href='/tags/Jekyll.html'>Jekyll (1)</a></li><li><a href='/tags/NL-FP-day.html'>NL-FP day (1)</a></li><li><a href='/tags/Sass.html'>Sass (1)</a></li>      </ul>
     </div>
   </body>
+  <script type='text/javascript'>
+    //<![CDATA[
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+      var disqus_shortname = 'basbossink'; // required: replace example with your forum shortname
+      
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function () {
+          var s = document.createElement('script'); s.async = true;
+          s.type = 'text/javascript';
+          s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+      }());
+    //]]>
+  </script>
 </html>
