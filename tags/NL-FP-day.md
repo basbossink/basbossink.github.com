@@ -208,3 +208,4 @@ and functionally rewired.
 [gadt]: http://www.haskell.org/haskellwiki/GADT "Generalised algebraic datatype"
 
 
+<hr/>

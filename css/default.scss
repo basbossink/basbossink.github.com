@@ -5,6 +5,7 @@ $body-to-footer-distance: 50px;
 $default-margin: 3px;
 $default-padding: 0px;
 $footnote-size: 0.7em;
+$body-width: 35%;
 
 @mixin right-small($size) {
   text-align: right; 
@@ -43,6 +44,12 @@ div.comment_count {
   padding-left: 1em;
   margin-bottom: 0.3ex;
 }
+div.highlight {
+  overflow: auto;
+  color: #ffffff; 
+  background-color: #333333;
+  padding: 5px;
+}
 p { 
   margin-top: $default-margin; 
   text-align: justify;
@@ -67,9 +74,6 @@ h4 {
 }
 pre { 
   font-family: "Courier New", monospace;
-  color: #ffffff; 
-  background-color: #333333;
-  padding: 5px;
 }
 hr { 
   border-bottom-width: 1px;
@@ -81,7 +85,7 @@ hr {
   @include centrate;
   background-color: $em-color;
   padding: 10px;
-  width: 35%;
+  width: $body-width;
   text-align: center;
   border-style: double;
   border-width: medium;
@@ -94,7 +98,7 @@ hr {
 }
 #container {
   @include centrate;
-  width: 35%;
+  width: $body-width;
   padding: 5px;
 }
 .date { 

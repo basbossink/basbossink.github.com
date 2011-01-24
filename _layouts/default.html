@@ -68,8 +68,8 @@
         <a href='/'>Home</a>
       </h3>
       <h3>Posts</h3>
-      <ul class='posts'>
-        {% for post in site.posts limit: 5 %}<li><a href='{{ post.url }}'>
+      <ul>
+        {% for post in site.posts limit:5  %}<li><a href='{{ post.url }}'>
             {{ post.title | truncate: 120 }}
           </a><br />
           <div class='comment_count'><a data-disqus-identifier='{{ post.id }}' href='{{ post.url }}#disqus_thread'></a></div>
@@ -127,9 +127,9 @@
       <h3>Tags</h3>
       <ul>
 <!--
-Configuration from C:/Users/bas/Documents/My Dropbox/projects/basbossink.github.com/_config.yml
+Configuration from c:/Users/bas/Documents/My Dropbox/projects/basbossink.github.com/_config.yml
 -->
-<li><a href='/tags/GitHub-Pages.html'>GitHub Pages (1)</a></li><li><a href='/tags/Haml.html'>Haml (1)</a></li><li><a href='/tags/Jekyll.html'>Jekyll (1)</a></li><li><a href='/tags/NL-FP-day.html'>NL-FP day (1)</a></li><li><a href='/tags/Sass.html'>Sass (1)</a></li>      </ul>
+<li><a href='/tags/GitHub-Pages.html'>GitHub Pages (1)</a></li><li><a href='/tags/Haml.html'>Haml (1)</a></li><li><a href='/tags/Jekyll.html'>Jekyll (2)</a></li><li><a href='/tags/NL-FP-day.html'>NL-FP day (1)</a></li><li><a href='/tags/Sass.html'>Sass (1)</a></li>      </ul>
     </div>
   </body>
   <script type='text/javascript'>

@@ -1,6 +1,6 @@
 require 'rake/clean'
 
-LAYOUT_SRC = FileList.new('_layouts/*.haml', 'index.haml')
+LAYOUT_SRC = FileList.new('_includes/*.haml','_layouts/*.haml', 'index.haml')
 LAYOUT_HTML = LAYOUT_SRC.ext('html')
 SCSS = FileList.new('css/*.scss')
 CSS = SCSS.ext('css')
@@ -63,6 +63,7 @@ HTML
 <h2><a href="#{post_data['url']}">#{post_data['title']}</a></h2>
 {% assign my_date = ' #{post_data['date'].strftime("%a %d %b %Y")}' %}
 #{post_data['content']}
+<hr/>
 HTML
       end
       File.open("tags/#{category.gsub(/\s+/,'-')}.md", 'w+') do |file|
@@ -84,7 +85,7 @@ task :shrink => :build do
 end
 
 desc 'Build and start server'
-task :server => :build do
+task :server => :default do
   sh %{ jekyll --server --safe }
 end
 
