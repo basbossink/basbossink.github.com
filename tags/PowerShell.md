@@ -16,6 +16,7 @@ I really didn't understand want went wrong all of a sudden, so
 I started to inspect the output of the script. And low and behold the
 trouble was caused by the fact that [Out-String][os] by default puts
 only 80 characters in a line. Quoting the documentation: 
+
 > -Width &lt;int&gt;
 > Specifies the number of characters in each line of output. Any
 > additional characters are truncated, not wrapped. If you omit this
@@ -52,6 +53,11 @@ containing the load statistics hence becomes something like this:
 <span style='color:#0000FF'>Send-MailMessage</span><span style='color:#000000'>&nbsp;</span><span style='color:#FF4500'>@messageParameters</span><span style='color:#000000'>&nbsp;</span><span style='color:#000080'>-BodyAsHtml</span>
 </code> 
 </div>
+
+I hope this helps anybody using the Power to send nice reports.
+
+{% include date.inc %}
+
 [os]: http://technet.microsoft.com/en-us/library/dd315365.aspx "Out-String" 
 [ps]: http://technet.microsoft.com/en-us/scriptcenter/dd742419 "PowerShell"
 [wr]: /images/wrong-width.png "Wrong syntax for the width parameter"
