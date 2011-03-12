@@ -5,6 +5,7 @@
     <meta content='text/html; charset=utf-8' http-equiv='Content-Type' />
     <meta content='{{ timestamp }}' http-equiv='Date' />
     <meta content='{{ timestamp }}' http-equiv='Last-Modified' />
+    <meta content='*' http-equiv='Access-Control-Allow-Origin' />
     <meta content='A personal blog about programming.' name='description' />
     <meta content='Bas Bossink' name='author' />
     {% if page.categories %}<meta content="{{ page.categories | join: ',' }}" name='keywords' />{% endif %}
@@ -35,29 +36,32 @@
     <div id='container'>
       {{ content }}
       <div class='footer'>
-        <hr />
-        <a href='http://validator.w3.org/check?uri=referer'>
-          <img alt='Valid XHTML 1.0 Strict' src='/images/w3c-xhtml.png' />
-        </a>
-        <a href='http://jigsaw.w3.org/css-validator/check/referer'>
-          <img alt='Valid CSS' src='/images/w3c-css.png' />
-        </a>
-        <a href='http://feed2.w3.org/check.cgi?url=http%3A//basbossink.github.com/atom.xml'>
-          <img alt='Valid Atom 1.0' src='/images/valid-atom.png' />
-        </a>
-        <a href='http://www.gnu.org/software/emacs/'>
-          <img alt='Powered by GNU Emacs' src='/images/emacs-powered.png' />
-        </a>
-        <a href='http://www.anybrowser.org/campaign/'>
-          <img alt='Best viewed with any browser.' src='/images/anybrowser.png' />
-        </a>
-        <a href='http://creativecommons.org/licenses/by/3.0/nl/' rel='license'>
-          <img alt='Creative Commons License' src='http://i.creativecommons.org/l/by/3.0/nl/80x15.png' />
-        </a><br />Hosted by
-        <a href='https://github.com/basbossink/basbossink.github.com/'>GitHub</a>
-        and powered by&#32;<a href='https://github.com/mojombo/jekyll/'>Jekyll</a>,&#32;
-        <a href='http://haml-lang.com/'>Haml</a>
-        &amp;&#32;<a href='http://sass-lang.com/'>Sass</a>.<br />This work is licensed under a&#32;<a href='http://creativecommons.org/licenses/by/3.0/nl/' rel='license'>Creative Commons Attribution 3.0 Netherlands License</a>.<br />Copyright &copy; {{ site.time | date: "%Y" }} Bas Bossink<br />Last updated on: {{ site.time | date_to_xmlschema }}
+        <p>
+          <a href='http://validator.w3.org/check?uri=referer'>
+            Valid XHTML 1.0 Strict
+            |
+            <a href='http://jigsaw.w3.org/css-validator/check/referer'>
+              Valid CSS
+              |
+              <a href='http://feed2.w3.org/check.cgi?url=http%3A//basbossink.github.com/atom.xml'>
+                Valid Atom 1.0
+                |
+                Hosted by
+                <a href='https://github.com/basbossink/basbossink.github.com/'>GitHub</a>
+                and powered by&#32;<a href='https://github.com/mojombo/jekyll/'>Jekyll</a>,&#32;
+                <a href='http://haml-lang.com/'>Haml</a>
+                &amp;&#32;<a href='http://sass-lang.com/'>Sass</a>.
+              </a>
+            </a>
+          </a>
+        </p>
+        <p>
+          This work is licensed under a&#32;<a href='http://creativecommons.org/licenses/by/3.0/nl/' rel='license'>Creative Commons Attribution 3.0 Netherlands License</a>.
+          Copyright &copy; {{ site.time | date: "%Y" }} Bas Bossink
+        </p>
+        <p>
+          Last updated on: {{ site.time | date_to_xmlschema }}
+        </p>
       </div>
     </div>
     <div id='linkList'>
@@ -70,36 +74,36 @@
       <h3>Posts</h3>
       <ul>
         {% for post in site.posts limit:5  %}<li><a href='{{ post.url }}'>
-            {{ post.title | truncate: 120 }}
-          </a><br />
-          <div class='comment_count'><a data-disqus-identifier='{{ post.id }}' href='{{ post.url }}#disqus_thread'></a></div>
+            {{ post.title | truncate: 25 }}
+          </a><div class='comment_count'><a data-disqus-identifier='{{ post.id }}' href='{{ post.url }}#disqus_thread'></a></div>
         </li>{% endfor %}
       </ul>
       <h3>Profiles</h3>
       <ul>
         <li>
           <a href='http://stackoverflow.com/users/74198/bas-bossink'>
-            <img alt='Stack Overflow profile for Bas Bossink' height='58' src='http://stackoverflow.com/users/flair/74198.png' width='208' />
+            Stack Overflow
+          </a>
+          <div class='by_line'>
+            1087
+            
+            :: <span class='silver'>4</span>
+            :: <span class='bronze'>14</span>
+          </div>
+        </li>
+        <li>
+          <a href='http://www.twitter.com/basbossink'>
+            Twitter
           </a>
         </li>
         <li>
           <a href='http://nl.linkedin.com/in/basbossink'>
-            <img alt="View Bas Bossink's profile on LinkedIn" height='33' src='http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif' width='160' />
-          </a>
-        </li>
-        <li>
-          <a href='http://www.twitter.com/basbossink'>
-            <img alt='Follow basbossink on Twitter' src='http://twitter-badges.s3.amazonaws.com/follow_me-a.png' />
+            LinkedIn
           </a>
         </li>
         <li>
           <a href='http://nl-nl.facebook.com/people/Bas-Bossink/1820090791'>
-            <img alt='follow Bas Bossink on Facebook' height='23' src='/images/facebook.png' width='79' />
-          </a>
-        </li>
-        <li>
-          <a href='http://friendfeed.com/basbossink'>
-            <img alt='Subscribe to me on FriendFeed' src='http://friendfeed.com/static/images/chiclet.png' />
+            Facebook
           </a>
         </li>
       </ul>
@@ -110,9 +114,6 @@
         </li>
         <li>
           <a href='http://basbossink.github.com/skelhs/'>Skelhs</a>
-        </li>
-        <li>
-          <a href='https://github.com/basbossink/hspec/'>hspec</a>
         </li>
         <li>
           <a href='https://github.com/basbossink/presentations/'>presentations</a>
@@ -129,21 +130,7 @@
 <!--
 Configuration from c:/Users/bas/Documents/My Dropbox/projects/basbossink.github.com/_config.yml
 -->
-<li><a href='/tags/GitHub-Pages.html'>GitHub Pages (1)</a></li><li><a href='/tags/Haml.html'>Haml (1)</a></li><li><a href='/tags/Jekyll.html'>Jekyll (2)</a></li><li><a href='/tags/NL-FP-day.html'>NL-FP day (1)</a></li><li><a href='/tags/Sass.html'>Sass (1)</a></li>      </ul>
+<li><a href='/tags/GitHub-Pages.html'>GitHub Pages (1)</a></li><li><a href='/tags/Haml.html'>Haml (1)</a></li><li><a href='/tags/Jekyll.html'>Jekyll (2)</a></li><li><a href='/tags/NL-FP-day.html'>NL-FP day (1)</a></li><li><a href='/tags/PowerShell.html'>PowerShell (1)</a></li><li><a href='/tags/Sass.html'>Sass (1)</a></li>      </ul>
     </div>
   </body>
-  <script type='text/javascript'>
-    //<![CDATA[
-      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-      var disqus_shortname = 'basbossink'; // required: replace example with your forum shortname
-      
-      /* * * DON'T EDIT BELOW THIS LINE * * */
-      (function () {
-          var s = document.createElement('script'); s.async = true;
-          s.type = 'text/javascript';
-          s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-          (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-      }());
-    //]]>
-  </script>
 </html>

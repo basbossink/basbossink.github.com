@@ -251,4 +251,4 @@ Until next time.
 [inde]: http://intensedebate.com/ "IntenseDebate"
 [prev]: http://basbossink.github.com/2011-01-16/blog-setup/ "Blog setup"
 
-<hr/>
+

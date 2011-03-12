@@ -63,7 +63,7 @@ HTML
 <h2><a href="#{post_data['url']}">#{post_data['title']}</a></h2>
 {% assign my_date = ' #{post_data['date'].strftime("%a %d %b %Y")}' %}
 #{post_data['content']}
-<hr/>
+#{'<hr/>' unless post == posts.last}
 HTML
       end
       File.open("tags/#{category.gsub(/\s+/,'-')}.md", 'w+') do |file|

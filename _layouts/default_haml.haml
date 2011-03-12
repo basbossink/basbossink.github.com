@@ -7,6 +7,7 @@
     %meta{ "http-equiv" => "Content-Type", :content => "text/html; charset=utf-8" }
     %meta{ "http-equiv" => "Date", :content => "{{ timestamp }}" }
     %meta{ "http-equiv" => "Last-Modified", :content => "{{ timestamp }}" }
+    %meta{ "http-equiv" => "Access-Control-Allow-Origin", :content => "*" }
     %meta{ :name => "description", :content => "A personal blog about programming." }
     %meta{ :name => "author", :content => "Bas Bossink" }
     {% if page.categories %}
@@ -34,44 +35,36 @@
     %div#banner
       %h1 Move along, nothing to see here
       %h2 Ramblings about my programming escapades.
-    
     %div#container
       {{ content }}
       %div.footer  
-        %hr
-        %a{ :href => "http://validator.w3.org/check?uri=referer"}
-          %img{ :src => "/images/w3c-xhtml.png", :alt => "Valid XHTML 1.0 Strict"}
-        %a{ :href => "http://jigsaw.w3.org/css-validator/check/referer"}
-          %img{ :src => "/images/w3c-css.png", :alt => "Valid CSS"}
-        %a{ :href => "http://feed2.w3.org/check.cgi?url=http%3A//basbossink.github.com/atom.xml"}
-          %img{ :src => "/images/valid-atom.png", :alt => "Valid Atom 1.0"}
-        %a{ :href => "http://www.gnu.org/software/emacs/"}
-          %img{ :src => "/images/emacs-powered.png", :alt => "Powered by GNU Emacs"}
-        %a{ :href => "http://www.anybrowser.org/campaign/"}
-          %img{ :src => "/images/anybrowser.png", :alt => "Best viewed with any browser."}
-        %a{ :href => "http://creativecommons.org/licenses/by/3.0/nl/", :rel => "license"}
-          %img{ :src => "http://i.creativecommons.org/l/by/3.0/nl/80x15.png", 
-                :alt => "Creative Commons License"}
-        %br>
-        Hosted by 
-        %a{ :href => "https://github.com/basbossink/basbossink.github.com/"} GitHub
-        and powered by&#32;
-        %a{ :href => "https://github.com/mojombo/jekyll/"}> Jekyll
-        ,&#32;
-        %a{ :href => "http://haml-lang.com/"} Haml
-        &amp;&#32;
-        %a{ :href => "http://sass-lang.com/"}> Sass
-        \.
-        %br>
-        This work is licensed under a&#32;
-        %a{ :rel => "license", :href => "http://creativecommons.org/licenses/by/3.0/nl/"}> |
-        Creative Commons Attribution 3.0 Netherlands License |
-        \.
-        %br>
-        Copyright &copy; {{ site.time | date: "%Y" }} Bas Bossink
-        %br>
-        Last updated on: {{ site.time | date_to_xmlschema }}
-
+        %p
+          %a{ :href => "http://validator.w3.org/check?uri=referer"}
+            Valid XHTML 1.0 Strict 
+            |  
+            %a{ :href => "http://jigsaw.w3.org/css-validator/check/referer"}
+              Valid CSS 
+              |  
+              %a{ :href => "http://feed2.w3.org/check.cgi?url=http%3A//basbossink.github.com/atom.xml"}
+                Valid Atom 1.0
+                |
+                Hosted by 
+                %a{ :href => "https://github.com/basbossink/basbossink.github.com/"} GitHub
+                and powered by&#32;
+                %a{ :href => "https://github.com/mojombo/jekyll/"}> Jekyll
+                ,&#32;
+                %a{ :href => "http://haml-lang.com/"} Haml
+                &amp;&#32;
+                %a{ :href => "http://sass-lang.com/"}> Sass
+                \.
+        %p
+          This work is licensed under a&#32;
+          %a{ :rel => "license", :href => "http://creativecommons.org/licenses/by/3.0/nl/"}> |
+          Creative Commons Attribution 3.0 Netherlands License |
+          \.
+          Copyright &copy; {{ site.time | date: "%Y" }} Bas Bossink
+        %p
+          Last updated on: {{ site.time | date_to_xmlschema }}
     %div#linkList
       %a{ :href => "/atom.xml"}
         %img{ :alt => "subcribe", :src => "/images/feed-icon.png"}
@@ -82,8 +75,7 @@
         {% for post in site.posts limit:5  %}
         %li>
           %a{ :href => "{{ post.url }}" }>
-            {{ post.title | truncate: 120 }}
-          %br
+            {{ post.title | truncate: 25 }}
           %div.comment_count
             %a{ :href => "{{ post.url }}#disqus_thread", 
               "data-disqus-identifier" => "{{ post.id }}" }>
@@ -92,31 +84,36 @@
       %ul
         %li
           %a{ :href => "http://stackoverflow.com/users/74198/bas-bossink"}
-            %img{ :src => "http://stackoverflow.com/users/flair/74198.png",
-                  :width => "208", :height =>"58", 
-                  :alt => "Stack Overflow profile for Bas Bossink" }
-        %li
-          %a{ :href => "http://nl.linkedin.com/in/basbossink"}
-            %img{ :src => "http://www.linkedin.com/img/webpromo/btn_myprofile_160x33.gif",
-                  :width => "160", :height => "33", 
-                  :alt => "View Bas Bossink's profile on LinkedIn"}
+            Stack Overflow
+          - require 'uri'
+          - require 'yajl/gzip'
+          - require 'yajl/deflate'
+          - require 'yajl/http_stream'
+          - url = URI.parse('http://api.stackoverflow.com/1.0/users/74198')
+          - result = Yajl::HttpStream.get(url)
+          - me = result['users'][0]
+          - rep = me['reputation']
+          - golds = me['badge_counts']['gold']
+          - silvers = me['badge_counts']['silver']
+          - bronzes = me['badge_counts']['bronze']
+          %div.by_line
+            = rep
+            = if golds > 0 then ":: <span class='gold'>#{golds}</span>" end
+            = if silvers > 0 then ":: <span class='silver'>#{silvers}</span>" end
+            = if bronzes > 0 then ":: <span class='bronze'>#{bronzes}</span>" end
         %li 
           %a{ :href => "http://www.twitter.com/basbossink"}
-            %img{ :src => "http://twitter-badges.s3.amazonaws.com/follow_me-a.png",
-                  :alt => "Follow basbossink on Twitter"}
+            Twitter
+        %li
+          %a{ :href => "http://nl.linkedin.com/in/basbossink"}
+            LinkedIn
         %li
           %a{ :href => "http://nl-nl.facebook.com/people/Bas-Bossink/1820090791"}
-            %img{ :src => "/images/facebook.png", :width => "79", :height=> "23",
-                  :alt => "follow Bas Bossink on Facebook"}
-        %li
-          %a{ :href => "http://friendfeed.com/basbossink"}
-            %img{ :src => "http://friendfeed.com/static/images/chiclet.png",
-                  :alt => "Subscribe to me on FriendFeed"}
+            Facebook
       %h3 Projects
       %ul
         - [[ "http://nl.gitready.com/", "git ready (dutch translation)"],
            [ "http://basbossink.github.com/skelhs/", "Skelhs"],
-           [ "https://github.com/basbossink/hspec/", "hspec"],
            [ "https://github.com/basbossink/presentations/", "presentations"],
            [ "https://github.com/basbossink/dot-files/", "dot-files"],
            [ "https://bitbucket.org/basbossink/pygments-main/", "Pygments fork"]].each do |ref,txt| 
@@ -138,14 +135,4 @@
               print "#{category} (#{posts.length})</a>"
               print "</li>"
           end
-  :javascript
-    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-    var disqus_shortname = 'basbossink'; // required: replace example with your forum shortname
 
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());

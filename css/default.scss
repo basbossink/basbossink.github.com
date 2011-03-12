@@ -6,131 +6,190 @@ $default-margin: 3px;
 $default-padding: 0px;
 $footnote-size: 0.7em;
 $body-width: 35%;
+$gold: #ffd700;
+$silver: #c0c0c0;
+$bronze: #9c6963;
+$border-color: #4b0082;
 
 @mixin right-small($size) {
   text-align: right; 
   font-size: $size;
-  padding-top: $body-to-footer-distance;
+  margin-top: $body-to-footer-distance;
 }
 
 @mixin centrate {
   margin-left: auto;
   margin-right: auto;
 }
-
-html {
-  margin: $default-margin;
-  padding: $default-padding;
-  background-color: #ffffff;
-  color: #000000;
-  font-family: arial, sans-serif;
-  border: $border-size solid black;
-}
-img {
-  border: $border-size;
-}
-a {
-  color: $em-color;
-  &:link { text-decoration: none; }
-  &:visited { 
-    color: $visited-color;
-    text-decoration: none; 
-  }
-  &:hover { text-decoration: underline; }  
-  &:active { text-decoration: underline; }
-}
-div.comment_count {
-  font-size: 0.5em;
-  padding-left: 1em;
-  margin-bottom: 0.3ex;
-}
-div.highlight {
-  overflow: auto;
-  color: #ffffff; 
-  background-color: #333333;
-  padding: 5px;
-}
-p { 
-  margin-top: $default-margin; 
-  text-align: justify;
-}
-h1 { 
-  font-size: 2.5em;
-  color: $em-color;
-  margin-bottom: 3px;
-}
-h2,h3,h4 { 
-  color: $em-color;
-  margin: $default-margin;  
-}
-h2 {
-  font-size: 1.8em;  
-}
-h3 { 
-  font-size: 1.3em;
-}
-h4 { 
-  font-size: 1.1em;
-}
-pre { 
-  font-family: "Courier New", monospace;
-}
-hr { 
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-color: gray;
-}
-/* specific divs */
-#banner {
-  @include centrate;
-  background-color: $em-color;
-  padding: 10px;
-  width: $body-width;
-  text-align: center;
-  border-style: double;
-  border-width: medium;
-  border-color: #4b0082;
-  h1, h2 {
-    font-weight: bold; 
-    font-family: Tahoma, sans-serif;
-    color: #fffaf0;
-  }
-}
-#container {
-  @include centrate;
-  width: $body-width;
-  padding: 5px;
-}
-.date { 
-  @include right-small(0.8em);
-}
-.footer { 
-  @include right-small($footnote-size);
-}
-.footnotes {
-  font-size: $footnote-size;
-  p,ol,li {
+@media screen {
+  html {
     margin: $default-margin;
     padding: $default-padding;
+    background-color: #ffffff;
+    color: #000000;
+    font-family: arial, sans-serif;
+    border: $border-size solid black;
+    word-break: keep-words;
+  }
+  img {
+    border: $border-size;
+  }
+  a {
+    color: $em-color;
+    &:link { text-decoration: none; }
+    &:visited { 
+      color: $visited-color;
+      text-decoration: none; 
+    }
+    &:hover { text-decoration: underline; }  
+    &:active { text-decoration: underline; }
+  }
+  div.by_line {
+    font-size: 70%;
+    padding-left: 1em;
+  }
+  div.comment_count {
+    font-size: 0.5em;
+    padding-left: 1em;
+    margin-bottom: 0.3ex;
+  }
+  div.highlight {
+    overflow: auto;
+    color: #ffffff; 
+    padding: 5px;
+  }
+  p { 
+    margin-top: $default-margin; 
+    text-align: left;
+  }
+  h1 { 
+    font-size: 2.5em;
+    color: $em-color;
+    margin-bottom: 3px;
+  }
+  h2,h3,h4 { 
+    color: $em-color;
+    margin: $default-margin;  
+  }
+  h2 {
+    font-size: 1.8em;  
+  }
+  h3 { 
+    font-size: 1.3em;
+  }
+  h4 { 
+    font-size: 1.1em;
+  }
+  pre { 
+    font-family: "Courier New", monospace;
+  }
+  /* specific divs */
+  #banner {
+    @include centrate;
+    background-color: $em-color;
+    padding: 10px;
+    width: $body-width;
+    text-align: center;
+    border-style: double;
+    border-width: medium;
+    border-color: $border-color;
+    h1, h2 {
+      font-weight: bold; 
+      font-family: Tahoma, sans-serif;
+      color: #fffaf0;
+    }
+  }
+  #container {
+    @include centrate;
+    width: $body-width;
+    padding: 5px;
+  }
+  .date { 
+    @include right-small(0.8em);
+  }
+  div.postpreviewseparator {
+    border-style: solid;
+    border-width: 0 0 1px 0;
+    border-bottom-color: gray;
+    margin-bottom: 2em; 
+  }
+  .footer { 
+    @include right-small($footnote-size);
+    border-style: solid;
+    border-width: 1px 0 0 0;
+    border-top-color: gray;
+    p {
+      margin: $default-margin;
+      padding: $default-padding;
+      text-align: right;
+      line-height: 1;
+    }
+  }
+  .footnotes {
+    font-size: $footnote-size;
+    p,ol,li {
+      margin: $default-margin;
+      padding: $default-padding;
+    }
+  }
+  #linkList {
+    $interspacing: 5px;
+
+    position: absolute;
+    top: 250px;
+    right: 5px;
+    font-size: 80%;
+    ul { 
+      margin: $default-margin; 
+      padding: $default-padding;
+    }
+    li {
+      display: block; 
+      list-style-type: none;
+    }
+    img { 
+      padding-top: $interspacing; 
+      margin-bottom: $interspacing;
+    }
+  }
+  .gold {
+    color: $gold;
+  }
+  .silver {
+    color: $silver;
+  }
+  .bronze {
+    color: $bronze;
   }
 }
-#linkList {
-  $interspacing: 5px;
-
-  position: absolute;
-  top: 250px;
-  right: 5px;
-
-  ul { 
-    margin: $default-margin; 
-    padding: $default-padding;
+@media print {
+  #linkList, #banner, #disqus_thread, .footer { 
+    display: none;
   }
-  li {
-    display: block; 
-    list-style-type: none;
+  p {
+    text-align: justify;
   }
-  img { 
-    padding-top: $interspacing; 
-    margin-bottom: $interspacing;
+  a {
+    color: black;
+    &:link { 
+      text-decoration: none; 
+    }
+    &:visited { 
+      text-decoration: none; 
+    }
+    &:hover { 
+      text-decoration: none; 
+    }  
+    &:active { 
+      text-decoration: none; 
+    }
   }
 }
+
+
+
+
+
+
+
+
