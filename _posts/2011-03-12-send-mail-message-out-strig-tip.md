@@ -34,11 +34,11 @@ output gets garbled.
 
 ## Solution
 I thought this would be easy to fix just specify `[int]::MaxValue` for
-the `-Width` parameter to `Out-String`. Trying that in a
+the `-Width` parameter to <code>Out&#8209;String</code>. Trying that in a
 [PowerShell][ps] console gave:
 ![Out-String with unsatisfactory result][wr]
 Hum, seems like the `[int]::MaxValue` doesn't get evaluated before it
-is interpreted by `Out-String` so some extra parenthesis should do the
+is interpreted by <code>Out&#8209;String</code> so some extra parenthesis should do the
 trick. 
 
 ## End result
