@@ -55,8 +55,9 @@ $border-color: #4b0082;
   }
   div.highlight {
     overflow: auto;
-    color: #ffffff; 
+    border: 1px solid $border-color;
     padding: 5px;
+    margin: 5px;
   }
   p { 
     margin-top: $default-margin; 
@@ -81,7 +82,7 @@ $border-color: #4b0082;
     font-size: 1.1em;
   }
   pre { 
-    font-family: "Courier New", monospace;
+    font-family: "Lucida Console","Courier New", monospace;
   }
   /* specific divs */
   #banner {
