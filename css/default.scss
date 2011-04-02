@@ -1,15 +1,25 @@
-$em-color: #483d8b;
-$visited-color: #483d7a;
+/* 
+Palette color codes :from
+http://colorschemedesigner.com/#4y11Tw0w0w0w0
+*/
+$primary: #5c0dac;
+$secondary: #542881;
+$ternairy: #3a0470;
+$quadairy: #8b42d6;
+$quintairy: #9f69d6;
+
+/* Specific colors */
+$gold: #ffd700;
+$silver: #c0c0c0;
+$bronze: #9c6963;
+
+/* Sizes */
 $border-size: 0px;
 $body-to-footer-distance: 50px;
 $default-margin: 3px;
 $default-padding: 0px;
 $footnote-size: 0.7em;
 $body-width: 35%;
-$gold: #ffd700;
-$silver: #c0c0c0;
-$bronze: #9c6963;
-$border-color: #4b0082;
 
 @mixin right-small($size) {
   text-align: right; 
@@ -34,16 +44,6 @@ $border-color: #4b0082;
   img {
     border: $border-size;
   }
-  a {
-    color: $em-color;
-    &:link { text-decoration: none; }
-    &:visited { 
-      color: $visited-color;
-      text-decoration: none; 
-    }
-    &:hover { text-decoration: underline; }  
-    &:active { text-decoration: underline; }
-  }
   div.by_line {
     font-size: 70%;
     padding-left: 1em;
@@ -55,7 +55,7 @@ $border-color: #4b0082;
   }
   div.highlight {
     overflow: auto;
-    border: 1px solid $border-color;
+    border: 1px solid $quadairy;
     padding: 5px;
     margin: 5px;
   }
@@ -65,11 +65,11 @@ $border-color: #4b0082;
   }
   h1 { 
     font-size: 2.5em;
-    color: $em-color;
+    color: $primary;
     margin-bottom: 3px;
   }
   h2,h3,h4 { 
-    color: $em-color;
+    color: $ternairy;
     margin: $default-margin;  
   }
   h2 {
@@ -87,17 +87,17 @@ $border-color: #4b0082;
   /* specific divs */
   #banner {
     @include centrate;
-    background-color: $em-color;
+    background-color: $primary;
     padding: 10px;
     width: $body-width;
     text-align: center;
     border-style: double;
     border-width: medium;
-    border-color: $border-color;
+    border-color: $quadairy;
     h1, h2 {
       font-weight: bold; 
       font-family: Tahoma, sans-serif;
-      color: #fffaf0;
+      color: $quintairy;
     }
   }
   #container {
