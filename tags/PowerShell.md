@@ -40,19 +40,18 @@ trick.
 ## End result
 The paragraph of code that I use to send around an HTML table
 containing the load statistics hence becomes something like this:
-<div class="highlight">
-<code>
-<span style='color:#FF4500'>$messageParameters</span><span style='color:#000000'>&nbsp;</span><span style='color:#A9A9A9'>=</span><span style='color:#000000'>&nbsp;</span><span style='color:#000000'>@{</span><br />
-<span style='color:#000000'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='color:#000000'>Subject</span><span style='color:#000000'>&nbsp;</span><span style='color:#A9A9A9'>=</span><span style='color:#000000'>&nbsp;</span><span style='color:#8B0000'>&quot;Weekly load report&quot;</span><br />
-<span style='color:#000000'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='color:#000000'>Body</span><span style='color:#000000'>&nbsp;</span><span style='color:#A9A9A9'>=</span><span style='color:#000000'>&nbsp;</span><span style='color:#000000'>(</span><span style='color:#0000FF'>Get-LoadStatistics</span><span style='color:#000000'>&nbsp;</span><span style='color:#A9A9A9'>|</span><span style='color:#000000'>&nbsp;</span><span style='color:#0000FF'>ConvertTo-Html</span><span style='color:#000000'>&nbsp;</span><span style='color:#000080'>-Head</span><span style='color:#000000'>&nbsp;</span><span style='color:#FF4500'>$head</span><span style='color:#000000'>&nbsp;</span><span style='color:#A9A9A9'>|</span><span style='color:#000000'>&nbsp;</span><br />
-<span style='color:#000000'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='color:#0000FF'>Out-String</span><span style='color:#000000'>&nbsp;</span><span style='color:#000080'>-Width</span><span style='color:#000000'>&nbsp;</span><span style='color:#000000'>(</span><span style='color:#008080'>[int]</span><span style='color:#A9A9A9'>::</span><span style='color:#000000'>MaxValue</span><span style='color:#000000'>)</span><span style='color:#000000'>)</span><br />
-<span style='color:#000000'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='color:#000000'>From</span><span style='color:#000000'>&nbsp;</span><span style='color:#A9A9A9'>=</span><span style='color:#000000'>&nbsp;</span><span style='color:#8B0000'>&quot;donotreply@devnull.org&quot;</span><br />
-<span style='color:#000000'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='color:#000000'>To</span><span style='color:#000000'>&nbsp;</span><span style='color:#A9A9A9'>=</span><span style='color:#000000'>&nbsp;</span><span style='color:#8B0000'>&quot;fred.flinstone@bedrock.com&quot;</span><br />
-<span style='color:#000000'>&nbsp;&nbsp;&nbsp;&nbsp;</span><span style='color:#000000'>SmtpServer</span><span style='color:#000000'>&nbsp;</span><span style='color:#A9A9A9'>=</span><span style='color:#000000'>&nbsp;</span><span style='color:#8B0000'>&quot;my.smtpserver&quot;</span><br />
-<span style='color:#000000'>}</span><br />
-<span style='color:#0000FF'>Send-MailMessage</span><span style='color:#000000'>&nbsp;</span><span style='color:#FF4500'>@messageParameters</span><span style='color:#000000'>&nbsp;</span><span style='color:#000080'>-BodyAsHtml</span>
-</code> 
-</div>
+<script type="syntaxhighlighter" class="brush: ps"><![CDATA[
+$messageParameters = @{
+    Subject = "Weekly load report"
+    Body = (Get-LoadStatistics | ConvertTo-Html -Head $head | 
+        Out-String -Width ([int]::MaxValue))
+    From = "donotreply@devnull.org"
+    To = "fred.flinstone@bedrock.com"
+    SmtpServer = "my.smtpserver"
+}
+Send-MailMessage @messageParameters -BodyAsHtml
+]]>
+</script>
 
 I hope this helps anybody using the Power to send nice reports.
 

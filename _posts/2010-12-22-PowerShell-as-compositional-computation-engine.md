@@ -5,14 +5,13 @@ layout: post
 categories: [PowerShell,extendibillity]
 ---
 
-
 In this post I will be making the case for using [Windows PowerShell][ps] as a
 general purpose computation engine with a [pipes and filters][pf] archictecture.
 This might seem odd at first since [PowerShell][ps] is designed to be
 a tool that helps system administrators automate tasks they encounter
 in their day to day activities. In my opinion however [PowerShell][ps]
-has a number of features and has an easy enough extensibillity story
-that makes it a perfect candidate to use it to develop a domain
+has a number of killing features and has an easy enough extensibillity story
+to make it a perfect candidate to use to develop a domain
 specific toolkit that can be used by end users.
 
 ## Extensibillity
@@ -20,7 +19,7 @@ specific toolkit that can be used by end users.
 embedding it in your software.
 ### The Provider
 The [Windows PowerShell Provider][pr] gives you as a developer the
-oppertunity to surface your specific data as file system structure
+oppertunity to surface your specific data as a file system structure
 that can be easily accessed through powershell. To give you a more
 concrete idea 
 
