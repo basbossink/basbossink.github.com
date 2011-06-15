@@ -1,0 +1,15 @@
+* Blogpost plannen
+** Serie: PowerShell for .NET developers
+   1. PowerShell what is it, and why should I care
+   2. PowerShell as a better shell
+   3. The syntax
+   4. Listing the Targets in your MSBuild file
+   5. Freeing yourself from xml build languages with psake
+   6. Shutting down the pesky virus scanner
+   7. Basic monitoring
+   8. Graphing monitoring data with PowerShell and gnuplot
+   9. Writing a Visual Studio extension in 1 line of PowerShell
+   10. Using chewie and nuget to automate dependencies
+   11. Testing your .NET code using Pester
+   12. Getting on overview of your codebase
+   13. Looking into your MongoDB data with PowerShell
