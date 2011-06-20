@@ -9,6 +9,7 @@ LAYOUT = LAYOUT_HTML + CSS
 CLOBBER.include('_site')
 CLEAN.include('tags/*.*')
 CLEAN.include(LAYOUT)
+CLEAN.include('css/combined.css')
 
 rule '.html' => ['.haml'] do |t|
     sh %{ haml -E utf-8 #{t.source} #{t.name.sub(/_haml\./,'.')} }
@@ -30,6 +31,12 @@ def aggregate_keywords(category,posts)
     end
   end
   return keywords.to_a.join(',')
+end
+
+def concatenate_files(output_filename, input_files)
+  File.open(output_filename, "a+") do |out|
+    out.puts input_files.map{ |s| IO.read(s)}
+  end
 end
 
 namespace :tags do
@@ -75,6 +82,10 @@ end
 
 desc 'Generate html and css from sources'
 task :build => LAYOUT do
+  sh %{ jekyll --no-server --no-auto --safe }
+  FileList['_site/**/*.html'].each do |file|
+    sh %{ java -jar c:/Users/bas/programs/htmlcompressor/htmlcompressor-0.9.8.jar --remove-intertag-spaces --remove-quotes #{file} -o #{file}}
+  end
 end
 
 desc 'commpress html'
@@ -82,6 +93,9 @@ task :shrink => :build do
   FileList['_layouts/default.html'].each do |file|
     sh %{ java -jar c:/Users/bas/programs/htmlcompressor/htmlcompressor-0.9.8.jar --remove-intertag-spaces --remove-quotes #{file} -o #{file}}
   end
+  rm_rf 'css/combined.css'
+  concatenate_files("css/combined.css",FileList['css/*.css'])
+  sh %{ java -jar C:/Users/bas/programs/yuicompressor-2.4.6/build/yuicompressor-2.4.6.jar css/combined.css -o _site/css/combined.css }
 end
 
 desc 'Build and start server'
@@ -90,7 +104,7 @@ task :server => :default do
 end
 
 desc "Create per tag pages and rest"
-task :default => [:build, "tags:generate"]
+task :default => [:shrink, "tags:generate"]
 
 
 

@@ -21,6 +21,13 @@ $default-padding: 0px;
 $footnote-size: 0.7em;
 $body-width: 35%;
 
+@mixin bare-list {
+  li {
+    display: block; 
+    list-style-type: none;
+  }
+}
+
 @mixin right-small($size) {
   text-align: right; 
   font-size: $size;
@@ -144,10 +151,7 @@ $body-width: 35%;
       margin: $default-margin; 
       padding: $default-padding;
     }
-    li {
-      display: block; 
-      list-style-type: none;
-    }
+    @include bare-list;
     img { 
       padding-top: $interspacing; 
       margin-bottom: $interspacing;
@@ -161,6 +165,9 @@ $body-width: 35%;
   }
   .bronze {
     color: $bronze;
+  }
+  .references {
+    @include bare-list
   }
 }
 @media print {
