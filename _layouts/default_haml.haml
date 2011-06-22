@@ -1,5 +1,5 @@
 !!! XML utf-8
-!!! Strict
+!!! 
 :plain
   {% assign lang = 'en' %}{% capture timestamp %}{{site.time | date: "%a, %d %b %y %H:%M:%S +0100" }}{% endcapture %}
 %html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "{{ lang }}", :lang => "{{ lang }}" }>
@@ -41,28 +41,19 @@
       {{ content }}
       %div.footer  
         %p
-          %a{ :href => "http://validator.w3.org/check?uri=referer"}
-            Valid XHTML 1.0 Strict 
-            |  
-            %a{ :href => "http://jigsaw.w3.org/css-validator/check/referer"}
-              Valid CSS 
-              |  
-              %a{ :href => "http://feed2.w3.org/check.cgi?url=http%3A//basbossink.github.com/atom.xml"}
-                Valid Atom 1.0
-                |
-                Hosted by 
-                %a{ :href => "https://github.com/basbossink/basbossink.github.com/"} GitHub
-                and powered by&#32;
-                %a{ :href => "https://github.com/mojombo/jekyll/"}> Jekyll
-                ,&#32;
-                %a{ :href => "http://haml-lang.com/"} Haml
-                &amp;&#32;
-                %a{ :href => "http://sass-lang.com/"}> Sass
-                \.
+          Hosted by 
+          %a{ :href => "https://github.com/basbossink/basbossink.github.com/"} GitHub
+          and powered by&#32;
+          %a{ :href => "https://github.com/mojombo/jekyll/"}> Jekyll
+          ,&#32;
+          %a{ :href => "http://haml-lang.com/"} Haml
+          &amp;&#32;
+          %a{ :href => "http://sass-lang.com/"}> Sass
+          \.
         %p
           This work is licensed under a&#32;
-          %a{ :rel => "license", :href => "http://creativecommons.org/licenses/by/3.0/nl/"}> |
-          Creative Commons Attribution 3.0 Netherlands License |
+          %a{ :rel => "license", :href => "http://creativecommons.org/licenses/by/3.0/nl/"}> 
+            Creative Commons Attribution 3.0 Netherlands License
           \.
           Copyright &copy; {{ site.time | date: "%Y" }} Bas Bossink
         %p
@@ -117,8 +108,7 @@
         - [[ "http://nl.gitready.com/", "git ready (dutch translation)"],
            [ "http://basbossink.github.com/skelhs/", "Skelhs"],
            [ "https://github.com/basbossink/presentations/", "presentations"],
-           [ "https://github.com/basbossink/dot-files/", "dot-files"],
-           [ "https://bitbucket.org/basbossink/pygments-main/", "Pygments fork"]].each do |ref,txt| 
+           [ "https://github.com/basbossink/dot-files/", "dot-files"]].each do |ref,txt| 
           %li
             %a{ :href => "#{ref}"}#{txt}
       %h3 Tags
@@ -137,4 +127,3 @@
               print "#{category} (#{posts.length})</a>"
               print "</li>"
           end
-

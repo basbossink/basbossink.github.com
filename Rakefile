@@ -82,20 +82,13 @@ end
 
 desc 'Generate html and css from sources'
 task :build => LAYOUT do
-  sh %{ jekyll --no-server --no-auto --safe }
-  FileList['_site/**/*.html'].each do |file|
-    sh %{ java -jar c:/Users/bas/programs/htmlcompressor/htmlcompressor-0.9.8.jar --remove-intertag-spaces --remove-quotes #{file} -o #{file}}
-  end
 end
 
 desc 'commpress html'
 task :shrink => :build do
-  FileList['_layouts/default.html'].each do |file|
-    sh %{ java -jar c:/Users/bas/programs/htmlcompressor/htmlcompressor-0.9.8.jar --remove-intertag-spaces --remove-quotes #{file} -o #{file}}
-  end
   rm_rf 'css/combined.css'
   concatenate_files("css/combined.css",FileList['css/*.css'])
-  sh %{ java -jar C:/Users/bas/programs/yuicompressor-2.4.6/build/yuicompressor-2.4.6.jar css/combined.css -o _site/css/combined.css }
+  sh %{ java -jar C:/Users/bas/programs/yuicompressor-2.4.6/build/yuicompressor-2.4.6.jar css/combined.css -o css/combined.css }
 end
 
 desc 'Build and start server'

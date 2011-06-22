@@ -22,6 +22,10 @@ $footnote-size: 0.7em;
 $body-width: 35%;
 
 @mixin bare-list {
+  ul { 
+    margin: $default-margin; 
+    padding: $default-padding;
+  }
   li {
     display: block; 
     list-style-type: none;
@@ -75,7 +79,7 @@ $body-width: 35%;
     color: $primary;
     margin-bottom: 3px;
   }
-  h2,h3,h4 { 
+  h2,h3,h4,h5 { 
     color: $ternairy;
     margin: $default-margin;  
   }
@@ -87,6 +91,10 @@ $body-width: 35%;
   }
   h4 { 
     font-size: 1.1em;
+  }
+  h5 {
+    font-size: 1.0em;
+    font-weight: bold;
   }
   pre { 
     font-family: "Lucida Console","Courier New", monospace;
@@ -147,10 +155,6 @@ $body-width: 35%;
     top: 250px;
     right: 5px;
     font-size: 80%;
-    ul { 
-      margin: $default-margin; 
-      padding: $default-padding;
-    }
     @include bare-list;
     img { 
       padding-top: $interspacing; 
@@ -167,7 +171,8 @@ $body-width: 35%;
     color: $bronze;
   }
   .references {
-    @include bare-list
+    @include bare-list;
+    font-size: $footnote-size;
   }
 }
 @media print {
