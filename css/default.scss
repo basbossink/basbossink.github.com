@@ -96,8 +96,9 @@ $body-width: 35%;
     font-size: 1.0em;
     font-weight: bold;
   }
-  pre { 
+  pre,code { 
     font-family: "Lucida Console","Courier New", monospace;
+    white-space: nowrap;
   }
   /* specific divs */
   #banner {
