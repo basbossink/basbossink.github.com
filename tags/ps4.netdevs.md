@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Posts tagged ps4.netdevs
-keywords: [.NET,.NET development,PowerShell,PowerShell advocacy,development,ps4.netdevs]
+keywords: [.NET,.NET development,C#,PowerShell,PowerShell advocacy,PowerShell syntax,development,ps4.netdevs]
 ---
 <h2><a href="/2011-06-19/ps4.netdevs-0-what-and-why/">PS for .NET devs part 0: PowerShell what is it and why should I care?</a></h2>
 {% assign my_date = ' Sun 19 Jun 2011' %}
@@ -316,5 +316,172 @@ viewed through the eyes of a C# developer.
 [12]: /tags/ps4.netdevs.html
 [13]: http://go.microsoft.com/fwlink/?LinkID=113322 "Get-Member online help"
 [14]: http://msdn.microsoft.com/en-us/library/system.timespan.aspx "msdn: TimeSpan"
+
+<hr/>
+<h2><a href="/2011-06-29/ps4.netdevs-2-powershell-syntax/">PS for .NET devs part 2: Comparing the PowerShell language to C#</a></h2>
+{% assign my_date = ' Wed 29 Jun 2011' %}
+In my previous posts in this series I discussed
+[why you should care about PowerShell][0] and I pointed to some
+resources to help you [get started with PowerShell][2]. This post will
+describe the syntax of the [PowerShell][1] language by comparing it
+with C# syntax. [Recently][3] the
+[PowerShell language specification][4] was released under the
+community promise, so if you were so inclined you can now implement
+your own version of [PowerShell][1] without fearing a lawsuit for
+patent infringement. To summarize this post I would take what you
+would normally write in C#, remove all the explicit typing add a few
+`$`'s here and there and you have learned how to write
+[PowerShell][1]. What follows is a set of tables showing the C# syntax
+in the second column and the equivalent [PowerShell][1] syntax in the
+third preceded with a description of the particular language construct
+in the first column. Enjoy.
+
+### Comments
+Description                        | C#          | PowerShell  |
+-----------------------------------|-------------|-------------|
+single line                        | `//`        | `#`         |
+multi line                         | `/* ... */` | `<# ... #>` |
+single line documentation comments | `///`       |             |
+
+#### Comment documentation keywords
+[PowerShell][1] is also blessed with comment-based help but
+because it does not have any formating keywords and does not focus on
+types, a lot of the corresponding keywords have no equivalent in the
+[PowerShell][1] column. [PowerShell][1] supports more keywords than
+the ones listed below for the entire story please use
+[PowerShell][1]'s built in help:
+
+    help about_Comment_Based_Help
+
+Description                                            | C#             | PowerShell      |
+-------------------------------------------------------|----------------|-----------------|
+Set text in a code-like font                           | `<c>`          |                 |
+Set one or more lines of source code or program output | `<code>`       |                 |
+Indicate an example                                    | `<example>`    | `.EXAMPLE`      |
+Identifies the exceptions a method can throw           | `<exception>`  |                 |
+Includes XML from an external file                     | `<include>`    | `.EXTERNALHELP` |
+Create a list or table                                 | `<list>`       |                 |
+Permit structure to be added to text                   | `<para>`       |                 |
+Describe a parameter for a method or constructor       | `<param>`      | `.PARAMETER`    |
+Identify that a word is a parameter name               | `<paramref>`   |                 |
+Document the security accessibility of a member        | `<permission>` |                 |
+Describe a type                                        | `<remarks>`    |                 |
+Describe the return value of a method                  | `<returns>`    | `.OUTPUTS`      |
+Specify a link                                         | `<see>`        | `.LINK`         |
+Generate a See Also entry                              | `<seealso>`    | `.LINK`         |
+Describe a member of a type                            | `<summary>`    | `.SYNOPSIS`     |
+Describe a property                                    | `<value>`      |                 |
+Additional information about the function or script    |                | `.NOTES`        |
+A detailed description of the function or script       |                | `.DESCRIPTION`  |
+The inputs that can be piped to the function or script |                | `.INPUTS`       |
+
+### Operators 
+The arithmetic and assignment operators are the same for C# and
+[PowerShell][1] the differences start with the comparison operators
+the familiar `>` and friends are replaced with a `-` followed by an
+abbreviation for the comparison. This was done to keep the meaning `>`
+of for redirection as all system administrators now it from dos and
+POSIX shells.
+
+| C#           | PowerShell  | Description                 |
+|--------------+-------------+-----------------------------|
+| `==`         | `-eq`       |                             |
+| `!=`         | `-ne`       |                             |
+| `>`          | `-gt`       |                             |
+| `<`          | `-lt`       |                             |
+| `<=`         | `-le`       |                             |
+| `>=`         | `-ge`       |                             |
+|              | `-match`    | regular expression matching |
+|              | `-notmatch` |                             |
+|              | `-like`     | wildcard pattern matching   |
+|              | `-notlike`  |                             |
+|              | `-replace`  | replace regular expressions |
+| `$\mid$`     | `-bOR`      |                             |
+| `&`          | `-bAND`     |                             |
+| `^`          | `-bXOR`     |                             |
+| `~`          | `-bNOT`     |                             |
+| `&&`         | `-and`      |                             |
+| `$\mid\mid$` | `-or`       |                             |
+|              | `-xor`      |                             |
+| `!`          | `!`,`-not`  |                             |
+| `++`         | `++`        |                             |
+| `--`         | `--`        |                             |
+| `is`         | `-is`       |                             |
+|              | `-isnot`    |                             |
+| `as`         | `-as`       |                             |
+
+Apart from this table above there are a lot of extra operators that
+have no C# equivalent
+- Redirection Operators: `>, >>, 2>, 2>&1`
+- Split and Join Operators: `-split,-join` to divide and combine
+  substrings
+- Call operator: `&` run a command, script, or script block.
+  `& 'C:\Program Files (x86)\GNU\GnuPG\sha256sum.exe' test.iso`
+
+
+### Control flow
+All basic control flow statements you would expect are present in
+[PowerShell][1] the `switch` statement has some more functionality
+compared to C# since it supports switching on regular expressions and
+wildcards when the values supplied let themselves be converted to
+strings. Again use
+
+    help about_Switch
+    
+| C#                                   | PowerShell                                             |
+|--------------------------------------+--------------------------------------------------------|
+| `foreach(var i in Collection) {...}` | `foreach($i in $collection) {...}`                     |
+|                                      | `<command> $\mid$ foreach {...}`                       |
+|                                      | `<command> $\mid$ foreach {<begin>} {<process>}{<end>} |
+| `for(i=0; i< 20; i++) {..}`          | `for($i=0; $i -lt 20; $i++) {..}`                      |
+| `while(true) {...}`                  | `while($true) {..}`                                    |
+| `do { ... } while(false)`            | `do {...} while ($false)`                              |
+|                                      | `do {...} until ($true)`                               |
+|                                      |                                                        |
+
+
+{% include date.inc %}
+
+##### References {#references}
+<div class="references">
+<ul>
+<li><a href='/2011-06-19/ps4.netdevs-0-what-and-why/' title='PS for .NET devs part 0: PowerShell what is it and why should I care?'>PS for .NET devs part 0: PowerShell what is it and why should I care?</a></li>
+<li><a href='http://technet.microsoft.com/en-us/scriptcenter/dd742419' title='Scripting with Windows PowerShell'>Technet: Scripting with Windows PowerShell</a></li>
+<li><a href='/tags/ps4.netdevs.html' title='PS for .NET devs category'>PS for .NET devs category</a></li>
+</ul>
+</div>
+[0]: /2011-06-19/ps4.netdevs-0-what-and-why/ "PS for .NET devs part 0: PowerShell what is it and why should I care?"
+[1]: http://technet.microsoft.com/en-us/scriptcenter/dd742419 "Scripting with Windows PowerShell"
+[2]: /2011-06-22-ps4.netdev-1-getting-started-with-powershell/ "PS for .NET devs part 1: Getting started with PowerShell"
+[3]: http://blogs.msdn.com/b/powershell/archive/2011/04/16/powershell-language-now-licensed-under-the-community-promise.aspx "Powershell Language specification announcement"
+[4]: http://www.microsoft.com/download/en/details.aspx?id=9706 "Windows PowerShell Language Specification Version 2.0"
+[12]: /tags/ps4.netdevs.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

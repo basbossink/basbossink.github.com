@@ -41,3 +41,27 @@ reasons:
   20. Automate smoke tests using PSVirtualBox
   21. Exploring OData feeds
 
+*** The syntax of the PowerShell language
+
+[[http://www.microsoft.com/download/en/details.aspx?id%3D9706][Windows PowerShell Language Specification Version 2.0]]
+
+**** Comments
+***** comment based help
+**** literals
+**** variables
+***** types
+***** scope
+***** arrays
+***** hashes
+***** creating objects
+***** loading assemblies
+**** operators
+**** control flow statements
+**** exception handling
+**** functions
+***** filters
+***** parameters
+****** splatting
+***** advanced functions
+**** modules
+
