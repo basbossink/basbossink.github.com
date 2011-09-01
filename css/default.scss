@@ -42,6 +42,11 @@ $body-width: 35%;
   margin-left: auto;
   margin-right: auto;
 }
+
+@mixin code {
+    font-family: "Bitstream Vera Sans Mono","Consolas","Courier New", monospace;
+    white-space: nowrap;
+}
 table,th,td {
   border: 1px solid black;
   text-align: left;
@@ -80,6 +85,11 @@ td,th {
     padding: 5px;
     margin: 5px;
   }
+  div.code {
+    td {
+      @include code;
+    }
+  }
   p { 
     margin-top: $default-margin; 
     text-align: left;
@@ -107,8 +117,7 @@ td,th {
     font-weight: bold;
   }
   pre,code { 
-    font-family: "Lucida Console","Courier New", monospace;
-    white-space: nowrap;
+    @include code;
   }
   /* specific divs */
   #banner {

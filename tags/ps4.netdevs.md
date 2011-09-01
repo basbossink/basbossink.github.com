@@ -337,11 +337,11 @@ third preceded with a description of the particular language construct
 in the first column. Enjoy.
 
 ### Comments
-Description                        | C#          | PowerShell  |
------------------------------------|-------------|-------------|
-single line                        | `//`        | `#`         |
-multi line                         | `/* ... */` | `<# ... #>` |
-single line documentation comments | `///`       |             |
+Description                        | C#          | PowerShell  
+-----------------------------------|-------------|-------------
+single line                        | `//`        | `#`         
+multi line                         | `/* ... */` | `<# ... #>` 
+single line documentation comments | `///`       |             
 
 #### Comment documentation keywords
 [PowerShell][1] is also blessed with comment-based help but
@@ -353,27 +353,27 @@ the ones listed below for the entire story please use
 
     help about_Comment_Based_Help
 
-Description                                            | C#             | PowerShell      |
--------------------------------------------------------|----------------|-----------------|
-Set text in a code-like font                           | `<c>`          |                 |
-Set one or more lines of source code or program output | `<code>`       |                 |
-Indicate an example                                    | `<example>`    | `.EXAMPLE`      |
-Identifies the exceptions a method can throw           | `<exception>`  |                 |
-Includes XML from an external file                     | `<include>`    | `.EXTERNALHELP` |
-Create a list or table                                 | `<list>`       |                 |
-Permit structure to be added to text                   | `<para>`       |                 |
-Describe a parameter for a method or constructor       | `<param>`      | `.PARAMETER`    |
-Identify that a word is a parameter name               | `<paramref>`   |                 |
-Document the security accessibility of a member        | `<permission>` |                 |
-Describe a type                                        | `<remarks>`    |                 |
-Describe the return value of a method                  | `<returns>`    | `.OUTPUTS`      |
-Specify a link                                         | `<see>`        | `.LINK`         |
-Generate a See Also entry                              | `<seealso>`    | `.LINK`         |
-Describe a member of a type                            | `<summary>`    | `.SYNOPSIS`     |
-Describe a property                                    | `<value>`      |                 |
-Additional information about the function or script    |                | `.NOTES`        |
-A detailed description of the function or script       |                | `.DESCRIPTION`  |
-The inputs that can be piped to the function or script |                | `.INPUTS`       |
+Description                                            | C#             | PowerShell      
+-------------------------------------------------------|----------------|-----------------
+Set text in a code-like font                           | `<c>`          |                 
+Set one or more lines of source code or program output | `<code>`       |                 
+Indicate an example                                    | `<example>`    | `.EXAMPLE`      
+Identifies the exceptions a method can throw           | `<exception>`  |                 
+Includes XML from an external file                     | `<include>`    | `.EXTERNALHELP` 
+Create a list or table                                 | `<list>`       |                 
+Permit structure to be added to text                   | `<para>`       |                 
+Describe a parameter for a method or constructor       | `<param>`      | `.PARAMETER`    
+Identify that a word is a parameter name               | `<paramref>`   |                 
+Document the security accessibility of a member        | `<permission>` |                 
+Describe a type                                        | `<remarks>`    |                 
+Describe the return value of a method                  | `<returns>`    | `.OUTPUTS`      
+Specify a link                                         | `<see>`        | `.LINK`         
+Generate a See Also entry                              | `<seealso>`    | `.LINK`         
+Describe a member of a type                            | `<summary>`    | `.SYNOPSIS`     
+Describe a property                                    | `<value>`      |                 
+Additional information about the function or script    |                | `.NOTES`        
+A detailed description of the function or script       |                | `.DESCRIPTION`  
+The inputs that can be piped to the function or script |                | `.INPUTS`       
 
 ### Operators 
 The arithmetic and assignment operators are the same for C# and
@@ -383,66 +383,137 @@ abbreviation for the comparison. This was done to keep the meaning `>`
 of for redirection as all system administrators now it from dos and
 POSIX shells.
 
-| C#           | PowerShell  | Description                 |
-|--------------+-------------+-----------------------------|
-| `==`         | `-eq`       |                             |
-| `!=`         | `-ne`       |                             |
-| `>`          | `-gt`       |                             |
-| `<`          | `-lt`       |                             |
-| `<=`         | `-le`       |                             |
-| `>=`         | `-ge`       |                             |
-|              | `-match`    | regular expression matching |
-|              | `-notmatch` |                             |
-|              | `-like`     | wildcard pattern matching   |
-|              | `-notlike`  |                             |
-|              | `-replace`  | replace regular expressions |
-| `$\mid$`     | `-bOR`      |                             |
-| `&`          | `-bAND`     |                             |
-| `^`          | `-bXOR`     |                             |
-| `~`          | `-bNOT`     |                             |
-| `&&`         | `-and`      |                             |
-| `$\mid\mid$` | `-or`       |                             |
-|              | `-xor`      |                             |
-| `!`          | `!`,`-not`  |                             |
-| `++`         | `++`        |                             |
-| `--`         | `--`        |                             |
-| `is`         | `-is`       |                             |
-|              | `-isnot`    |                             |
-| `as`         | `-as`       |                             |
+<div class="code">
+<table>
+<thead>
+<tr><th>C#</th><th>PowerShell</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>==</td><td>-eq</td><td></td></tr>
+<tr><td>!=</td><td>-ne</td><td></td></tr>
+<tr><td>&gt;</td><td>-gt</td><td></td></tr>
+<tr><td>&lt;</td><td>-lt</td><td></td></tr>
+<tr><td>&lt;=</td><td>-le</td><td></td></tr>
+<tr><td>&gt;=</td><td>-ge</td><td></td></tr>
+<tr><td></td><td>-match</td><td>regular expression matching</td></tr>
+<tr><td></td><td>-notmatch</td><td></td></tr>
+<tr><td></td><td>-like</td><td>wildcard pattern matching</td></tr>
+<tr><td></td><td>-notlike</td><td></td></tr>
+<tr><td></td><td>-replace</td><td>replace regular expressions</td></tr>
+<tr><td>|</td><td>-bOR</td><td></td></tr>
+<tr><td>&amp;</td><td>-bAND</td><td></td></tr>
+<tr><td>^</td><td>-bXOR</td><td></td></tr>
+<tr><td>~</td><td>-bNOT</td><td></td></tr>
+<tr><td>&amp;&amp;</td><td>-and</td><td></td></tr>
+<tr><td>||</td><td>-or</td><td></td></tr>
+<tr><td></td><td>-xor</td><td></td></tr>
+<tr><td>!</td><td>!,-not</td><td></td></tr>
+<tr><td>++</td><td>++</td><td></td></tr>
+<tr><td>--</td><td>--</td><td></td></tr>
+<tr><td>is</td><td>-is</td><td></td></tr>
+<tr><td></td><td>-isnot</td><td></td></tr>
+<tr><td>as</td><td>-as</td><td></td></tr>
+</tbody>
+</table>
+</div>
 
-Apart from this table above there are a lot of extra operators that
+Apart from this table above there are a couple of extra operators that
 have no C# equivalent
-- Redirection Operators: `>, >>, 2>, 2>&1`
-- Split and Join Operators: `-split,-join` to divide and combine
-  substrings
-- Call operator: `&` run a command, script, or script block.
-  `& 'C:\Program Files (x86)\GNU\GnuPG\sha256sum.exe' test.iso`
+#### Redirection operators: 
+  `>, >>, 2>, 2>&1`
+  
+- Split and Join operators: `-split,-join` 
+  To divide and combine substrings
+  
+- Call operator: `&` 
+  Run a command, script, or script block.
+
+<script type="syntaxhighlighter" class="brush: ps"><![CDATA[
+PS>& 'C:\Program Files (x86)\GNU\GnuPG\sha256sum.exe' test.iso
+]]>
+</script>
 
 
-### Control flow
-All basic control flow statements you would expect are present in
-[PowerShell][1] the `switch` statement has some more functionality
+- Dot sourcing operator: `.`   
+  Runs a script so that the items in the script
+  are part of the calling scope.
+- Static member operator: `::`   
+  Used to call static method or retrieve
+  static properties of a .NET Framework class.
+- Range operator: `..`   
+  Represents the sequential integers in given an
+  upper and lower boundary
+- Format operator: `-f`
+<script type="syntaxhighlighter" class="brush: ps"><![CDATA[      
+      "{0:0.00}" -f [math]::pi
+]]>
+</script>
+  
+      &darr;  
+  
+<script type="syntaxhighlighter" class="brush: cs"><![CDATA[      
+      Math.PI.ToString("{0:0.00}")
+]]>
+</script>
+      
+- Subexpression operator: `$()`  
+  Returns the result of one or more statements.
+- Array subexpression operator `@()`  
+  Returns the result of one or more statements as an array.
+  Comma operator: `,`  
+  Creates an array.
+  
+### Selection Statements
+[PowerShell][1] supports the `if-else` and `switch` statements.
+The `if-else` differs only in the fact that [PowerShell][1] has a
+`elseif` keyword where C# uses `else if`.
+
+In [PowerShell][1] the `switch` statement has some more functionality
 compared to C# since it supports switching on regular expressions and
 wildcards when the values supplied let themselves be converted to
 strings. Again use
 
     help about_Switch
     
-| C#                                   | PowerShell                                             |
-|--------------------------------------+--------------------------------------------------------|
-| `foreach(var i in Collection) {...}` | `foreach($i in $collection) {...}`                     |
-|                                      | `<command> $\mid$ foreach {...}`                       |
-|                                      | `<command> $\mid$ foreach {<begin>} {<process>}{<end>} |
-| `for(i=0; i< 20; i++) {..}`          | `for($i=0; $i -lt 20; $i++) {..}`                      |
-| `while(true) {...}`                  | `while($true) {..}`                                    |
-| `do { ... } while(false)`            | `do {...} while ($false)`                              |
-|                                      | `do {...} until ($true)`                               |
-|                                      |                                                        |
+### Iteration Statements
+<div class="code">
+<table>
+<thead>
+<tr><th>C#</th><th>PowerShell</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>do {...} while (x &lt; 5 )</td>
+<td>do {...} while ($x -lt 5 )</td>
+</tr>
+<tr>
+<td>for(int i=0; i &lt; 37; i++) {...}</td>
+<td>for($i=0; i -lt 37; i++) {...}</td>
+</tr>
+<tr>
+<td>foreach(var i in Collection) {...}</td>
+<td>foreach($i in $collection) {...}</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;command&gt; | foreach {...}</td>
+</tr>
+<tr>
+<td></td>
+<td>&lt;command&gt; | ForEach-Object {...}</td>
+</tr>
+<tr>
+<td>while(x &lt; 5) {...}</td>
+<td>while($x -lt 5) {...}</td>
+</tr>
+</tbody>
+</table>
+</div>
 
 
 {% include date.inc %}
 
-##### References {#references}
+##### References
 <div class="references">
 <ul>
 <li><a href='/2011-06-19/ps4.netdevs-0-what-and-why/' title='PS for .NET devs part 0: PowerShell what is it and why should I care?'>PS for .NET devs part 0: PowerShell what is it and why should I care?</a></li>
