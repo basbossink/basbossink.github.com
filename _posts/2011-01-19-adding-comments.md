@@ -20,9 +20,12 @@ site was also trivial. Being a bit overly purist I decided to
 translate the code snippet provided by [Disqus][disq] to
 [Haml][haml]. Which results in the following:
 
-{% highlight haml linenos %}
 {% assign post_id = '{{ post.id }}' %}
 {% assign post_url = '{{ post.url}}' %}
+
+<script type="syntaxhighlighter" class="brush: plain">
+<![CDATA[
+
 %div#disqus_thread
 :javascript
   /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
@@ -46,8 +49,8 @@ translate the code snippet provided by [Disqus][disq] to
   blog comments powered by
   %span.logo-disqus 
     Disqus
-{% endhighlight %}
-
+]]>
+</script>
 This snippet can also be found in the [Git][git] [repository][repo] from which
 this blog is generated, [here][dh] to be exact. Now that the basic
 infrastructure is in place. It is probably time for some real content.

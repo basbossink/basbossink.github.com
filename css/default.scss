@@ -44,7 +44,7 @@ $body-width: 35%;
 }
 
 @mixin code {
-    font-family: "Bitstream Vera Sans Mono","Consolas","Courier New", monospace;
+    font-family: "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
     white-space: nowrap;
 }
 table,th,td {
@@ -63,7 +63,7 @@ td,th {
     padding: $default-padding;
     background-color: #ffffff;
     color: #000000;
-    font-family: arial, sans-serif;
+    font-family: "DejaVu Sans", Verdana, Arial, sans-serif;
     border: $border-size solid black;
     word-break: keep-words;
   }
@@ -196,6 +196,7 @@ td,th {
   }
 }
 @media print {
+  font-family: "Times New Roman", Helvetica, Arial, serif;
   #linkList, #banner, #disqus_thread, .footer { 
     display: none;
   }

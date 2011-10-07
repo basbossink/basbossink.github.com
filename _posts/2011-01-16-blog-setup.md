@@ -40,13 +40,13 @@ for the content and stylesheets but does not work for the `_layout`
 content. Therefor I decided to call [Rake][rake] to the rescue and use
 the following rule to generate the HTML for the `_layout` directory
 
-{% highlight ruby linenos %}
-
+<script type="syntaxhighlighter" class="brush: ruby">
+<![CDATA[
 rule '.html' => ['.haml'] do |t|
     sh %{ haml -E utf-8 #{t.source} #{t.name.sub(/_haml\./,'.')} }
 end
-
-{% endhighlight %}
+]]>
+</script>
 
 Note the non-standard output filename on line 2, this is needed because
 [Jekyll][jek] does not use extensions when referring to layouts and it
@@ -58,13 +58,14 @@ locallly as well. Since this also gives me more control and I can be
 sure that the page rendered locally will look exactly the same once
 everything is committed. For generating the CSS I use the following rule:
 
-{% highlight ruby linenos %}
+<script type="syntaxhighlighter" class="brush: ruby">
+<![CDATA[
 
 rule '.css' => ['.scss'] do |t|
     sh %{ sass -t compressed #{t.source} #{t.name} }
 end
-
-{% endhighlight %}
+]]>
+</script>
 
 ## Generating a tag cloud
 
@@ -77,7 +78,8 @@ of the layout for each post. Isn't that a wonderful self referential
 system. Here's the [Haml][haml] code to produce the tag list you see
 in the right column.
 
-{% highlight haml linenos %}
+<script type="syntaxhighlighter" class="brush: ruby">
+<![CDATA[
 
 %h3 Categories
   %ul
@@ -95,8 +97,8 @@ in the right column.
       print "#{category} (#{posts.length})</a>"
       print "</li>"
   end
-{% endhighlight %}
-
+]]>
+</script>
 Apparently `site.read_posts` outputs to stdout to avoid it from
 clogging up the page it's output gets rendered as an HTML comment
 (line 6 and 10).
@@ -107,7 +109,8 @@ Also inspired by [this gist][raketag] I added a [Rake][rake] task to
 generate a page for each used tag in the site containing all posts
 that refer to the tag. Here's the code:
 
-{% highlight ruby linenos %}
+<script type="syntaxhighlighter" class="brush: ruby">
+<![CDATA[
 
 namespace :tags do
   task :clean do 
@@ -147,14 +150,17 @@ HTML
   end
 end
 
-{% endhighlight %}
+]]>
+</script>
+
 To be able to fill the `<meta keywords...` each post puts keywords
 appropriate for the post in the [Yaml Front Matter][yfm].
 The function `aggregate_keywords` just puts the category at hand
 and all the keywords from all posts in one set and returns them as a comma
 separated list, like so:
 
-{% highlight ruby linenos %}
+<script type="syntaxhighlighter" class="brush: ruby">
+<![CDATA[
 
 def aggregate_keywords(category,posts)
   keywords = SortedSet.new()
@@ -170,7 +176,8 @@ def aggregate_keywords(category,posts)
   return keywords.to_a.join(',')
 end
 
-{% endhighlight %}
+]]>
+</script>
 
 Next up from my blog setup backlog is a comments facility.
 If you'd like to use any of the code quoted above
