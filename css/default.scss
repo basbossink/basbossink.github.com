@@ -1,13 +1,8 @@
-/* 
-Palette color codes :from
-http://colorschemedesigner.com/#4y11Tw0w0w0w0
-*/
-$primary: #5c0dac;
-$secondary: #542881;
-$ternairy: #3a0470;
-$quadairy: #8b42d6;
-$quintairy: #9f69d6;
-
+$primary: #033649;
+$secondary: #036564;
+$ternary: #031634;
+$quartary: #cdb380;
+$background: white;
 /* Specific colors */
 $gold: #ffd700;
 $silver: #c0c0c0;
@@ -52,7 +47,7 @@ table,th,td {
   text-align: left;
 }
 th {
-  color: $quadairy;
+  color: $primary;
 }
 td,th {
   padding: $default-margin;
@@ -61,11 +56,17 @@ td,th {
   html {
     margin: $default-margin;
     padding: $default-padding;
-    background-color: #ffffff;
+    background-color: $background;
     color: #000000;
     font-family: "DejaVu Sans", Verdana, Arial, sans-serif;
     border: $border-size solid black;
     word-break: keep-words;
+    a {
+      color: $primary;
+      &:visited { 
+        color: $secondary;
+      }
+    }
   }
   img {
     border: $border-size;
@@ -81,7 +82,7 @@ td,th {
   }
   div.highlight {
     overflow: auto;
-    border: 1px solid $quadairy;
+    border: 1px solid $primary;
     padding: 5px;
     margin: 5px;
   }
@@ -96,11 +97,11 @@ td,th {
   }
   h1 { 
     font-size: 2.5em;
-    color: $primary;
+    color: $secondary;
     margin-bottom: 3px;
   }
   h2,h3,h4,h5 { 
-    color: $ternairy;
+    color: $secondary;
     margin: $default-margin;  
   }
   h2 {
@@ -122,17 +123,17 @@ td,th {
   /* specific divs */
   #banner {
     @include centrate;
-    background-color: $primary;
+    background-color: $ternary;
+    color: $secondary;
     padding: 10px;
     width: $body-width;
     text-align: center;
-    border-style: double;
-    border-width: medium;
-    border-color: $quadairy;
+    border-style: solid;
+    border-width: 15px;
+    border-color: $primary;
     h1, h2 {
       font-weight: bold; 
       font-family: Tahoma, sans-serif;
-      color: $quintairy;
     }
   }
   #container {
@@ -145,8 +146,8 @@ td,th {
   }
   div.postpreviewseparator {
     border-style: solid;
-    border-width: 0 0 1px 0;
-    border-bottom-color: gray;
+    border-width: 0 0 2px 0;
+    border-bottom-color: $secondary;
     margin-bottom: 2em; 
   }
   .footer { 
@@ -170,7 +171,6 @@ td,th {
   }
   #linkList {
     $interspacing: 5px;
-
     position: absolute;
     top: 250px;
     right: 5px;

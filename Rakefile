@@ -1,4 +1,5 @@
 require 'rake/clean'
+require 'rexml/document'
 
 LAYOUT_SRC = FileList.new('_includes/*.haml','_layouts/*.haml', 'index.haml')
 LAYOUT_HTML = LAYOUT_SRC.ext('html')
@@ -36,6 +37,76 @@ end
 def concatenate_files(output_filename, input_files)
   File.open(output_filename, "a+") do |out|
     out.puts input_files.map{ |s| IO.read(s)}
+  end
+end
+
+def create_loc(path)
+  name = File.basename(path, '.md') 
+  name[10] ='/'
+  loc = REXML::Element.new "loc" 
+  loc.text = "http://basbossink.github.com/" + name + "/"
+  
+  loc
+end
+
+def create_lastmod(path)
+  require 'time'
+  lastmod = REXML::Element.new "lastmod"
+  date = File.mtime(path)
+  lastmod.text = date.iso8601
+  lastmod
+end
+
+def create_url(path,date)
+  url = REXML::Element.new "url"
+  url.add_element(create_loc(path))
+  url.add_element(create_lastmod(path))
+  url
+end
+
+
+def generate_sitemap()
+  require 'find'
+  sitemap = REXML::Document.new << REXML::XMLDecl.new("1.0", "UTF-8")
+  urlset = REXML::Element.new "urlset"
+  urlset.add_attribute("xmlns", 
+        "http://www.sitemaps.org/schemas/sitemap/0.9")
+  
+  Find.find('_posts') do |path|
+    unless FileTest.directory?(path) 
+      puts "adding #{path} to sitemap"
+      date = File.mtime(path)
+      urlset.add_element(create_url(path,date))
+    end
+  end
+  sitemap.add_element(urlset)
+  sitemap
+end
+
+def write_sitemap(sitemap)
+  file = File.new("sitemap.xml", "w")
+  formatter = REXML::Formatters::Default::new(true)
+  formatter.write(sitemap, file)
+  file.close
+end
+
+def validate_sitemap()
+  require 'Nokogiri'
+  xsd = Nokogiri::XML::Schema(File.read("sitemap.xsd"))
+  doc = Nokogiri::XML(File.read("sitemap.xml"))
+
+  xsd.validate(doc).each do |error|
+    puts error.message
+  end
+end
+
+namespace :sitemap do
+  task :generate do
+    write_sitemap(generate_sitemap())
+  end
+
+  task :validate => :generate do 
+    validate_sitemap()
   end
 end
 
@@ -93,11 +164,15 @@ end
 
 desc 'Build and start server'
 task :server => :default do
-  sh %{ jekyll --server --safe }
+  sh %{ jekyll --server }
 end
 
 desc "Create per tag pages and rest"
-task :default => [:shrink, "tags:generate"]
+task :default => [
+                  :shrink, 
+                  "tags:generate",
+                  "sitemap:generate"
+                 ]
 
 
 

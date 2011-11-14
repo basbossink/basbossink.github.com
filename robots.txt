@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /sitemap.xsd
+Disallow: /planning.org
+Disallow: /Rakefile
+Disallow: /index.haml
