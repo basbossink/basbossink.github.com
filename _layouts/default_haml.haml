@@ -26,13 +26,6 @@
     %link{ :rel => "alternate", :type => "application/atom+xml",
            :href => "/atom.xml", :title => "Sitewide ATOM Feed"}
     :javascript
-      google_ad_client = "ca-pub-2311864687324407";
-      /* blog */
-      google_ad_slot = "7855154384";
-      google_ad_width = 120;
-      google_ad_height = 240;
-    %script{ :type => "text/javascript", :src => "http://pagead2.googlesyndication.com/pagead/show_ads.js"}
-    :javascript
       SyntaxHighlighter.all();
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-20785819-1']);
@@ -140,3 +133,10 @@
               print "#{category} (#{posts.length})</a>"
               print "</li>"
           end
+    :javascript
+      google_ad_client = "ca-pub-2311864687324407";
+      /* blog */
+      google_ad_slot = "7855154384";
+      google_ad_width = 120;
+      google_ad_height = 240;
+    %script{ :type => "text/javascript", :src => "http://pagead2.googlesyndication.com/pagead/show_ads.js"}

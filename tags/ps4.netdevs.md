@@ -318,8 +318,8 @@ viewed through the eyes of a C# developer.
 [14]: http://msdn.microsoft.com/en-us/library/system.timespan.aspx "msdn: TimeSpan"
 
 <hr/>
-<h2><a href="/2011-06-29/ps4.netdevs-2-powershell-syntax/">PS for .NET devs part 2: Comparing the PowerShell language to C#</a></h2>
-{% assign my_date = ' Wed 29 Jun 2011' %}
+<h2><a href="/2011-11-14/ps4.netdevs-2-powershell-syntax/">PS for .NET devs part 2: Comparing the PowerShell language to C#</a></h2>
+{% assign my_date = ' Mon 14 Nov 2011' %}
 In my previous posts in this series I discussed
 [why you should care about PowerShell][0] and I pointed to some
 resources to help you [get started with PowerShell][2]. This post will
@@ -523,6 +523,11 @@ strings. Again use `help about_Switch` (or look [here][switch]).
 </table>
 </div>
 
+Even though it's not explicitly mentioned in the table above
+[PowerShell][1] also supports the familiar `break` and `continue` keywords. See `help
+about_break` (or [here][break]) and `help about_continue` (or
+[here][continue]) for details.
+
 ### Exception Handling
 Since version 2 [PowerShell][1] supports the C# [`try-catch-finally`][tryc]
 syntax besides the earlier introduced [`trap`][trap] keyword, which
@@ -544,16 +549,20 @@ in the [`throw`][throw] syntax is optional, this reminds me a bit of the
 href='/2011-06-22-ps4.netdev-1-getting-started-with-powershell/' title='PS for .NET devs part 1: Getting started with PowerShell'>
 PS for .NET devs part 1: Getting started with PowerShell</a></li>
 <li><a href='http://blogs.msdn.com/b/powershell/archive/2011/04/16/powershell-language-now-licensed-under-the-community-promise.aspx' title='Powershell Language specification announcement'>Powershell Language specification announcement</a></li>
-<li><a href='http://technet.microsoft.com/en-us/library/dd347548.aspx'
-title='About Trap'>About Trap</a></li>
-<li><a href='http://technet.microsoft.com/en-us/library/dd315350.aspx'
-title='About Try, Catch, Finally'>About Try, Catch, Finally</a></li>
+<li><a href='http://technet.microsoft.com/en-us/library/dd315285.aspx'
+title='About Break'>About Break</a></li>
 <li><a href='http://technet.microsoft.com/en-us/library/dd819489.aspx'
 title='About Comment Based Help'>About Comment Based Help</a></li>
+<li><a href='http://technet.microsoft.com/en-us/library/dd347559.aspx'
+title='About Continue'>About Continue</a></li>
 <li><a href='http://technet.microsoft.com/en-us/library/dd347715.aspx'
 title='About Switch'>About Switch</a></li>
 <li><a href='http://technet.microsoft.com/en-us/library/dd819510.aspx'
 title='About Throw'>About Throw</a></li>
+<li><a href='http://technet.microsoft.com/en-us/library/dd347548.aspx'
+title='About Trap'>About Trap</a></li>
+<li><a href='http://technet.microsoft.com/en-us/library/dd315350.aspx'
+title='About Try, Catch, Finally'>About Try, Catch, Finally</a></li>
 <li><a href='http://www.perl.org'
 title='The Perl Programming Language'>The Perl Programming Language</a></li>
 <li><a href='http://perldoc.perl.org/functions/die.html'
@@ -573,27 +582,7 @@ title='The Perl die Function'>The Perl die Function</a></li>
 [throw]: http://technet.microsoft.com/en-us/library/dd819510.aspx "About Throw"
 [perl]: http://www.perl.org "The Perl Programming Language"
 [die]: http://perldoc.perl.org/functions/die.html "The Perl die Function"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+[break]: http://technet.microsoft.com/en-us/library/dd315285.aspx "About Break"
+[continue]: http://technet.microsoft.com/en-us/library/dd347559.aspx "About Continue"
 
 
