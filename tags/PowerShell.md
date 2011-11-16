@@ -456,6 +456,16 @@ C#              | PowerShell      | Description
                 | `.DESCRIPTION`  | A detailed description of the function or script      
                 | `.INPUTS`       | The inputs that can be piped to the function or script
 
+### Literals 
+Literals are the same as in C# with a few minor differences:
+- [PowerShell][1] does not have `char` literals to create one you have
+  to use a cast: `[char]"a"`.
+- [PowerShell][1] multi-line strings also begin with the `@"` it 
+  however has to be followed by a new line, furthermore the end mark
+  is a `"@` which has to by put at the beginning of the line.
+- Array literals are created using the array operator `,`. So
+  `"Fred","Barney"` creates on array containing 2 strings.
+  
 ### Operators 
 The arithmetic and assignment operators are the same for C# and
 [PowerShell][1] the differences start with the comparison operators
@@ -620,6 +630,12 @@ difference being that any expression can be [`throw`][throw]n. The expression
 in the [`throw`][throw] syntax is optional, this reminds me a bit of the
 [Perl][perl] [`die` ][die] function.
 
+### Epilogue
+This is my brief summary of the syntactic differences between C# and
+[PowerShell][1]. I hope this can help you in coming to grips with
+[PowerShell][1]. Next time we'll look at how easy it is to work with
+XML in [PowerShell][1] and munge a large [MSBuild][msb] file with a
+small script. 
 {% include date.inc %}
 
 ##### References
@@ -650,6 +666,8 @@ title='About Try, Catch, Finally'>About Try, Catch, Finally</a></li>
 title='The Perl Programming Language'>The Perl Programming Language</a></li>
 <li><a href='http://perldoc.perl.org/functions/die.html'
 title='The Perl die Function'>The Perl die Function</a></li>
+<li><a href='http://msdn.microsoft.com/en-us/library/wea2sca5.aspx'
+title='MSBuild'>MSBuild</a></li>
 </ul>
 </div>
 [0]: /2011-06-19/ps4.netdevs-0-what-and-why/ "PS for .NET devs part 0: PowerShell what is it and why should I care?"
@@ -667,5 +685,6 @@ title='The Perl die Function'>The Perl die Function</a></li>
 [die]: http://perldoc.perl.org/functions/die.html "The Perl die Function"
 [break]: http://technet.microsoft.com/en-us/library/dd315285.aspx "About Break"
 [continue]: http://technet.microsoft.com/en-us/library/dd347559.aspx "About Continue"
+[msb]: http://msdn.microsoft.com/en-us/library/wea2sca5.aspx "MSBuild"
 
 
