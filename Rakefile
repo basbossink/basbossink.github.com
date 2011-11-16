@@ -6,6 +6,7 @@ LAYOUT_HTML = LAYOUT_SRC.ext('html')
 SCSS = FileList.new('css/*.scss')
 CSS = SCSS.ext('css')
 LAYOUT = LAYOUT_HTML + CSS
+POSTS = FileList.new('_posts/*.md')
 
 CLOBBER.include('_site')
 CLEAN.include('tags/*.*')
@@ -165,6 +166,19 @@ end
 desc 'Build and start server'
 task :server => :default do
   sh %{ jekyll --server }
+end
+
+desc 'Count words and lines of post'
+task :count => POSTS do 
+  POSTS.each do | post | 
+    output = IO.popen( "pandoc -t plain #{post}") 
+    lc = wc = 0
+    output.each_line do |line| 
+      lc += 1
+      wc += line.split.size
+    end
+    puts "#{post.pathmap("%f")} has #{lc} lines and #{wc} words"
+  end
 end
 
 desc "Create per tag pages and rest"
