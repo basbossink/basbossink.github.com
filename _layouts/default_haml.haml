@@ -97,9 +97,9 @@
           - bronzes = me['badge_counts']['bronze']
           %div.by_line
             = rep
-            = if golds > 0 then ":: <span class='gold'>#{golds}</span>" end
-            = if silvers > 0 then ":: <span class='silver'>#{silvers}</span>" end
-            = if bronzes > 0 then ":: <span class='bronze'>#{bronzes}</span>" end
+            = ":: <span class='gold'>#{golds}</span>" 
+            = ":: <span class='silver'>#{silvers}</span>" 
+            = ":: <span class='bronze'>#{bronzes}</span>" 
         %li 
           %a{ :href => "http://www.twitter.com/basbossink"}
             Twitter
@@ -133,10 +133,10 @@
               print "#{category} (#{posts.length})</a>"
               print "</li>"
           end
-    :javascript
-      google_ad_client = "ca-pub-2311864687324407";
-      /* blog */
-      google_ad_slot = "7855154384";
-      google_ad_width = 120;
-      google_ad_height = 240;
-    %script{ :type => "text/javascript", :src => "http://pagead2.googlesyndication.com/pagead/show_ads.js"}
+      :javascript
+        google_ad_client = "ca-pub-2311864687324407";
+        /* blog */
+        google_ad_slot = "7855154384";
+        google_ad_width = 120;
+        google_ad_height = 240;
+      %script{ :type => "text/javascript", :src => "http://pagead2.googlesyndication.com/pagead/show_ads.js"}

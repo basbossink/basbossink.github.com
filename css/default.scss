@@ -3,6 +3,7 @@ $secondary: #036564;
 $ternary: #031634;
 $quartary: #cdb380;
 $background: white;
+
 /* Specific colors */
 $gold: #ffd700;
 $silver: #c0c0c0;
@@ -74,6 +75,7 @@ td,th {
   div.by_line {
     font-size: 70%;
     padding-left: 1em;
+    color: $secondary;
   }
   div.comment_count {
     font-size: 0.5em;
