@@ -64,4 +64,5 @@ reasons:
 ****** splatting
 ***** advanced functions
 **** modules
-
+*** List Targets in your MSBuild file
+**** 
