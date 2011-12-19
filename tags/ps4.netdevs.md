@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Posts tagged ps4.netdevs
-keywords: [.NET,.NET development,C#,MSBuild,Metrics,PowerShell,PowerShell advocacy,PowerShell syntax,Statistics,XML,code-base,development,overview,ps4.netdevs]
+keywords: [.NET,.NET development,C#,MSBuild,Metrics,PowerShell,PowerShell advocacy,PowerShell syntax,Statistics,StudioShell,Visual Studio 2010,XML,code-base,development,overview,ps4.netdevs]
 ---
 <h2><a href="/2011-06-19/ps4.netdevs-0-what-and-why/">PS for .NET devs part 0: PowerShell what is it and why should I care?</a></h2>
 {% assign my_date = ' Sun 19 Jun 2011' %}
@@ -1016,7 +1016,7 @@ specific to this project
 
 <script type="syntaxhighlighter" class="brush: ps"><![CDATA[
 >ls -rec -inc *.cs | 
->>group { sls -path $_ -pattern '\[TestFixture\]'` -quiet } | 
+>>group { sls -path $_ -pattern '\[TestFixture\]' -quiet } | 
 >>Select @{Name="TestOrProduction";
 >>Exp={if ($_.Name -eq "True") { "Test" } else {"Production"}}},`
 >>@{Name="LoC";Expr={ $_.group | %{ gc $_ } | measure -line -ignorew|
@@ -1050,5 +1050,181 @@ title='NUnit a .NET unit-testing framework'>NUnit a .NET unit-testing framework<
 
 [1]: http://technet.microsoft.com/en-us/scriptcenter/dd742419 "Scripting with Windows PowerShell"
 [nunit]: http://nunit.org "NUnit a .NET unit-testing framework "
+
+<hr/>
+<h2><a href="/2011-12-19/ps4.netdevs-5-extending-vs/">PS for .NET devs part 5: Extending Visual Studio using StudioShell</a></h2>
+{% assign my_date = ' Mon 19 Dec 2011' %}
+In a [previous post][targets] I showed how to extract all targets
+defined in a given MSBuild file. Wouldn't it be great if the
+execution of those targets could be performed directly from within
+Visual Studio. Building on [PowerShell][1] and [StudioShell][studios]
+this becomes trivial. 
+
+### PowerShell Hosts in Visual Studio
+Looking in the [Visual Studio Extension Manager][vsextm] you find a number 
+of extensions that offer [PowerShell][1] related functionality for Visual
+Studio, below I'll briefly describe them:
+
+1. [NuGet Package Manager Console][nuget]  
+   [NuGet][nuget] is a .NET package manager, comparable to for
+   instance [Ruby][ruby] [Gems][gem], that you can use to easily install
+   and use .NET libraries in your project. [NuGet][nuget] can be used
+   to install libraries into your project by downloading the library
+   adding a reference to your project and possibly editing 
+   configuration files if that should be necessary. Packages can be
+   managed through a set of [PowerShell][1] Cmdlets, such as:
+   - `Get-Package`
+   - `Install-Package`
+   - `Uninstall-Package`
+   - `Update-Package`
+   - `New-Package`
+   - `Get-Project`
+   - `Add-BindingRedirect`
+   - `Open-PackagePage`
+   - `Register-TabExpansion`  
+   Besides the [NuGet][nuget] Cmdlets the package manager console
+   does not provide any extra functionality over the standard
+   [PowerShell][1] console. 
+1. [PowerGUI Visual Studio Extension][powerguic]  
+   This great extension has two parts:
+   - a [PowerGUI][pwg] Console  
+     this is again a [PowerShell host][pshost] inside Visual Studio
+     comparable to the host you find in [PowerGUI][pwg]
+   - an editor extension equivalent to the
+     [PowerGUI Script Editor][pwgse]    
+     with a rich feature set such as, IntelliSense, snippets, syntax
+     highlighting and even debugging
+   In my opinion this is a must have Visual Studio extension and best
+   of all it's free of charge.
+1. [PowerConsole][powerc]  
+   Is a [PowerShell host][pshost] that has some extra functionality compared
+   to the [NuGet][nuget] package manager console. It exposes Visual
+   Studio's COM API by providing a `$dte` variable. That is an
+   instance of [DTE][dte] which is the entry point to the Visual Studio
+   Automation API. Apart from that, a few Cmdlets
+   (`Get-VSService`,`Get-Interface`, `Get-VSComponentModel`) are provided to
+   interact with the managed API. Judging from the examples provided
+   on the website these provide a very C# like interaction with
+   Visual Studio.
+1. [PowerStudio][powers]  
+   Offers a rich editing experience for [PowerShell][1], feature wise
+   almost comparable to the
+   [PowerGUI Visual Studio Extension][powerguic].
+   I have not used this extension in anger but it feels OK. The thing
+   it's missing compared to the
+   [PowerGUI Visual Studio Extension][powerguic] is the IntelliSense
+   for file names.
+1. [StudioShell][studios]  
+   In this case I'm saving the best for last. [StudioShell][studios]
+   is again a [PowerShell][1] host for Visual Studio where in my
+   opinion the Visual Studio API is surfaced in the most
+   [PowerShell][1]-like way. The before mentioned [DTE][dte] object is
+   surfaced as a [PowerShell][1] [provider][prov]. This makes
+   interacting with VS really easy as you will see in the example
+   below. Furthermore [StudioShell][studios] offers several
+   [profile][prof] options, one of which is a [profile][prof] per
+   solution. This makes it very easy to develop your VS extras on a
+   solution specific basis. Let's expand on the 
+   [previous article about listing all targets in a MSBuild file][targets] 
+   by creating a Visual Studio extension that adds a menu were each of the 
+   available targets can be executed from within Visual Studio. Building on
+   [StudioShell][studios] this becomes a piece of cake.
+
+### Extending Visual Studio with StudioShell
+Here's a little snippet that adds a command bar to Visual Studio with a button 
+for each available MSBuild target.
+
+<script type="syntaxhighlighter" class="brush: ps"><![CDATA[
+New-Item dte:/commandBars -Name "MSBuild"
+$solutiondir = Split-Path (get-item dte:\solution).FileName
+cd $solutiondir
+.\Get-MsBuildTargets.ps1 | ForEach-Object { 
+    $command = "New-Item `"dte:\commandBars\MSBuild`" -Name $($_.Name) -Type button -Value { 
+        pushd .
+        cd $solutiondir
+        .\MSBuildTarget.bat $($_.Name) | 
+            Out-Outputpane -name MSBuild
+        popd 
+    }"
+    Invoke-Expression $command 
+}
+]]>
+</script>
+  
+In the documentation I could not find how to use the 
+`EventArgs` that you would guess would be passed to this event handler. 
+Therefor I resorted to the use of string interpolation and `Invoke-Expression`.
+This is only a small example, you can find some more examples on the 
+[StudioShell][studios] [examples page][studiosex]. This snippet could be put
+in your solution profile. The `MSBuildTarget.bat` command basically does what
+the name says, it calls `msbuild` with the given target using the build file 
+for the project. Yes, I know all batch files should by replaced with their
+[next generation alternative][1] but this project started before [PowerShell][1]
+version 1.0 shipped. Somehow we never seem to get the time to rewrite them ![Smiley](/images/wink.png "smiley").
+
+I hope this presents a nice starter for enhancing your Visual Studio 
+productivity with [PowerShell][1]. 
+
+{% include date.inc %}
+
+##### References
+
+<div class="references">
+<ul>
+<li><a href='http://technet.microsoft.com/en-us/scriptcenter/dd742419'
+title='Scripting with Windows PowerShell'>Technet: Scripting with
+Windows PowerShell</a></li>
+<li><a href='http://studioshell.codeplex.com/' 
+title='StudioShell home page'>StudioShell home page</a></li>
+<li><a href='/2011-11-19/ps4.netdevs-3-list-targets/'
+title='PS for .NET devs part 3: List Targets in your MSBuild file'>
+PS for .NET devs part 3: List Targets in your MSBuild file</a></li>
+<li><a href='http://studioshell.codeplex.com/wikipage?title=Examples&referringTitle=Documentation'
+title='StudioShell Examples page' >StudioShell Examples page</a></li>
+<li><a href='http://nuget.org' title='NuGet home page' >NuGet home page</a></li>
+<li><a href='http://powerguivsx.codeplex.com/' 
+title='PowerGUI Visual Studio Extension'>PowerGUI Visual Studio Extension</a></li>
+<li><a href='http://visualstudiogallery.msdn.microsoft.com/67620d8c-93dd-4e57-aa86-c9404acbd7b3'
+title='PowerConsole'>PowerConsole</a></li>
+<li><a href='http://visualstudiogallery.msdn.microsoft.com/9b3272d4-6d13-4c1c-93bc-3ec74614508e'
+title='PowerStudio'>PowerStudio</a></li>
+<li><a href='http://msdn.microsoft.com/en-us/library/dd293638.aspx'
+title='Visual Studio Extension Manager'>Visual Studio Extension Manager</a></li>
+<li><a href='http://msdn.microsoft.com/en-us/library/windows/desktop/ee706610(v=vs.85).aspx'
+title='PowerShell Host overview'>PowerShell Host overview'</a></li>
+<li><a href='http://www.ruby-lang.org/en/'
+title='Ruby'>Ruby</a></li>
+<li><a href='http://rubygems.org/'
+title='Ruby Gems'>Ruby Gems</a></li>
+<li><a href='http://www.powergui.org/'
+title='PowerGUI'>PowerGUI</a></li>
+<li><a href='http://wiki.powergui.org/index.php/Script_Editor'
+title='PowerGUI Script Editor'>PowerGUI Script Editor</a></li>
+<li><a href='http://msdn.microsoft.com/en-us/library/envdte.dte.aspx'
+title='DTE'>DTE</a></li>
+<li><a href='http://msdn.microsoft.com/en-us/library/windows/desktop/bb613488(v=vs.85).aspx'
+title='PowerShell profiles'>PowerShell profiles</a></li>
+<li><a href='http://msdn.microsoft.com/en-us/library/windows/desktop/ee126186(v=VS.85).aspx'
+title='PowerShell provider'>PowerShell provider</a></li>
+</ul>
+</div> 
+
+[1]: http://technet.microsoft.com/en-us/scriptcenter/dd742419 "Scripting with Windows PowerShell"
+[studios]: http://studioshell.codeplex.com/ "StudioShell home page"
+[studiosex]: http://studioshell.codeplex.com/wikipage?title=Examples&referringTitle=Documentation "StudioShell Examples page"
+[targets]: /2011-11-19/ps4.netdevs-3-list-targets/ "PS for .NET devs part 3: List Targets in your MSBuild file"
+[nuget]: http://nuget.org "NuGet home page"
+[powerguic]: http://powerguivsx.codeplex.com/ "PowerGUI Visual Studio Extension"
+[powerc]: http://visualstudiogallery.msdn.microsoft.com/67620d8c-93dd-4e57-aa86-c9404acbd7b3 "PowerConsole"
+[powers]: http://visualstudiogallery.msdn.microsoft.com/9b3272d4-6d13-4c1c-93bc-3ec74614508e "PowerStudio"
+[vsextm]: http://msdn.microsoft.com/en-us/library/dd293638.aspx "Visual Studio Extension Manager"
+[pshost]: http://msdn.microsoft.com/en-us/library/windows/desktop/ee706610(v=vs.85).aspx "PowerShell Host overview"
+[ruby]: http://www.ruby-lang.org/en/ "Ruby"
+[gem]: http://rubygems.org/ "Ruby Gems"
+[pwg]: http://www.powergui.org/ "PowerGUI"
+[pwgse]: http://wiki.powergui.org/index.php/Script_Editor "PowerGUI Script Editor"
+[dte]: http://msdn.microsoft.com/en-us/library/envdte.dte.aspx "DTE"
+[prof]: http://msdn.microsoft.com/en-us/library/windows/desktop/bb613488(v=vs.85).aspx "PowerShell profiles"
+[prov]: http://msdn.microsoft.com/en-us/library/windows/desktop/ee126186(v=VS.85).aspx "PowerShell provider"
 
 
