@@ -15,7 +15,7 @@ $body-to-footer-distance: 50px;
 $default-margin: 3px;
 $default-padding: 0px;
 $footnote-size: 0.7em;
-$body-width: 70%;
+$body-width: 50%;
 
 @mixin bare-list {
   ul { 
@@ -144,8 +144,9 @@ td,th {
     float: left;
     @include centrate;
     width: $body-width;
-    padding: 5px;
-    margin: 30px 0 0 5px;
+    padding: 50px;
+    /* margin: 30px 50px 30px 50px; */
+    margin: 30px 5% 30px 5%;
   }
   .date { 
     @include right-small(0.8em);
