@@ -15,7 +15,7 @@ $body-to-footer-distance: 50px;
 $default-margin: 3px;
 $default-padding: 0px;
 $footnote-size: 0.7em;
-$body-width: 35%;
+$body-width: 70%;
 
 @mixin bare-list {
   ul { 
@@ -125,6 +125,7 @@ td,th {
   /* specific divs */
   #banner {
     @include centrate;
+    z-index: 1;
     background-color: $ternary;
     color: $secondary;
     padding: 10px;
@@ -133,15 +134,18 @@ td,th {
     border-style: solid;
     border-width: 15px;
     border-color: $primary;
+    border-radius: 40px;
     h1, h2 {
       font-weight: bold; 
       font-family: Tahoma, sans-serif;
     }
   }
   #container {
+    float: left;
     @include centrate;
     width: $body-width;
     padding: 5px;
+    margin: 30px 0 0 5px;
   }
   .date { 
     @include right-small(0.8em);
@@ -153,6 +157,7 @@ td,th {
     margin-bottom: 2em; 
   }
   .footer { 
+    clear: both;
     @include right-small($footnote-size);
     border-style: solid;
     border-width: 1px 0 0 0;
@@ -173,9 +178,10 @@ td,th {
   }
   #linkList {
     $interspacing: 5px;
-    position: absolute;
-    top: 250px;
-    right: 5px;
+    margin: 5px;
+    width: 25%;
+    padding: 5px;
+    float: right;
     font-size: 80%;
     @include bare-list;
     img { 

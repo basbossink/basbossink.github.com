@@ -1,7 +1,11 @@
 ---
 layout: default
 ---
-<h2>{{ page.title }}</h2>
-{{ content }}
-<div class='postpreviewseparator'></div>
+<section>
+  <article>
+    <h2>{{ page.title }}</h2>
+    {{ content }}
+    <div class='postpreviewseparator'></div>
+  </article>
+</section>
 {% include disqus.html %}

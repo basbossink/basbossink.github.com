@@ -1,8 +1,7 @@
-!!! XML utf-8
-!!! 
+!!! 5
 :plain
   {% assign lang = 'en' %}{% capture timestamp %}{{site.time | date: "%a, %d %b %y %H:%M:%S +0100" }}{% endcapture %}
-%html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "{{ lang }}", :lang => "{{ lang }}" }>
+%html
   %head
     %meta{ "http-equiv" => "Content-Type", :content => "text/html; charset=utf-8" }
     %meta{ "http-equiv" => "Date", :content => "{{ timestamp }}" }
@@ -37,11 +36,102 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
   %body
-    %div#banner
-      %h1 Move along, nothing to see here
-      %h2 Ramblings about my programming escapades.
+    %header
+      %div#banner
+        %h1 Move along, nothing to see here
+        %h2 Ramblings about my programming escapades.
+    %aside
+      %nav
+        %div#linkList
+          %a{ :href => "/atom.xml"}
+            %img{ :alt => "subcribe", 
+            :src => "/images/feed-icon.png", 
+            :height => "16", 
+            :width => "16" }
+          %h3
+            %a{ :href => "/"} Home
+          %h3 Posts
+          %ul
+            {% for post in site.posts limit: 10  %}
+            %li>
+              %a{ :href => "{{ post.url }}" }>
+                {{ post.title }}
+              %div.comment_count
+                %a{ :href => "{{ post.url }}#disqus_thread", 
+                  "data-disqus-identifier" => "{{ post.id }}" }>
+            {% endfor %}
+          %h3 Profiles
+          %ul
+            %li
+              %a{ :href => "http://stackoverflow.com/users/74198/bas-bossink"}
+                Stack Overflow
+              - require 'uri'
+              - require 'yajl/gzip'
+              - require 'yajl/deflate'
+              - require 'yajl/http_stream'
+              - url = URI.parse('http://api.stackoverflow.com/1.0/users/74198')
+              - result = Yajl::HttpStream.get(url)
+              - me = result['users'][0]
+              - rep = me['reputation']
+              - golds = me['badge_counts']['gold']
+              - silvers = me['badge_counts']['silver']
+              - bronzes = me['badge_counts']['bronze']
+              %div.by_line
+                = rep
+                = ":: <span class='gold'>#{golds}</span>" 
+                = ":: <span class='silver'>#{silvers}</span>" 
+                = ":: <span class='bronze'>#{bronzes}</span>" 
+            %li 
+              %a{ :href => "http://www.twitter.com/basbossink"}
+                Twitter
+            %li
+              %a{ :title =>"Google+",
+                  :rel => "author", 
+                  :href => "https://plus.google.com/u/0/115103420698129324744?rel=author",
+                  :alt => "Google+" }
+                Google+
+            %li
+              %a{ :href => "http://nl.linkedin.com/in/basbossink"}
+                LinkedIn
+            %li
+              %a{ :href => "http://coderwall.com/basbossink" }
+                Coderwall
+            %li
+              %a{ :href => "http://nl-nl.facebook.com/people/Bas-Bossink/1820090791"}
+                Facebook
+            %li 
+              %a{ :href => "http://www.codecademy.com/users/netrunner27248"}
+                Codeacademy
+          %h3 Projects
+          %ul
+            - [[ "http://nl.gitready.com/", "git ready (dutch translation)"],
+               [ "http://basbossink.github.com/skelhs/", "Skelhs"],
+               [ "https://github.com/basbossink/presentations/", "presentations"],
+               [ "https://github.com/basbossink/basbossink.chocolatey.utilities", "chocolatey packages"],
+               [ "https://github.com/basbossink/dot-files/", "dot-files"]].each do |ref,txt| 
+              %li
+                %a{ :href => "#{ref}"}#{txt}
+          %h3 Tags
+          %ul
+            :ruby
+              require 'rubygems'
+              require 'jekyll'
+              options = Jekyll.configuration({})
+              site = Jekyll::Site.new(options)
+              site.read_posts('')
+              site.categories.sort.each do |category, posts|
+                haml_io.puts("<li><a href=\"/tags/#{category.gsub(/\s+/,'-')}.html\">#{category} (#{posts.length})</a></li>")
+              end
+          :javascript
+            google_ad_client = "ca-pub-2311864687324407";
+            /* blog */
+            google_ad_slot = "7855154384";
+            google_ad_width = 120;
+            google_ad_height = 240;
+          %script{ :type => "text/javascript", :src => "http://pagead2.googlesyndication.com/pagead/show_ads.js"}
     %div#container
       {{ content }}
+    %footer
       %div.footer  
         %p
           Hosted by 
@@ -61,91 +151,3 @@
           Copyright &copy; {{ site.time | date: "%Y" }} Bas Bossink
         %p
           Last updated on: {{ site.time | date_to_xmlschema }}
-    %div#linkList
-      %a{ :href => "/atom.xml"}
-        %img{ :alt => "subcribe", 
-        :src => "/images/feed-icon.png", 
-        :height => "16", 
-        :width => "16" }
-      %h3
-        %a{ :href => "/"} Home
-      %h3 Posts
-      %ul
-        {% for post in site.posts limit: 10  %}
-        %li>
-          %a{ :href => "{{ post.url }}" }>
-            {{ post.title | truncate: 25 }}
-          %div.comment_count
-            %a{ :href => "{{ post.url }}#disqus_thread", 
-              "data-disqus-identifier" => "{{ post.id }}" }>
-        {% endfor %}
-      %h3 Profiles
-      %ul
-        %li
-          %a{ :href => "http://stackoverflow.com/users/74198/bas-bossink"}
-            Stack Overflow
-          - require 'uri'
-          - require 'yajl/gzip'
-          - require 'yajl/deflate'
-          - require 'yajl/http_stream'
-          - url = URI.parse('http://api.stackoverflow.com/1.0/users/74198')
-          - result = Yajl::HttpStream.get(url)
-          - me = result['users'][0]
-          - rep = me['reputation']
-          - golds = me['badge_counts']['gold']
-          - silvers = me['badge_counts']['silver']
-          - bronzes = me['badge_counts']['bronze']
-          %div.by_line
-            = rep
-            = ":: <span class='gold'>#{golds}</span>" 
-            = ":: <span class='silver'>#{silvers}</span>" 
-            = ":: <span class='bronze'>#{bronzes}</span>" 
-        %li 
-          %a{ :href => "http://www.twitter.com/basbossink"}
-            Twitter
-        %li
-          %a{ :title =>"Google+",
-              :rel => "author", 
-              :href => "https://plus.google.com/u/0/115103420698129324744?rel=author",
-              :alt => "Google+" }
-            Google+
-        %li
-          %a{ :href => "http://nl.linkedin.com/in/basbossink"}
-            LinkedIn
-        %li
-          %a{ :href => "http://coderwall.com/basbossink" }
-            Coderwall
-        %li
-          %a{ :href => "http://nl-nl.facebook.com/people/Bas-Bossink/1820090791"}
-            Facebook
-      %h3 Projects
-      %ul
-        - [[ "http://nl.gitready.com/", "git ready (dutch translation)"],
-           [ "http://basbossink.github.com/skelhs/", "Skelhs"],
-           [ "https://github.com/basbossink/presentations/", "presentations"],
-           [ "https://github.com/basbossink/dot-files/", "dot-files"]].each do |ref,txt| 
-          %li
-            %a{ :href => "#{ref}"}#{txt}
-      %h3 Tags
-      %ul
-        :ruby
-          require 'rubygems'
-          require 'jekyll'
-          puts "<!--"
-          options = Jekyll.configuration({})
-          site = Jekyll::Site.new(options)
-          site.read_posts('')
-          puts "-->"
-          site.categories.sort.each do |category, posts|
-              print "<li>"
-              print "<a href='/tags/#{category.gsub(/\s+/,'-')}.html'>"
-              print "#{category} (#{posts.length})</a>"
-              print "</li>"
-          end
-      :javascript
-        google_ad_client = "ca-pub-2311864687324407";
-        /* blog */
-        google_ad_slot = "7855154384";
-        google_ad_width = 120;
-        google_ad_height = 240;
-      %script{ :type => "text/javascript", :src => "http://pagead2.googlesyndication.com/pagead/show_ads.js"}

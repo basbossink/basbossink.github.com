@@ -2,7 +2,9 @@
   ---
   layout: default
   ---
-%h2 {{ page.title }}
-{{ content }}
-%div.postpreviewseparator
+%section
+  %article
+    %h2 {{ page.title }}
+    {{ content }}
+    %div.postpreviewseparator
 {% include disqus.html %}
