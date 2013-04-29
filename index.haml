@@ -6,7 +6,7 @@
 {% for post in site.posts %}
 %h3
   %a{ :href => "{{ post.url }}"}{{ post.title }}
-{{ post.content | truncatewords: 41 }}
+{{ post.content | truncatewords: 42 }}
 %a{ :href => "{{ post.url }}"}>
   ! Read more#{"&raquo;"}
 {% unless forloop.last %}

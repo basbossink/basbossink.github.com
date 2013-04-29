@@ -82,6 +82,15 @@
                 = ":: <span class='silver'>#{silvers}</span>" 
                 = ":: <span class='bronze'>#{bronzes}</span>" 
             %li 
+              %a{ :href => "https://github.com/basbossink" }
+                Github
+            %li
+              %a{ :href => "http://coderwall.com/basbossink" }
+                Coderwall
+            %li 
+              %a{ :href => "http://www.codecademy.com/users/netrunner27248"}
+                Codeacademy
+            %li 
               %a{ :href => "http://www.twitter.com/basbossink"}
                 Twitter
             %li
@@ -94,21 +103,12 @@
               %a{ :href => "http://nl.linkedin.com/in/basbossink"}
                 LinkedIn
             %li
-              %a{ :href => "http://coderwall.com/basbossink" }
-                Coderwall
-            %li
               %a{ :href => "http://nl-nl.facebook.com/people/Bas-Bossink/1820090791"}
                 Facebook
-            %li 
-              %a{ :href => "http://www.codecademy.com/users/netrunner27248"}
-                Codeacademy
           %h3 Projects
           %ul
-            - [[ "http://nl.gitready.com/", "git ready (dutch translation)"],
-               [ "http://basbossink.github.com/skelhs/", "Skelhs"],
-               [ "https://github.com/basbossink/presentations/", "presentations"],
-               [ "https://github.com/basbossink/basbossink.chocolatey.utilities", "chocolatey packages"],
-               [ "https://github.com/basbossink/dot-files/", "dot-files"]].each do |ref,txt| 
+            - [[ "https://github.com/basbossink/presentations/", "presentations"],
+               [ "https://github.com/basbossink/basbossink.chocolatey.utilities", "chocolatey packages"]].each do |ref,txt| 
               %li
                 %a{ :href => "#{ref}"}#{txt}
           %h3 Tags
