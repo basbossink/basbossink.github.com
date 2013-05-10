@@ -45,7 +45,7 @@ def create_loc(path)
   name = File.basename(path, '.md') 
   name[10] ='/'
   loc = REXML::Element.new "loc" 
-  loc.text = "http://basbossink.github.com/" + name + "/"
+  loc.text = "http://basbossink.github.io/" + name + "/"
   
   loc
 end
@@ -187,14 +187,3 @@ task :default => [
                   "tags:generate",
                   "sitemap:generate"
                  ]
-
-
-
-
-
-
-
-
-
-
-

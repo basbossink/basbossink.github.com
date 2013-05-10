@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Posts tagged NL-FP day
-keywords: [Clean,Haskell,NL-FP day]
+title: Posts tagged nl-fp day
+keywords: [Clean,Haskell,nl-fp day]
 ---
 <h2><a href="/2011-01-09/NLFP-day/">NL FP day 2011</a></h2>
 {% assign my_date = ' Sun 09 Jan 2011' %}

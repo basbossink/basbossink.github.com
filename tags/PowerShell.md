@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Posts tagged PowerShell
-keywords: [.NET,.NET development,C#,ConvertTo-Html,MSBuild,Metrics,Out-String,PowerShell,PowerShell advocacy,PowerShell syntax,Send-MailMessage,Statistics,StudioShell,Visual Studio 2010,XML,code-base,development,overview]
+title: Posts tagged powershell
+keywords: [.NET,.NET development,C#,ConvertTo-Html,MSBuild,Metrics,Out-String,PowerShell,PowerShell advocacy,PowerShell syntax,Send-MailMessage,Statistics,StudioShell,Visual Studio 2010,XML,code-base,development,overview,powershell]
 ---
 <h2><a href="/2011-03-12/send-mail-message-out-string-tip/">Quick Powershell tip concerning Out-String and Send-MailMessage</a></h2>
 {% assign my_date = ' Sat 12 Mar 2011' %}

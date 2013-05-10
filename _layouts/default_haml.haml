@@ -60,7 +60,9 @@
                 %a{ :href => "{{ post.url }}#disqus_thread", 
                   "data-disqus-identifier" => "{{ post.id }}" }>
             {% endfor %}
-          %h3 Profiles
+          %h3 
+            %a{ :id => 'profiles' }
+              Profiles
           %ul
             %li
               %a{ :href => "http://stackoverflow.com/users/74198/bas-bossink"}

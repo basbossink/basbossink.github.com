@@ -1,7 +1,7 @@
 ---
 layout: default
-title: Posts tagged GitHub Pages
-keywords: [GitHub Pages,categories,git,rake,ruby]
+title: Posts tagged github pages
+keywords: [categories,git,github pages,rake,ruby]
 ---
 <h2><a href="/2011-01-16/blog-setup/">Combining Jekyll, Haml and Sass with GitHub Pages</a></h2>
 {% assign my_date = ' Sun 16 Jan 2011' %}
