@@ -154,15 +154,15 @@ HTML
 end
 
 desc 'Generate html and css from sources'
-task :build => LAYOUT do
+task :build => :shrink do
   sh %{ jekyll build }
 end
 
 desc 'commpress html'
-task :shrink => :build do
+task :shrink => LAYOUT do
   rm_rf 'css/combined.css'
   concatenate_files("css/combined.css",CSS) #["css/default.css", "css/shCore.css", "css/shThemeDefault.css", "css/trac.css"])
-  sh %{ java -jar C:/Users/bas/programs/yuicompressor-2.4.8/build/yuicompressor-2.4.8.jar css/combined.css -o _site/css/combined.css }
+  sh %{ java -jar C:/Users/bas/programs/yuicompressor-2.4.8/build/yuicompressor-2.4.8.jar css/combined.css -o css/combined.css }
 end
 
 desc 'Start a webserver to serve this presentation'
@@ -187,7 +187,7 @@ end
 
 desc "Create per tag pages and rest"
 task :default => [
-                  :shrink, 
+                  :build, 
                   "tags:generate",
                   "sitemap:generate"
                  ]
