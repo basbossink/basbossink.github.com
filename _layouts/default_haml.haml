@@ -67,13 +67,9 @@
             %li
               %a{ :href => "http://stackoverflow.com/users/74198/bas-bossink"}
                 Stack Overflow
-              - require 'uri'
-              - require 'yajl/gzip'
-              - require 'yajl/deflate'
-              - require 'yajl/http_stream'
-              - url = URI.parse('http://api.stackoverflow.com/1.0/users/74198')
-              - result = Yajl::HttpStream.get(url)
-              - me = result['users'][0]
+              - require 'httparty'
+              - response = HTTParty.get('http://api.stackoverflow.com/1.0/users/74198')
+              - me = response['users'][0]
               - rep = me['reputation']
               - golds = me['badge_counts']['gold']
               - silvers = me['badge_counts']['silver']

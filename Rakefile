@@ -1,3 +1,4 @@
+require 'webrick'
 require 'rake/clean'
 require 'rexml/document'
 
@@ -154,18 +155,21 @@ end
 
 desc 'Generate html and css from sources'
 task :build => LAYOUT do
+  sh %{ jekyll build }
 end
 
 desc 'commpress html'
 task :shrink => :build do
   rm_rf 'css/combined.css'
-  concatenate_files("css/combined.css",FileList['css/*.css'])
-  sh %{ java -jar C:/Users/bas/programs/yuicompressor-2.4.6/build/yuicompressor-2.4.6.jar css/combined.css -o css/combined.css }
+  concatenate_files("css/combined.css",CSS) #["css/default.css", "css/shCore.css", "css/shThemeDefault.css", "css/trac.css"])
+  sh %{ java -jar C:/Users/bas/programs/yuicompressor-2.4.8/build/yuicompressor-2.4.8.jar css/combined.css -o _site/css/combined.css }
 end
 
-desc 'Build and start server'
-task :server => :default do
-  sh %{ jekyll --server }
+desc 'Start a webserver to serve this presentation'
+task :serve => :default do
+    server = WEBrick::HTTPServer.new :Port => 4000, :DocumentRoot => __dir__ + "/_site"
+    trap 'INT' do server.shutdown end
+    server.start
 end
 
 desc 'Count words and lines of post'
