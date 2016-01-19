@@ -112,47 +112,6 @@ namespace :sitemap do
   end
 end
 
-namespace :tags do
-
-  task :clean do 
-    rm_rf "tags"
-    mkdir "tags"
-  end
-
-  task :generate do
-    puts 'Generating tags...'
-    require 'rubygems'
-    require 'jekyll'
-    include Jekyll::Filters
-
-    options = Jekyll.configuration({})
-    site = Jekyll::Site.new(options)
-    site.read_posts('')
-    site.categories.sort.each do |category, posts|
-      keywords = aggregate_keywords(category, posts)
-      html= <<-HTML
----
-layout: default
-title: Posts tagged #{category}
-keywords: [#{keywords}]
----
-HTML
-      posts.each do |post|
-        post_data = post.to_liquid
-        html << <<-HTML
-<h2><a href="#{post_data['url']}">#{post_data['title']}</a></h2>
-{% assign my_date = ' #{post_data['date'].strftime("%a %d %b %Y")}' %}
-#{post_data['content']}
-#{'<hr/>' unless post == posts.last}
-HTML
-      end
-      File.open("tags/#{category.gsub(/\s+/,'-')}.md", 'w+') do |file|
-        file.puts html
-      end
-    end
-  end
-end
-
 desc 'Generate html and css from sources'
 task :build => :shrink do
   sh %{ jekyll build }
@@ -162,7 +121,7 @@ desc 'commpress html'
 task :shrink => LAYOUT do
   rm_rf 'css/combined.css'
   concatenate_files("css/combined.css",CSS) #["css/default.css", "css/shCore.css", "css/shThemeDefault.css", "css/trac.css"])
-  sh %{ java -jar C:/Users/bas/programs/yuicompressor-2.4.8/build/yuicompressor-2.4.8.jar css/combined.css -o css/combined.css }
+  sh %{ java -jar ~/bin/yuicompressor-2.4.8.jar css/combined.css -o css/combined.css }
 end
 
 desc 'Start a webserver to serve this presentation'
@@ -188,6 +147,5 @@ end
 desc "Create per tag pages and rest"
 task :default => [
                   :build, 
-                  "tags:generate",
                   "sitemap:generate"
                  ]

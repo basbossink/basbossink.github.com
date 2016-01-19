@@ -56,9 +56,6 @@
             %li>
               %a{ :href => "{{ post.url }}" }>
                 {{ post.title }}
-              %div.comment_count
-                %a{ :href => "{{ post.url }}#disqus_thread", 
-                  "data-disqus-identifier" => "{{ post.id }}" }>
             {% endfor %}
           %h3 
             %a{ :id => 'profiles' }
@@ -66,19 +63,7 @@
           %ul
             %li
               %a{ :href => "http://stackoverflow.com/users/74198/bas-bossink"}
-                Stack Overflow
-              - require 'httparty'
-              - response = HTTParty.get('http://api.stackoverflow.com/1.0/users/74198')
-              - me = response['users'][0]
-              - rep = me['reputation']
-              - golds = me['badge_counts']['gold']
-              - silvers = me['badge_counts']['silver']
-              - bronzes = me['badge_counts']['bronze']
-              %div.by_line
-                = rep
-                = ":: <span class='gold'>#{golds}</span>" 
-                = ":: <span class='silver'>#{silvers}</span>" 
-                = ":: <span class='bronze'>#{bronzes}</span>" 
+                %img{ :src => "http://stackoverflow.com/users/flair/74198.png?theme=light"}
             %li 
               %a{ :href => "https://github.com/basbossink" }
                 Github
@@ -109,24 +94,6 @@
                [ "https://github.com/basbossink/basbossink.chocolatey.utilities", "chocolatey packages"]].each do |ref,txt| 
               %li
                 %a{ :href => "#{ref}"}#{txt}
-          %h3 Tags
-          %ul
-            :ruby
-              require 'rubygems'
-              require 'jekyll'
-              options = Jekyll.configuration({})
-              site = Jekyll::Site.new(options)
-              site.read_posts('')
-              site.categories.sort.each do |category, posts|
-                haml_io.puts("<li><a href=\"/tags/#{category.gsub(/\s+/,'-')}.html\">#{category} (#{posts.length})</a></li>")
-              end
-          :javascript
-            google_ad_client = "ca-pub-2311864687324407";
-            /* blog */
-            google_ad_slot = "7855154384";
-            google_ad_width = 120;
-            google_ad_height = 240;
-          %script{ :type => "text/javascript", :src => "http://pagead2.googlesyndication.com/pagead/show_ads.js"}
     %div#container
       {{ content }}
     %footer

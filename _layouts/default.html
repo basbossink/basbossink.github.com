@@ -51,8 +51,7 @@
           <ul>
             {% for post in site.posts limit: 10  %}<li><a href='{{ post.url }}'>
                 {{ post.title }}
-              </a><div class='comment_count'><a data-disqus-identifier='{{ post.id }}' href='{{ post.url }}#disqus_thread'></a></div>
-            </li>{% endfor %}
+              </a></li>{% endfor %}
           </ul>
           <h3>
             <a id='profiles'>
@@ -62,14 +61,8 @@
           <ul>
             <li>
               <a href='http://stackoverflow.com/users/74198/bas-bossink'>
-                Stack Overflow
+                <img src='http://stackoverflow.com/users/flair/74198.png?theme=light'>
               </a>
-              <div class='by_line'>
-                3789
-                :: <span class='gold'>1</span>
-                :: <span class='silver'>17</span>
-                :: <span class='bronze'>27</span>
-              </div>
             </li>
             <li>
               <a href='https://github.com/basbossink'>
@@ -116,25 +109,6 @@
               <a href='https://github.com/basbossink/basbossink.chocolatey.utilities'>chocolatey packages</a>
             </li>
           </ul>
-          <h3>Tags</h3>
-          <ul>
-<li><a href="/tags/github-pages.html">github pages (1)</a></li>
-<li><a href="/tags/haml.html">haml (1)</a></li>
-<li><a href="/tags/jekyll.html">jekyll (2)</a></li>
-<li><a href="/tags/learning.html">learning (1)</a></li>
-<li><a href="/tags/nl-fp-day.html">nl-fp day (1)</a></li>
-<li><a href="/tags/powershell.html">powershell (7)</a></li>
-<li><a href="/tags/ps4.netdevs.html">ps4.netdevs (6)</a></li>
-<li><a href="/tags/sass.html">sass (1)</a></li>
-          </ul>
-          <script>
-            google_ad_client = "ca-pub-2311864687324407";
-            /* blog */
-            google_ad_slot = "7855154384";
-            google_ad_width = 120;
-            google_ad_height = 240;
-          </script>
-          <script src='http://pagead2.googlesyndication.com/pagead/show_ads.js' type='text/javascript'></script>
         </div>
       </nav>
     </aside>

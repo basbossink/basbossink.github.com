@@ -1,4 +1,4 @@
 lsi: false
 permalink: /:year-:month-:day/:title/
-pygments: true
+highlighter: pigments
 markdown: rdiscount
