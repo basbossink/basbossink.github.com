@@ -10,11 +10,11 @@
     %meta{ :name => "description", :content => "A personal blog about programming." }
     %meta{ :name => "author", :content => "Bas Bossink" }
     {% if page.categories %}
-    %meta{ :name => "keywords", :content => "{{ page.categories | join: ',' }}" }>
+    %meta{ :name => "keywords", :content => '{{ page.categories | join: "," }}' }>
     {% endif %}
     {% if page.keywords %}
-    %meta{ :name => "keywords", :content => "{{ page.keywords | join: ',' }}" }>
-    {% endif %}    
+    %meta{ :name => "keywords", :content => '{{ page.keywords | join: "," }}' }>
+    {% endif %}
     %title {{ page.title }}
     %link{ :rel => "stylesheet", :type => "text/css", :href => "/css/combined.css"}
     %script{ :type => "text/javascript", :src => "/js/shCore.js"}
@@ -44,9 +44,9 @@
       %nav
         %div#linkList
           %a{ :href => "/atom.xml"}
-            %img{ :alt => "subcribe", 
-            :src => "/images/feed-icon.png", 
-            :height => "16", 
+            %img{ :alt => "subcribe",
+            :src => "/images/feed-icon.png",
+            :height => "16",
             :width => "16" }
           %h3
             %a{ :href => "/"} Home
@@ -57,60 +57,48 @@
               %a{ :href => "{{ post.url }}" }>
                 {{ post.title }}
             {% endfor %}
-          %h3 
+          %h3
             %a{ :id => 'profiles' }
               Profiles
           %ul
             %li
-              %a{ :href => "http://stackoverflow.com/users/74198/bas-bossink"}
-                %img{ :src => "http://stackoverflow.com/users/flair/74198.png?theme=light"}
-            %li 
+              %a{ :href => "https://stackoverflow.com/users/74198/bas-bossink"}
+                %img{ :src => "https://stackoverflow.com/users/flair/74198.png?theme=light"}
+            %li
               %a{ :href => "https://github.com/basbossink" }
                 Github
             %li
-              %a{ :href => "http://coderwall.com/basbossink" }
-                Coderwall
-            %li 
-              %a{ :href => "http://www.codecademy.com/users/netrunner27248"}
-                Codeacademy
-            %li 
-              %a{ :href => "http://www.twitter.com/basbossink"}
+              %a{ :href => "https://www.twitter.com/basbossink"}
                 Twitter
             %li
-              %a{ :title =>"Google+",
-                  :rel => "author", 
-                  :href => "https://plus.google.com/u/0/115103420698129324744?rel=author",
-                  :alt => "Google+" }
-                Google+
-            %li
-              %a{ :href => "http://nl.linkedin.com/in/basbossink"}
+              %a{ :href => "https://nl.linkedin.com/in/basbossink"}
                 LinkedIn
             %li
-              %a{ :href => "http://nl-nl.facebook.com/people/Bas-Bossink/1820090791"}
+              %a{ :href => "https://nl-nl.facebook.com/people/Bas-Bossink/1820090791"}
                 Facebook
           %h3 Projects
           %ul
-            - [[ "http://basbossink.github.io/presentations/", "presentations"],
-               [ "https://github.com/basbossink/basbossink.chocolatey.utilities", "chocolatey packages"]].each do |ref,txt| 
+            - [[ "https://basbossink.github.io/presentations/", "presentations"],
+               [ "https://github.com/basbossink/basbossink.chocolatey.utilities", "chocolatey packages"]].each do |ref,txt|
               %li
                 %a{ :href => "#{ref}"}#{txt}
     %div#container
       {{ content }}
     %footer
-      %div.footer  
+      %div.footer
         %p
-          Hosted by 
+          Hosted by
           %a{ :href => "https://github.com/basbossink/basbossink.github.com/"} GitHub
           and powered by&#32;
-          %a{ :href => "https://github.com/mojombo/jekyll/"}> Jekyll
+          %a{ :href => "https://jekyllrb.com/"}> Jekyll
           ,&#32;
-          %a{ :href => "http://haml-lang.com/"} Haml
+          %a{ :href => "http://haml.info/"} Haml
           &amp;&#32;
-          %a{ :href => "http://sass-lang.com/"}> Sass
+          %a{ :href => "https://sass-lang.com/"}> Sass
           \.
         %p
           This work is licensed under the&#32;
-          %a{ :rel => "license", :href => "http://creativecommons.org/licenses/by/3.0/nl/"}> 
+          %a{ :rel => "license", :href => "https://creativecommons.org/licenses/by/3.0/nl/"}>
             Creative Commons Attribution 3.0 Netherlands License
           \.
           Copyright &copy; {{ site.time | date: "%Y" }} Bas Bossink

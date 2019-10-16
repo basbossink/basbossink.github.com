@@ -1,139 +1,124 @@
 <!DOCTYPE html>
 {% assign lang = 'en' %}{% capture timestamp %}{{site.time | date: "%a, %d %b %y %H:%M:%S +0100" }}{% endcapture %}
 <html>
-  <head>
-    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
-    <meta content='{{ timestamp }}' http-equiv='Date'>
-    <meta content='{{ timestamp }}' http-equiv='Last-Modified'>
-    <meta content='*' http-equiv='Access-Control-Allow-Origin'>
-    <meta content='A personal blog about programming.' name='description'>
-    <meta content='Bas Bossink' name='author'>
-    {% if page.categories %}<meta content="{{ page.categories | join: ',' }}" name='keywords'>{% endif %}
-    {% if page.keywords %}<meta content="{{ page.keywords | join: ',' }}" name='keywords'>{% endif %}
-    <title>{{ page.title }}</title>
-    <link href='/css/combined.css' rel='stylesheet' type='text/css'>
-    <script src='/js/shCore.js' type='text/javascript'></script>
-    <script src='/js/shBrushPowerShell.js' type='text/javascript'></script>
-    <script src='/js/shBrushCSharp.js' type='text/javascript'></script>
-    <script src='/js/shBrushRuby.js' type='text/javascript'></script>
-    <script src='/js/shBrushPlain.js' type='text/javascript'></script>
-    <link href='/atom.xml' rel='alternate' title='Sitewide ATOM Feed' type='application/atom+xml'>
-    <script>
-      SyntaxHighlighter.all();
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-20785819-1']);
-      _gaq.push(['_trackPageview']);
-      
-      (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-  </head>
-  <body>
-    <header>
-      <div id='banner'>
-        <h1>Move along, nothing to see here</h1>
-        <h2>Ramblings about my programming escapades.</h2>
-      </div>
-    </header>
-    <aside>
-      <nav>
-        <div id='linkList'>
-          <a href='/atom.xml'>
-            <img alt='subcribe' height='16' src='/images/feed-icon.png' width='16'>
-          </a>
-          <h3>
-            <a href='/'>Home</a>
-          </h3>
-          <h3>Posts</h3>
-          <ul>
-            {% for post in site.posts limit: 10  %}<li><a href='{{ post.url }}'>
-                {{ post.title }}
-              </a></li>{% endfor %}
-          </ul>
-          <h3>
-            <a id='profiles'>
-              Profiles
-            </a>
-          </h3>
-          <ul>
-            <li>
-              <a href='http://stackoverflow.com/users/74198/bas-bossink'>
-                <img src='http://stackoverflow.com/users/flair/74198.png?theme=light'>
-              </a>
-            </li>
-            <li>
-              <a href='https://github.com/basbossink'>
-                Github
-              </a>
-            </li>
-            <li>
-              <a href='http://coderwall.com/basbossink'>
-                Coderwall
-              </a>
-            </li>
-            <li>
-              <a href='http://www.codecademy.com/users/netrunner27248'>
-                Codeacademy
-              </a>
-            </li>
-            <li>
-              <a href='http://www.twitter.com/basbossink'>
-                Twitter
-              </a>
-            </li>
-            <li>
-              <a alt='Google+' href='https://plus.google.com/u/0/115103420698129324744?rel=author' rel='author' title='Google+'>
-                Google+
-              </a>
-            </li>
-            <li>
-              <a href='http://nl.linkedin.com/in/basbossink'>
-                LinkedIn
-              </a>
-            </li>
-            <li>
-              <a href='http://nl-nl.facebook.com/people/Bas-Bossink/1820090791'>
-                Facebook
-              </a>
-            </li>
-          </ul>
-          <h3>Projects</h3>
-          <ul>
-            <li>
-              <a href='http://basbossink.github.io/presentations/'>presentations</a>
-            </li>
-            <li>
-              <a href='https://github.com/basbossink/basbossink.chocolatey.utilities'>chocolatey packages</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </aside>
-    <div id='container'>
-      {{ content }}
-    </div>
-    <footer>
-      <div class='footer'>
-        <p>
-          Hosted by
-          <a href='https://github.com/basbossink/basbossink.github.com/'>GitHub</a>
-          and powered by&#32;<a href='https://github.com/mojombo/jekyll/'>Jekyll</a>,&#32;
-          <a href='http://haml-lang.com/'>Haml</a>
-          &amp;&#32;<a href='http://sass-lang.com/'>Sass</a>.
-        </p>
-        <p>
-          This work is licensed under the&#32;<a href='http://creativecommons.org/licenses/by/3.0/nl/' rel='license'>
-            Creative Commons Attribution 3.0 Netherlands License
-          </a>.
-          Copyright &copy; {{ site.time | date: "%Y" }} Bas Bossink
-        </p>
-        <p>
-          Last updated on: {{ site.time | date_to_xmlschema }}
-        </p>
-      </div>
-    </footer>
-  </body>
+<head>
+<meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+<meta content='{{ timestamp }}' http-equiv='Date'>
+<meta content='{{ timestamp }}' http-equiv='Last-Modified'>
+<meta content='*' http-equiv='Access-Control-Allow-Origin'>
+<meta content='A personal blog about programming.' name='description'>
+<meta content='Bas Bossink' name='author'>
+{% if page.categories %}<meta content='{{ page.categories | join: "," }}' name='keywords'>{% endif %}
+{% if page.keywords %}<meta content='{{ page.keywords | join: "," }}' name='keywords'>{% endif %}
+<title>{{ page.title }}</title>
+<link href='/css/combined.css' rel='stylesheet' type='text/css'>
+<script src='/js/shCore.js' type='text/javascript'></script>
+<script src='/js/shBrushPowerShell.js' type='text/javascript'></script>
+<script src='/js/shBrushCSharp.js' type='text/javascript'></script>
+<script src='/js/shBrushRuby.js' type='text/javascript'></script>
+<script src='/js/shBrushPlain.js' type='text/javascript'></script>
+<link href='/atom.xml' rel='alternate' title='Sitewide ATOM Feed' type='application/atom+xml'>
+<script>
+  SyntaxHighlighter.all();
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-20785819-1']);
+  _gaq.push(['_trackPageview']);
+  
+  (function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+<body>
+<header>
+<div id='banner'>
+<h1>Move along, nothing to see here</h1>
+<h2>Ramblings about my programming escapades.</h2>
+</div>
+</header>
+<aside>
+<nav>
+<div id='linkList'>
+<a href='/atom.xml'>
+<img alt='subcribe' height='16' src='/images/feed-icon.png' width='16'>
+</a>
+<h3>
+<a href='/'>Home</a>
+</h3>
+<h3>Posts</h3>
+<ul>
+{% for post in site.posts limit: 10  %}<li><a href='{{ post.url }}'>
+{{ post.title }}
+</a></li>{% endfor %}
+</ul>
+<h3>
+<a id='profiles'>
+Profiles
+</a>
+</h3>
+<ul>
+<li>
+<a href='https://stackoverflow.com/users/74198/bas-bossink'>
+<img src='https://stackoverflow.com/users/flair/74198.png?theme=light'>
+</a>
+</li>
+<li>
+<a href='https://github.com/basbossink'>
+Github
+</a>
+</li>
+<li>
+<a href='https://www.twitter.com/basbossink'>
+Twitter
+</a>
+</li>
+<li>
+<a href='https://nl.linkedin.com/in/basbossink'>
+LinkedIn
+</a>
+</li>
+<li>
+<a href='https://nl-nl.facebook.com/people/Bas-Bossink/1820090791'>
+Facebook
+</a>
+</li>
+</ul>
+<h3>Projects</h3>
+<ul>
+<li>
+<a href='https://basbossink.github.io/presentations/'>presentations</a>
+</li>
+<li>
+<a href='https://github.com/basbossink/basbossink.chocolatey.utilities'>chocolatey packages</a>
+</li>
+</ul>
+</div>
+</nav>
+</aside>
+<div id='container'>
+{{ content }}
+</div>
+<footer>
+<div class='footer'>
+<p>
+Hosted by
+<a href='https://github.com/basbossink/basbossink.github.com/'>GitHub</a>
+and powered by&#32;<a href='https://jekyllrb.com/'>Jekyll</a>,&#32;
+<a href='http://haml.info/'>Haml</a>
+&amp;&#32;<a href='https://sass-lang.com/'>Sass</a>.
+</p>
+<p>
+This work is licensed under the&#32;<a href='https://creativecommons.org/licenses/by/3.0/nl/' rel='license'>
+Creative Commons Attribution 3.0 Netherlands License
+</a>.
+Copyright &copy; {{ site.time | date: "%Y" }} Bas Bossink
+</p>
+<p>
+Last updated on: {{ site.time | date_to_xmlschema }}
+</p>
+</div>
+</footer>
+</body>
 </html>

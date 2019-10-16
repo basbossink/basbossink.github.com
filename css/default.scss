@@ -18,18 +18,18 @@ $footnote-size: 0.7em;
 $body-width: 50%;
 
 @mixin bare-list {
-  ul { 
-    margin: $default-margin; 
+  ul {
+    margin: $default-margin;
     padding: $default-padding;
   }
   li {
-    display: block; 
+    display: block;
     list-style-type: none;
   }
 }
 
 @mixin right-small($size) {
-  text-align: right; 
+  text-align: right;
   font-size: $size;
   margin-top: $body-to-footer-distance;
 }
@@ -64,7 +64,7 @@ td,th {
     word-break: keep-words;
     a {
       color: $primary;
-      &:visited { 
+      &:visited {
         color: $secondary;
       }
     }
@@ -93,33 +93,33 @@ td,th {
       @include code;
     }
   }
-  p { 
-    margin-top: $default-margin; 
+  p {
+    margin-top: $default-margin;
     text-align: left;
   }
-  h1 { 
+  h1 {
     font-size: 2.5em;
     color: $secondary;
     margin-bottom: 3px;
   }
-  h2,h3,h4,h5 { 
+  h2,h3,h4,h5 {
     color: $secondary;
-    margin: $default-margin;  
+    margin: $default-margin;
   }
   h2 {
-    font-size: 1.8em;  
+    font-size: 1.8em;
   }
-  h3 { 
+  h3 {
     font-size: 1.3em;
   }
-  h4 { 
+  h4 {
     font-size: 1.1em;
   }
   h5 {
     font-size: 1.0em;
     font-weight: bold;
   }
-  pre,code { 
+  pre,code {
     @include code;
   }
   /* specific divs */
@@ -136,7 +136,7 @@ td,th {
     border-color: $primary;
     border-radius: 40px;
     h1, h2 {
-      font-weight: bold; 
+      font-weight: bold;
       font-family: Tahoma, sans-serif;
     }
   }
@@ -145,19 +145,18 @@ td,th {
     @include centrate;
     width: $body-width;
     padding: 50px;
-    /* margin: 30px 50px 30px 50px; */
     margin: 30px 5% 30px 5%;
   }
-  .date { 
+  .date {
     @include right-small(0.8em);
   }
   div.postpreviewseparator {
     border-style: solid;
     border-width: 0 0 2px 0;
     border-bottom-color: $secondary;
-    margin-bottom: 2em; 
+    margin-bottom: 2em;
   }
-  .footer { 
+  .footer {
     clear: both;
     @include right-small($footnote-size);
     border-style: solid;
@@ -185,8 +184,8 @@ td,th {
     float: right;
     font-size: 80%;
     @include bare-list;
-    img { 
-      padding-top: $interspacing; 
+    img {
+      padding-top: $interspacing;
       margin-bottom: $interspacing;
     }
   }
@@ -204,35 +203,3 @@ td,th {
     font-size: $footnote-size;
   }
 }
-@media print {
-  font-family: "Times New Roman", Helvetica, Arial, serif;
-  #linkList, #banner, #disqus_thread, .footer { 
-    display: none;
-  }
-  p {
-    text-align: justify;
-  }
-  a {
-    color: black;
-    &:link { 
-      text-decoration: none; 
-    }
-    &:visited { 
-      text-decoration: none; 
-    }
-    &:hover { 
-      text-decoration: none; 
-    }  
-    &:active { 
-      text-decoration: none; 
-    }
-  }
-}
-
-
-
-
-
-
-
-
