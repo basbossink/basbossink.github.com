@@ -121,7 +121,7 @@ desc 'commpress html'
 task :shrink => LAYOUT do
   rm_rf 'css/combined.css'
   concatenate_files("css/combined.css",CSS) #["css/default.css", "css/shCore.css", "css/shThemeDefault.css", "css/trac.css"])
-  sh %{ java -jar #{File.expand_path('~/bin/yuicompressor-2.4.8.jar')} css/combined.css -o css/combined.css }
+  sh %{ java -jar #{File.expand_path('~/.bin/yuicompressor-2.4.8.jar')} css/combined.css -o css/combined.css }
 end
 
 desc 'Start a webserver to serve this presentation'
