@@ -1,0 +1,58 @@
+baseURL = 'http://basbossink.github.io/'
+languageCode = 'en-us'
+title = 'Nothing to see here'
+theme = 'archie'
+copyright = "© Bas Bossink"
+paginate=3 # articles per page
+
+[markup]
+  [markup.highlight]
+    lineNoStart = 1
+    lineNos = true
+    lineNumbersInTable = true
+    style = 'dracula'
+    tabWidth = 4
+
+[security]
+  [security.exec]
+    allow = ['^dart-sass-embedded$', '^go$', '^npx$', '^postcss$', '^asciidoctor$']
+
+[params]
+	customcss = ["css/overrides.css"]
+	mode="dark" # color-mode → light,dark,toggle or auto
+	useCDN=false # don't use CDNs for fonts and icons, instead serve them locally.
+	subtitle = "Ramblings about my programming escapades."
+
+# Social Tags
+
+[[params.social]]
+name = "GitHub"
+icon = "github"
+url = "https://github.com/basbossink/"
+
+[[params.social]]
+name = "Twitter"
+icon = "twitter"
+url = "https://twitter.com/basbossink/"
+
+# Main menu Items
+
+[[menu.main]]
+name = "Home"
+url = "/"
+weight = 1
+
+[[menu.main]]
+name = "All posts"
+url = "/posts"
+weight = 2
+
+[[menu.main]]
+name = "Projects"
+url = "/projects"
+weight = 3
+
+[[menu.main]]
+name = "About"
+url = "/about"
+weight = 4
