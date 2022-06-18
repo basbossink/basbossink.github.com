@@ -1,4 +1,4 @@
-baseURL = 'http://basbossink.github.io/'
+baseURL = 'https://basbossink.github.io/'
 languageCode = 'en-us'
 title = 'Nothing to see here'
 theme = 'archie'
