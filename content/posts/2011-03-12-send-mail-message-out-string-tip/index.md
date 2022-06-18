@@ -1,5 +1,5 @@
 +++
-date = "2022-06-18"
+date = "2011-03-12"
 title = "Quick Powershell tip concerning Out-String and Send-MailMessage"
 +++ 
 Recently I wrote a script at work to generate a report about the load
@@ -9,6 +9,7 @@ happened the body of the mail message containing a nice table got
 turned into gibberish.
 
 ## Cause 
+
 I really didn't understand want went wrong all of a sudden, so
 I started to inspect the output of the script. And low and behold the
 trouble was caused by the fact that [Out-String][os] by default puts
@@ -26,15 +27,17 @@ the case for me the first couple of times the script ran. But if
 output gets garbled.
 
 ## Solution
+
 I thought this would be easy to fix just specify `[int]::MaxValue` for
-the `-Width` parameter to <code>Out&#8209;String</code>. Trying that in a
+the `-Width` parameter to `Out-String`. Trying that in a
 [PowerShell][ps] console gave:
 ![Out-String with unsatisfactory result][wr]
 Hum, seems like the `[int]::MaxValue` doesn't get evaluated before it
-is interpreted by <code>Out&#8209;String</code> so some extra parenthesis should do the
+is interpreted by `Out-String` so some extra parenthesis should do the
 trick. 
 
 ## End result
+
 The paragraph of code that I use to send around an HTML table
 containing the load statistics hence becomes something like this:
 
