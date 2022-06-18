@@ -1,0 +1,97 @@
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>NL FP day 2011 - Nothing to see here</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Last Friday I attended the Nederlandse Functioneel Programmeren dag. The program showed a wide variety of short (20 min.) talks. This appeared to be a nice low barrier of entry opportunity to see what&rsquo;s currently hot in the field of functional programming. With the added benefit of being able to talk to people who get to use languages like Haskell, F# on a daily bases instead of in their spare time ☺."><meta property="og:image" content><meta property="og:title" content="NL FP day 2011"><meta property="og:description" content="Last Friday I attended the Nederlandse Functioneel Programmeren dag. The program showed a wide variety of short (20 min.) talks. This appeared to be a nice low barrier of entry opportunity to see what&rsquo;s currently hot in the field of functional programming. With the added benefit of being able to talk to people who get to use languages like Haskell, F# on a daily bases instead of in their spare time ☺."><meta property="og:type" content="article"><meta property="og:url" content="http://basbossink.github.io/posts/2011-01-09-nlfp-day/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2011-01-09T00:00:00+00:00"><meta property="article:modified_time" content="2011-01-09T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="NL FP day 2011"><meta name=twitter:description content="Last Friday I attended the Nederlandse Functioneel Programmeren dag. The program showed a wide variety of short (20 min.) talks. This appeared to be a nice low barrier of entry opportunity to see what&rsquo;s currently hot in the field of functional programming. With the added benefit of being able to talk to people who get to use languages like Haskell, F# on a daily bases instead of in their spare time ☺."><script src=http://basbossink.github.io/js/feather.min.js></script>
+<link href=http://basbossink.github.io/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css rel=stylesheet><link rel=stylesheet type=text/css media=screen href=http://basbossink.github.io/css/main.40ca3a860425083862b7ebd55447caec5c4384573f0cb098b8d06a91e8dace2e.css><link id=darkModeStyle rel=stylesheet type=text/css href=http://basbossink.github.io/css/dark.726cd11ca6eb7c4f7d48eb420354f814e5c1b94281aaf8fd0511c1319f7f78a4.css><link rel=stylesheet type=text/css href=http://basbossink.github.io/css/overrides.c755da9dccb0cb7240fb81a9a5f7b0962c285b8f6c9bcce5b2e7fa691de6a58b.css></head><body><div class=content><header><div class=main><a href=http://basbossink.github.io/>Nothing to see here</a></div><nav><a href=/>Home</a>
+<a href=/posts>All posts</a>
+<a href=/projects>Projects</a>
+<a href=/about>About</a></nav></header><main><article><div class=title><h1 class=title>NL FP day 2011</h1><div class=meta>Posted on Jan 9, 2011</div></div><section class=body><p>Last Friday I attended the <a href=http://caes.ewi.utwente.nl/External/NLFP/ title="NL-FP Dag 2011">Nederlandse Functioneel Programmeren dag</a>.
+The program showed a wide variety of short (20 min.) talks. This
+appeared to be a nice low barrier of entry opportunity to see what&rsquo;s
+currently hot in the field of <a href=http://en.wikipedia.org/wiki/Functional_programming title="Functional Programming">functional programming</a>.
+With the added benefit of being able to talk to people who get to use
+languages like <a href=http://www.haskell.org/haskellwiki/Haskell title=Haskell>Haskell</a>, <a href=http://msdn.microsoft.com/fsharp/ title=F#>F#</a> on a daily bases instead of in
+their spare time ☺.</p><h3 id=the-talks>The talks</h3><h4 id=creating-a-dataflow-processor-in-c955ashdfp><a href=http://caes.ewi.utwente.nl/External/NLFP/#creatingadataflowprocessorinclash title="Data Flow Processor">Creating a Dataflow Processor in CλaSH</a></h4><p>Anja Niedermeier presented a talk about designing a dataflow processor
+using <a href=http://clash.ewi.utwente.nl/ClaSH/Index.html title=CλaSH>CλaSH</a> a functional hardware description language that
+borrows both its syntax and semantics from <a href=http://www.haskell.org/haskellwiki/Haskell title=Haskell>Haskell</a>. The
+interesting part for me was to see a parallel to a question that was
+recently posed at my current project to create some means to let users
+create their own image processing pipeline from a given set of basic
+operations.</p><h4 id=unifying-merging-and-permuting-parsersmpp><a href=http://caes.ewi.utwente.nl/External/NLFP/#unifyingmergingandpermutingparsers title="Unifing Merging and Permutating Parsers">Unifying Merging and Permuting Parsers</a></h4><p>Doaitse Swierstra gave a talk about combining <a href=http://en.wikipedia.org/wiki/Parser title=Parser>parsers</a> for
+<a href=http://en.wikipedia.org/wiki/Permutation title=Permutation>permutations</a> with <a href=http://en.wikipedia.org/wiki/Parser title=Parser>parsers</a> for merged structures. An
+example of a <a href=http://en.wikipedia.org/wiki/Parser title=Parser>parser</a> for a permuted structure would be a
+<a href=http://en.wikipedia.org/wiki/Parser title=Parser>parser</a> for HTML elements, since attributes can occur in any
+order. An example of a <a href=http://en.wikipedia.org/wiki/Parser title=Parser>parser</a> for a merged structure would be
+<a href=http://www.cs.uu.nl/wiki/bin/view/HUT/AttributeGrammarSystem title="Utrecht University Attribute Grammar Compiler">The Utrecht Attribute Grammar System</a>, which needs to parse
+different types of text in a file. Another example of this would be a
+<a href=http://en.wikipedia.org/wiki/Template_engine_(web) title="Template engine">template language</a> like <a href=http://www.liquidmarkup.org/ title=Liquid>Liquid</a>. I found it a bit to
+abstract to really grasp it.</p><h4 id=functional-modeling-of-musical-harmonymus><a href=http://caes.ewi.utwente.nl/External/NLFP/#functionalmodelingofmusicalharmony title="Functional Modeling of Musical Harmony">Functional Modeling of Musical Harmony</a></h4><p>José Pedro Magalhães presented the way in which he and
+his fellow researchers used <a href=http://www.haskell.org/haskellwiki/Haskell title=Haskell>Haskell</a>
+<a href=http://www.haskell.org/haskellwiki/GADT title="Generalised algebraic datatype">Generalized Algebraic Data types</a> to model chord sequences. The
+practical application of this work could for instance be recognising
+music based on the found chord sequences. This talk was very
+interesting to me since it combined the field of music with
+programming <a href=http://www.haskell.org/haskellwiki/Haskell title=Haskell>Haskell</a>.</p><h4 id=the-expression-problem-in-clojurecexp><a href=http://caes.ewi.utwente.nl/External/NLFP/#theexpressionprobleminclojure title="The Expression Problem in Clojure">The Expression Problem in Clojure</a></h4><p>Sander van den Berg presented a way to solve a reformulation of the
+<a href=http://en.wikipedia.org/wiki/Expression_Problem title="Expression Problem">Expression Problem</a>. The expression problem was coined by
+<a href=http://homepages.inf.ed.ac.uk/wadler/ title="Phillip Wadler">Philip Wadler</a> as &lsquo;a salient indicator of its (red: programming
+language) capacity for expression&rsquo; <a href=http://www.daimi.au.dk/~madst/tool/papers/expression.txt title="Expression problem paper">[1]</a>. This was the only talk
+that featured a <a href=http://en.wikipedia.org/wiki/Type_system#Dynamic_typing title="Dynamic Typing">dynamically typed language</a>, <a href=http://clojure.org/ title=Clojure>Clojure</a> in
+this case. The language features demonstrated were <a href=http://clojure.org/Protocols title="Clojure protocols">protocols</a>
+and <a href=http://clojure.org/datatypes title="Clojure datatypes">data types</a>. Before the lunch break Sander also demo-ed a
+<a href=http://clojure.org/ title=Clojure>Clojure</a> program that was coded on stage at a Java conference,
+that tried to &lsquo;find&rsquo; a best estimate to the famous <a href=http://en.wikipedia.org/wiki/Mona_Lisa title="Mona Lisa">Mona Lisa</a>
+by drawing only polygons. The program also tried to demonstrate
+<a href=http://en.wikipedia.org/wiki/Lisp_(programming_language) title=Lisp>Lisp&rsquo;s</a> <a href=http://en.wikipedia.org/wiki/Homoiconicity title=Homoiconicity>homoiconicity</a>, this is the property that code
+can manipulate code because the syntax of the language can be
+represented as a data structure in a primitive type of the language.
+<a href=http://en.wikipedia.org/wiki/Lisp_(programming_language) title=Lisp>Lisp</a> is not the only language that is considered to be
+<a href=http://en.wikipedia.org/wiki/Homoiconicity title=Homoiconicity>homoiconic</a> other noteworthy examples are <a href=http://en.wikipedia.org/wiki/XSLT title=XSLT>XSLT</a>,
+<a href=http://en.wikipedia.org/wiki/PostScript_programming_language title=PostScript>Postscript</a> and <a href=http://www.r-project.org/ title="The R Project for Statistical Computing">R</a>.</p><h4 id=renjin-towards-a-more-pure-scalable-rrenjin><a href=http://caes.ewi.utwente.nl/External/NLFP/#renjintowardsamorepurescalabler title="Renjin: Towards a more pure, scalable R">Renjin: Towards a more pure, scalable R</a></h4><p>Alexander Bertram gave an interesting talk about his efforts to write
+a Java-based <a href=http://www.r-project.org/ title="The R Project for Statistical Computing">R</a> interpreter and compiler. <a href=http://www.r-project.org/ title="The R Project for Statistical Computing">R</a> is language with
+a large history, created and maintained mostly by statisticians and
+data-analysts. This accounts for the large number of language
+features, some of which make computer scientists curl their toes.
+<a href=http://www.r-project.org/ title="The R Project for Statistical Computing">R</a> is a functional language in which even if and break are
+functions, that can even be redefined, aaah. Running R in the &lsquo;cloud&rsquo;
+is the ultimate goal, to provide a solution for data-mining very large
+datasets.</p><h4 id=jquery-programming-with-haskelljqhas><a href=http://caes.ewi.utwente.nl/External/NLFP/#jqueryprogrammingwithhaskell title="jQuery Programming with Haskell">jQuery Programming with Haskell</a></h4><p>After lunch Jurriën Stutterheim presented the way one can
+currently use the <a href=http://www.cs.uu.nl/wiki/UHC title="Utrecht Haskell Compiler">Utrecht Haskell Compiler</a> to compile <a href=http://www.haskell.org/haskellwiki/Haskell title=Haskell>Haskell</a>
+code to JavaScript and how one can use the popular <a href=http://jquery.com/ title=jQuery>jQuery</a>
+library from within <a href=http://www.haskell.org/haskellwiki/Haskell title=Haskell>Haskell</a>. The demo was cool, there were
+still some hurdles to overcome however. The use of optional parameters
+is one of them. I couldn&rsquo;t help but wonder why some many people fight
+JavaScript. In my opinion we should just take it&rsquo;s good parts and use
+it&rsquo;s dynamic nature to our benefit and fight the error proneness of the
+dynamism with a sufficient set of unit tests, and right-sizing of
+view code using presentation patterns like <a href=http://en.wikipedia.org/wiki/MVVM title="Model View ViewModel">Model View ViewModel</a>.</p><h4 id=from-clean-to-javascript-via-saplclja><a href=http://caes.ewi.utwente.nl/External/NLFP/#fromcleantojavascriptviasapl title="From Clean to JavaScript via Sapl">From Clean to JavaScript via Sapl</a></h4><p>Jan Martin Jansen presented efforts to build a <a href=http://wiki.clean.cs.ru.nl/Clean title=Clean>Clean</a> to
+JavaScript compiler. This talk discussed in technical detail how some
+JavaScript constructs could be translated to Sapl (an intermediate
+language used by the <a href=http://wiki.clean.cs.ru.nl/Clean title=Clean>Clean</a> compiler).</p><h4 id=exchanging-sources-between-clean-and-haskell---a-double-edged-front-end-for-the-clean-compilerhascl><a href=http://caes.ewi.utwente.nl/External/NLFP/#cleanhaskell title="Clean Haskell">Exchanging sources between Clean and Haskell - A Double-Edged Front End for the Clean compiler</a></h4><p>Peter Achten presented work to combine the forces of <a href=http://wiki.clean.cs.ru.nl/Clean title=Clean>Clean</a>
+and <a href=http://www.haskell.org/haskellwiki/Haskell title=Haskell>Haskell</a> by providing two new dialects of both
+<a href=http://wiki.clean.cs.ru.nl/Clean title=Clean>Clean</a> and <a href=http://www.haskell.org/haskellwiki/Haskell title=Haskell>Haskell</a> that can be used with the
+<a href=http://wiki.clean.cs.ru.nl/Clean title=Clean>Clean</a> compiler. It was interesting to learn something about
+the similarities and differences between <a href=http://wiki.clean.cs.ru.nl/Clean title=Clean>Clean</a> and
+<a href=http://www.haskell.org/haskellwiki/Haskell title=Haskell>Haskell</a>. One of the differences between <a href=http://wiki.clean.cs.ru.nl/Clean title=Clean>Clean</a> and <a href=http://www.haskell.org/haskellwiki/Haskell title=Haskell>Haskell</a>
+is the fact the <a href=http://www.haskell.org/haskellwiki/Haskell title=Haskell>Haskell</a> uses <a href=http://www.haskell.org/haskellwiki/Monad title=Monad>Monads</a> to separate
+<a href=http://en.wikipedia.org/wiki/Pure_function title="Pure function">pure</a> code from <a href=http://en.wikipedia.org/wiki/Side_effect_(computer_science) title="Side effects">side effecting code</a> while
+<a href=http://wiki.clean.cs.ru.nl/Clean title=Clean>Clean</a> uses a concept called <a href=http://en.wikipedia.org/wiki/Uniqueness_type title="Uniqueness type">uniqueness types</a>.</p><h4 id=mixed-signal-modellingmixm><a href=http://caes.ewi.utwente.nl/External/NLFP/#mixedsignalmodelling title="Mixed-signal modelling">Mixed-signal modelling</a></h4><p>Kenneth Rovers presented his work on using <a href=http://www.haskell.org/haskellwiki/Haskell title=Haskell>Haskell</a> to create simulations
+of mixed-signals encountered for instance in a
+<a href=http://en.wikipedia.org/wiki/Phased_array title="Phased array">phased array</a>. The solution to the problem was very
+elegant, instead of trying to simulate a continuous signal with a set
+of values over a time-series, describe the simulation with functions
+that depend on the parameter time. The different components of the
+system can be composed using function composition.</p><h4 id=from-trees-to-graphs-and-back-againftgba><a href=http://caes.ewi.utwente.nl/External/NLFP/#fromtreestographsandbackagain title="From Trees to Graphs and Back Again">From Trees to Graphs and Back Again</a></h4><p>Next up Stefan Holdermans talked about making sharing explicit in
+<a href=http://en.wikipedia.org/wiki/Tree_(data_structure) title="Tree data structure">trees</a> which results in <a href=http://en.wikipedia.org/wiki/Graph_(mathematics) title=Graph>graphs</a>. Then he went on to
+explain how through the use of polynomial types<sup id=fnref:1><a href=#fn:1 class=footnote-ref role=doc-noteref>1</a></sup> and various
+<a href=http://en.wikipedia.org/wiki/Catamorphism title=Catamorphism>cata-</a> and <a href=http://en.wikipedia.org/wiki/Anamorphism title=Anamorphism>anamorphisms</a> one can impress your audience.
+Needless to say this talk was a bit to abstract for me even though
+I&rsquo;ve had my share of <a href=http://en.wikipedia.org/wiki/Category_theory title="Category theory">Category theory</a> while I was studying for
+my masters degree in mathematics. I could not see how this work would
+make me happy as a programmer trying to work with <a href=http://en.wikipedia.org/wiki/Graph_(mathematics) title=Graph>graphs</a>.</p><h4 id=evolving-the-layout-of-serialized-dataeser><a href=http://caes.ewi.utwente.nl/External/NLFP/#evolvingthelayoutofserializeddata title="Evolving the layout of serialized data">Evolving the layout of serialized data</a></h4><p>Alexey Rodriguez was the last presenter of the day. The title of the
+talk intrigued me, especially since I&rsquo;ve recently given up on
+serialization. In my opinion the time saved by not having to write a
+parser and generator for your data format is spent (and then some)
+solving the up-, and downgrade problems when using some form of
+serialization. Alexey described a framework in <a href=http://en.wikipedia.org/wiki/Ocaml title=OCaml>OCaml</a> used at
+<a href=http://www.vectorfabrics.com/ title=VectorFabrics>his company</a> to solve the aforementioned problem.</p><h4 id=aftermath>Aftermath</h4><p>The drinks and dinner afterwords were interesting and well deserved I
+would say. Having the opportunity to learn a little bit more about
+<a href=http://wiki.clean.cs.ru.nl/Clean title=Clean>Clean</a> and chat about using <a href=http://fscheck.codeplex.com/ title=FsCheck>FsCheck</a> to test a large
+<a href=http://en.wikipedia.org/wiki/C_Sharp_(programming_language) title=C#>C#</a> code-base. After a good meal I went home tired, inspired
+and functionally rewired.</p><div class=footnotes role=doc-endnotes><hr><ol><li id=fn:1><p>Of which I could not find a decent link describing them.&#160;<a href=#fnref:1 class=footnote-backref role=doc-backlink>&#8617;&#xfe0e;</a></p></li></ol></div></section><div class=post-tags></div></article></main><footer><div style=display:flex><a class=soc href=https://github.com/basbossink/ title=GitHub><i data-feather=github></i></a><a class=soc href=https://twitter.com/basbossink/ title=Twitter><i data-feather=twitter></i></a></div><div class=footer-info>2022 © Bas Bossink | <a href=https://github.com/athul/archie>Archie Theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div></footer><script>feather.replace()</script></div></body></html>

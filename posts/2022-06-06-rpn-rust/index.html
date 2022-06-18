@@ -1,0 +1,199 @@
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>RPN calculator in Rust - Nothing to see here</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Since I&rsquo;m now a Rust developer by day, I&rsquo;m trying to flatten my learning curve by using Rust for pet/learning projects. Trying to pick a task small enough to learn and looking for a calculator that is usable directly from the command-line, I didn&rsquo;t find anything I liked that was really simple. I&rsquo;m aware of calculators like bc(1), dc(1), kalker and of course calc in Emacs. All of these are extraordinary in their own right."><meta property="og:image" content><meta property="og:title" content="RPN calculator in Rust"><meta property="og:description" content="Since I&rsquo;m now a Rust developer by day, I&rsquo;m trying to flatten my learning curve by using Rust for pet/learning projects. Trying to pick a task small enough to learn and looking for a calculator that is usable directly from the command-line, I didn&rsquo;t find anything I liked that was really simple. I&rsquo;m aware of calculators like bc(1), dc(1), kalker and of course calc in Emacs. All of these are extraordinary in their own right."><meta property="og:type" content="article"><meta property="og:url" content="http://basbossink.github.io/posts/2022-06-06-rpn-rust/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-06-06T00:00:00+00:00"><meta property="article:modified_time" content="2022-06-06T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="RPN calculator in Rust"><meta name=twitter:description content="Since I&rsquo;m now a Rust developer by day, I&rsquo;m trying to flatten my learning curve by using Rust for pet/learning projects. Trying to pick a task small enough to learn and looking for a calculator that is usable directly from the command-line, I didn&rsquo;t find anything I liked that was really simple. I&rsquo;m aware of calculators like bc(1), dc(1), kalker and of course calc in Emacs. All of these are extraordinary in their own right."><script src=http://basbossink.github.io/js/feather.min.js></script>
+<link href=http://basbossink.github.io/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css rel=stylesheet><link rel=stylesheet type=text/css media=screen href=http://basbossink.github.io/css/main.40ca3a860425083862b7ebd55447caec5c4384573f0cb098b8d06a91e8dace2e.css><link id=darkModeStyle rel=stylesheet type=text/css href=http://basbossink.github.io/css/dark.726cd11ca6eb7c4f7d48eb420354f814e5c1b94281aaf8fd0511c1319f7f78a4.css><link rel=stylesheet type=text/css href=http://basbossink.github.io/css/overrides.c755da9dccb0cb7240fb81a9a5f7b0962c285b8f6c9bcce5b2e7fa691de6a58b.css></head><body><div class=content><header><div class=main><a href=http://basbossink.github.io/>Nothing to see here</a></div><nav><a href=/>Home</a>
+<a href=/posts>All posts</a>
+<a href=/projects>Projects</a>
+<a href=/about>About</a></nav></header><main><article><div class=title><h1 class=title>RPN calculator in Rust</h1><div class=meta>Posted on Jun 6, 2022</div></div><section class=body><p>Since I&rsquo;m now a <a href=https://rust-lang.org/>Rust</a> developer by day, I&rsquo;m trying to flatten my learning curve by using Rust for pet/learning projects. Trying to pick a task small enough to learn and looking for a calculator that is usable <em>directly</em> from the command-line, I didn&rsquo;t find anything I liked that was really simple. I&rsquo;m aware of calculators like <a href="https://www.freebsd.org/cgi/man.cgi?query=bc&sektion=1">bc(1)</a>, <a href="https://www.freebsd.org/cgi/man.cgi?query=dc&apropos=0&sektion=1">dc(1)</a>, <a href=https://kalker.xyz/>kalker</a> and of course <a href=https://www.gnu.org/software/emacs/manual/html_mono/calc.html>calc in Emacs</a>. All of these are extraordinary in their own right. For any extensive calculations and/or statistics there is of course <a href=https://julialang.org/>Julia</a> and <a href=https://www.r-project.org/>R</a>. What I wanted was something simple that allows one to type simple expressions directly in the shell without the need for quoting or escaping of special characters. Hence <a href=https://github.com/basbossink/rpn>rpn</a>.</p><h2 id=the-start>The start</h2><p>Because Rust has support for <a href=https://en.wikipedia.org/wiki/Algebraic_data_type>ADT</a>&rsquo;s via <code>enum</code>s <a href=https://doc.rust-lang.org/book/ch06-00-enums.html>see</a> the <a href=https://doc.rust-lang.org/book/ch06-00-enums.html>Enums and Pattern Matching</a> section in the <a href=https://doc.rust-lang.org/book/title-page.html>Rust book</a> for an introduction, handling a combination of integer and floating point arithmetic can be implemented with little effort. The first type written down looks like this:</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rust data-lang=rust><span style=display:flex><span><span style=color:#ff79c6>enum</span> <span style=color:#50fa7b>Num</span> {
+</span></span><span style=display:flex><span>    Integer(<span style=color:#8be9fd>i64</span>),
+</span></span><span style=display:flex><span>    Float(<span style=color:#8be9fd>f64</span>, <span style=color:#8be9fd>usize</span>),
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><p>The second value associated with the <code>Float</code> variant, is used to track the <a href=https://en.wikipedia.org/wiki/Significant_figures>number of signicant figures</a>. The possibility of an <em>item</em> being either a number or an operator is represented by the <code>Item</code> <code>enum</code>:</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rs data-lang=rs><span style=display:flex><span><span style=color:#ff79c6>enum</span> <span style=color:#50fa7b>Item</span> {
+</span></span><span style=display:flex><span>    Operand(Num),
+</span></span><span style=display:flex><span>    Operator(Oper),
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><p>Implementing the arithmetic was simply forwarding the hard work to the appropriate Rust standard library function. With a few <a href=https://doc.rust-lang.org/book/ch19-06-macros.html>macro&rsquo;s</a> to implement the necessary traits progress was nice. As an example here is the implementation of the binary operator trait:</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rs data-lang=rs><span style=display:flex><span><span style=color:#ff79c6>trait</span> BinaryOperator: <span style=color:#50fa7b>Display</span> {
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>apply</span>(<span style=color:#ff79c6>&amp;</span>self, lhs: <span style=color:#50fa7b>Num</span>, rhs: <span style=color:#50fa7b>Num</span>) -&gt; <span style=color:#50fa7b>Num</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>macro_rules! impl_bin_op {
+</span></span><span style=display:flex><span>    (<span style=color:#ff79c6>$oper</span>:<span style=color:#50fa7b>ident</span>, <span style=color:#ff79c6>$native_op</span>:<span style=color:#50fa7b>path</span>) <span style=color:#ff79c6>=&gt;</span> {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>impl</span> BinaryOperator <span style=color:#ff79c6>for</span> <span style=color:#ff79c6>$oper</span> {
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>apply</span>(<span style=color:#ff79c6>&amp;</span>self, lhs: <span style=color:#50fa7b>Num</span>, rhs: <span style=color:#50fa7b>Num</span>) -&gt; <span style=color:#50fa7b>Num</span> {
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>match</span> (lhs, rhs) {
+</span></span><span style=display:flex><span>                    (Num::Integer(l), Num::Integer(r)) <span style=color:#ff79c6>=&gt;</span> Num::Integer(<span style=color:#ff79c6>$native_op</span>(l, r)),
+</span></span><span style=display:flex><span>                    (Num::Float(l, prec), Num::Integer(r)) <span style=color:#ff79c6>=&gt;</span> {
+</span></span><span style=display:flex><span>                        Num::Float(<span style=color:#ff79c6>$native_op</span>(l, r <span style=color:#ff79c6>as</span> <span style=color:#8be9fd>f64</span>), prec)
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                    (Num::Integer(l), Num::Float(r, prec)) <span style=color:#ff79c6>=&gt;</span> {
+</span></span><span style=display:flex><span>                        Num::Float(<span style=color:#ff79c6>$native_op</span>(l <span style=color:#ff79c6>as</span> <span style=color:#8be9fd>f64</span>, r), prec)
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                    (Num::Float(l, lprec), Num::Float(r, rprec)) <span style=color:#ff79c6>=&gt;</span> {
+</span></span><span style=display:flex><span>                        Num::Float(<span style=color:#ff79c6>$native_op</span>(l, r), min(lprec, rprec))
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    };
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>struct</span> <span style=color:#50fa7b>Add</span>;
+</span></span><span style=display:flex><span>impl_bin_op<span style=color:#ff79c6>!</span>(Add, std::ops::Add::add);
+</span></span></code></pre></td></tr></table></div></div><p>Because the standard arithmetic operations are implemented is functions in the standard library these can be used here as the <code>$native_op</code> function.</p><h2 id=the-middle>The middle</h2><p>The parsing of the expressions, if one could call it that because all that is really happening is tokenizing. Is split into three <a href=https://doc.rust-lang.org/std/str/trait.FromStr.html><code>FromStr</code></a> implementations. The first one of the <code>Item</code> <code>enum</code>:</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rs data-lang=rs><span style=display:flex><span><span style=color:#ff79c6>impl</span> FromStr <span style=color:#ff79c6>for</span> Item {
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>type</span> <span style=color:#8be9fd;font-style:italic>Err</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>String</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>from_str</span>(s: <span style=color:#ff79c6>&amp;</span><span style=color:#8be9fd>str</span>) -&gt; <span style=color:#8be9fd;font-style:italic>Result</span><span style=color:#ff79c6>&lt;</span>Self, Self::<span style=color:#8be9fd;font-style:italic>Err</span><span style=color:#ff79c6>&gt;</span> {
+</span></span><span style=display:flex><span>        s.parse::<span style=color:#ff79c6>&lt;</span>Num<span style=color:#ff79c6>&gt;</span>().map_or_else(
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>|</span>err_1<span style=color:#ff79c6>|</span> s.parse::<span style=color:#ff79c6>&lt;</span>Oper<span style=color:#ff79c6>&gt;</span>().map_or_else(
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>|</span>err_2<span style=color:#ff79c6>|</span> <span style=color:#8be9fd;font-style:italic>Err</span>(format!(<span style=color:#f1fa8c>&#34;could not parse &#39;{s}&#39; as either a number or operator; {err_1}; {err_2}&#34;</span>)),
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>|</span>o<span style=color:#ff79c6>|</span> <span style=color:#8be9fd;font-style:italic>Ok</span>(Self::Operator(o))),
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>|</span>n<span style=color:#ff79c6>|</span> <span style=color:#8be9fd;font-style:italic>Ok</span>(Self::Operand(n)))
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><p>The second one is the implementation for <code>Num</code>:</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rs data-lang=rs><span style=display:flex><span><span style=color:#ff79c6>impl</span> FromStr <span style=color:#ff79c6>for</span> Num {
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>type</span> <span style=color:#8be9fd;font-style:italic>Err</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>String</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>from_str</span>(s: <span style=color:#ff79c6>&amp;</span><span style=color:#8be9fd>str</span>) -&gt; <span style=color:#8be9fd;font-style:italic>Result</span><span style=color:#ff79c6>&lt;</span>Self, Self::<span style=color:#8be9fd;font-style:italic>Err</span><span style=color:#ff79c6>&gt;</span> {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>if</span> PI_TOKEN <span style=color:#ff79c6>==</span> s {
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>return</span> <span style=color:#8be9fd;font-style:italic>Ok</span>(PI);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        s.parse::<span style=color:#ff79c6>&lt;</span><span style=color:#8be9fd>i64</span><span style=color:#ff79c6>&gt;</span>().map_or_else(
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>|</span>err_1<span style=color:#ff79c6>|</span> {
+</span></span><span style=display:flex><span>            <span style=color:#8be9fd;font-style:italic>let</span> prec <span style=color:#ff79c6>=</span> s
+</span></span><span style=display:flex><span>                .chars()
+</span></span><span style=display:flex><span>                .take_while(<span style=color:#ff79c6>|</span>c<span style=color:#ff79c6>|</span> <span style=color:#ff79c6>*</span>c <span style=color:#ff79c6>!=</span> <span style=color:#f1fa8c>&#39;e&#39;</span> <span style=color:#ff79c6>||</span> <span style=color:#ff79c6>*</span>c <span style=color:#ff79c6>!=</span> <span style=color:#f1fa8c>&#39;E&#39;</span>)
+</span></span><span style=display:flex><span>                .filter(<span style=color:#ff79c6>|</span>c<span style=color:#ff79c6>|</span> <span style=color:#8be9fd>char</span>::is_digit(<span style=color:#ff79c6>*</span>c, <span style=color:#bd93f9>10</span>))
+</span></span><span style=display:flex><span>                .count();
+</span></span><span style=display:flex><span>            s.parse::<span style=color:#ff79c6>&lt;</span><span style=color:#8be9fd>f64</span><span style=color:#ff79c6>&gt;</span>().map_or_else(
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>|</span>err_2<span style=color:#ff79c6>|</span> {
+</span></span><span style=display:flex><span>                    <span style=color:#8be9fd;font-style:italic>Err</span>(format!(
+</span></span><span style=display:flex><span>                        <span style=color:#f1fa8c>&#34;could not parse as floating point or integer number &#39;{s}&#39;; {err_1}; {err_2}&#34;</span>
+</span></span><span style=display:flex><span>                    ))
+</span></span><span style=display:flex><span>                },
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>|</span>f<span style=color:#ff79c6>|</span> <span style=color:#8be9fd;font-style:italic>Ok</span>(Self::Float(f, prec)),
+</span></span><span style=display:flex><span>            )
+</span></span><span style=display:flex><span>                },
+</span></span><span style=display:flex><span>                <span style=color:#ff79c6>|</span>i<span style=color:#ff79c6>|</span> <span style=color:#8be9fd;font-style:italic>Ok</span>(Self::Integer(i)),
+</span></span><span style=display:flex><span>            )
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><p>Here we see the nice <em>high-level</em> method chains that can be written in Rust, in this case to calculate the number of significant figures eluded to earlier.</p><p>The <code>FromStr</code> implementation, is a big switch statement looking something like:</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rs data-lang=rs><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>impl</span> FromStr <span style=color:#ff79c6>for</span> Oper {
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>type</span> <span style=color:#8be9fd;font-style:italic>Err</span> <span style=color:#ff79c6>=</span> <span style=color:#8be9fd;font-style:italic>String</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>fn</span> <span style=color:#50fa7b>from_str</span>(s: <span style=color:#ff79c6>&amp;</span><span style=color:#8be9fd>str</span>) -&gt; <span style=color:#8be9fd;font-style:italic>Result</span><span style=color:#ff79c6>&lt;</span>Self, Self::<span style=color:#8be9fd;font-style:italic>Err</span><span style=color:#ff79c6>&gt;</span> {
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>match</span> s {
+</span></span><span style=display:flex><span>            <span style=color:#f1fa8c>&#34;+&#34;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#8be9fd;font-style:italic>Ok</span>(Self::Bin(BinOp {
+</span></span><span style=display:flex><span>                oper: <span style=color:#8be9fd;font-style:italic>Box</span>::new(Add),
+</span></span><span style=display:flex><span>            })),
+</span></span><span style=display:flex><span>            <span style=color:#f1fa8c>&#34;-&#34;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#8be9fd;font-style:italic>Ok</span>(Self::Bin(BinOp {
+</span></span><span style=display:flex><span>                oper: <span style=color:#8be9fd;font-style:italic>Box</span>::new(Sub),
+</span></span><span style=display:flex><span>            })),
+</span></span><span style=display:flex><span>            <span style=color:#f1fa8c>&#34;x&#34;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#8be9fd;font-style:italic>Ok</span>(Self::Bin(BinOp {
+</span></span><span style=display:flex><span>                oper: <span style=color:#8be9fd;font-style:italic>Box</span>::new(Mult),
+</span></span><span style=display:flex><span>            })),
+</span></span><span style=display:flex><span>            ⋮ 
+</span></span><span style=display:flex><span>            })),
+</span></span><span style=display:flex><span>            <span style=color:#f1fa8c>&#34;..=&#34;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#8be9fd;font-style:italic>Ok</span>(Self::Range(RangeOp {
+</span></span><span style=display:flex><span>                oper: <span style=color:#8be9fd;font-style:italic>Box</span>::new(RangeInc),
+</span></span><span style=display:flex><span>            })),
+</span></span><span style=display:flex><span>            bad <span style=color:#ff79c6>=&gt;</span> <span style=color:#8be9fd;font-style:italic>Err</span>(format!(<span style=color:#f1fa8c>&#34;not a valid operator &#39;{bad}&#39;&#34;</span>)),
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></td></tr></table></div></div><p>The <code>main</code> function takes in all arguments splits them on whitespace and call&rsquo;s <code>.parse::&lt;Item>()</code>.</p><p>The evaluator takes the <code>Item</code>&rsquo;s and performs the operations by manipulating the stack as one would expect. Using the mentioned macro&rsquo;s this calculator was implemented in 480 lines of code, excluding the tests.</p><h3 id=conclusion>Conclusion</h3><p>It was fun to work on this tiny side-project, it learned me a great deal especially about <a href=https://doc.rust-lang.org/book/ch10-02-traits.html>traits</a> and the differences between <a href=https://doc.rust-lang.org/std/iter/index.html><code>iter()</code></a> and <a href=https://doc.rust-lang.org/std/iter/trait.IntoIterator.html><code>into_iter()</code></a>.</p></section><div class=post-tags></div></article></main><footer><div style=display:flex><a class=soc href=https://github.com/basbossink/ title=GitHub><i data-feather=github></i></a><a class=soc href=https://twitter.com/basbossink/ title=Twitter><i data-feather=twitter></i></a></div><div class=footer-info>2022 © Bas Bossink | <a href=https://github.com/athul/archie>Archie Theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div></footer><script>feather.replace()</script></div></body></html>

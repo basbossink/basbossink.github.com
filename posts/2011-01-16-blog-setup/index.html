@@ -1,0 +1,217 @@
+<!doctype html><html><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><title>Combining Jekyll, Haml and Sass with GitHub Pages - Nothing to see here</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Using Git introduced me to the wonderful services of GitHub. One of the many great features of GitHub is something known as GitHub Pages. To quote the GitHub Pages intro:
+The GitHub Pages feature allows you to publish content to the web by simply pushing content to one of your GitHub hosted repositories. You can use GitHub Pages for the website of your project or as a &lsquo;User Page&rsquo;. GitHub uses Git&rsquo;s post-commit hooks, to invoke Jekyll a Ruby based static site generator."><meta property="og:image" content><meta property="og:title" content="Combining Jekyll, Haml and Sass with GitHub Pages"><meta property="og:description" content="Using Git introduced me to the wonderful services of GitHub. One of the many great features of GitHub is something known as GitHub Pages. To quote the GitHub Pages intro:
+The GitHub Pages feature allows you to publish content to the web by simply pushing content to one of your GitHub hosted repositories. You can use GitHub Pages for the website of your project or as a &lsquo;User Page&rsquo;. GitHub uses Git&rsquo;s post-commit hooks, to invoke Jekyll a Ruby based static site generator."><meta property="og:type" content="article"><meta property="og:url" content="http://basbossink.github.io/posts/2011-01-16-blog-setup/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2011-01-16T00:00:00+00:00"><meta property="article:modified_time" content="2011-01-16T00:00:00+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Combining Jekyll, Haml and Sass with GitHub Pages"><meta name=twitter:description content="Using Git introduced me to the wonderful services of GitHub. One of the many great features of GitHub is something known as GitHub Pages. To quote the GitHub Pages intro:
+The GitHub Pages feature allows you to publish content to the web by simply pushing content to one of your GitHub hosted repositories. You can use GitHub Pages for the website of your project or as a &lsquo;User Page&rsquo;. GitHub uses Git&rsquo;s post-commit hooks, to invoke Jekyll a Ruby based static site generator."><script src=http://basbossink.github.io/js/feather.min.js></script>
+<link href=http://basbossink.github.io/css/fonts.b685ac6f654695232de7b82a9143a46f9e049c8e3af3a21d9737b01f4be211d1.css rel=stylesheet><link rel=stylesheet type=text/css media=screen href=http://basbossink.github.io/css/main.40ca3a860425083862b7ebd55447caec5c4384573f0cb098b8d06a91e8dace2e.css><link id=darkModeStyle rel=stylesheet type=text/css href=http://basbossink.github.io/css/dark.726cd11ca6eb7c4f7d48eb420354f814e5c1b94281aaf8fd0511c1319f7f78a4.css><link rel=stylesheet type=text/css href=http://basbossink.github.io/css/overrides.c755da9dccb0cb7240fb81a9a5f7b0962c285b8f6c9bcce5b2e7fa691de6a58b.css></head><body><div class=content><header><div class=main><a href=http://basbossink.github.io/>Nothing to see here</a></div><nav><a href=/>Home</a>
+<a href=/posts>All posts</a>
+<a href=/projects>Projects</a>
+<a href=/about>About</a></nav></header><main><article><div class=title><h1 class=title>Combining Jekyll, Haml and Sass with GitHub Pages</h1><div class=meta>Posted on Jan 16, 2011</div></div><section class=body><p>Using <a href=http://git-scm.com/ title=Git>Git</a> introduced me to the wonderful services of
+<a href=http://github.com/ title=GitHub>GitHub</a>. One of the many great features of <a href=http://github.com/ title=GitHub>GitHub</a> is
+something known as <a href=http://pages.github.com/ title="GitHub Pages">GitHub Pages</a>. To quote the
+<a href=http://pages.github.com/ title="GitHub Pages">GitHub Pages</a> intro:</p><blockquote><p>The GitHub Pages feature allows you to publish content to the web by
+simply pushing content to one of your GitHub hosted repositories.
+You can use <a href=http://pages.github.com/ title="GitHub Pages">GitHub Pages</a> for the website of your project or
+as a &lsquo;User Page&rsquo;. <a href=http://github.com/ title=GitHub>GitHub</a> uses <a href=http://git-scm.com/ title=Git>Git</a>&rsquo;s
+<a href=http://www.kernel.org/pub/software/scm/git/docs/githooks.html title=githooks>post-commit hooks</a>, to invoke <a href=http://jekyllrb.com/ title=Jekyll>Jekyll</a> a <a href=http://www.ruby-lang.org/en/ title=Ruby>Ruby</a>
+based static site generator.</p></blockquote><h2 id=enter-haml>Enter Haml</h2><p>Writing HTML by hand is somewhat tiresome, <a href=http://jekyllrb.com/ title=Jekyll>Jekyll</a> relieves this
+burden for the most part by providing rendering of <a href=http://daringfireball.net/projects/markdown/ title=Markdown>Markdown</a> or
+<a href=http://www.textism.com/tools/textile/ title=Textile>Textilize</a> if that&rsquo;s what you prefer. The layout pages still require you to
+write HTML though. <a href=http://haml-lang.com/ title=Haml>Haml</a> is a <a href=http://rubyonrails.org/ title="Ruby on Rails">Rails</a> view engine that has
+a really nice syntax and has the ability to execute <a href=http://www.ruby-lang.org/en/ title=Ruby>Ruby</a> code.
+After converting my <a href=https://github.com/basbossink/basbossink.github.com/blob/master/_layouts/default_haml.haml title="Default layout">default layout</a> from HTML to <a href=http://haml-lang.com/ title=Haml>Haml</a>,
+I was really happy with the result. The structure was much more clear
+and no more of those missing end tags. <a href=http://haml-lang.com/ title=Haml>Haml</a> is not
+integrated into the stock <a href=http://jekyllrb.com/ title=Jekyll>Jekyll</a> version, <a href=http://blog.martiandesigns.com/2010/07/19/haml-sass-converters-for-jekyll.html title="Haml and SASS converters for Jekyll">here</a> is a
+<a href=https://github.com/mojombo/jekyll/wiki/Plugins title="Jekyll Plugins">Jekyll plugin</a>, that does the trick. This plugin works great
+for the content and stylesheets but does not work for the <code>_layout</code>
+content. Therefor I decided to call <a href=http://rake.rubyforge.org/ title=Rake>Rake</a> to the rescue and use
+the following rule to generate the HTML for the <code>_layout</code> directory</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rb data-lang=rb><span style=display:flex><span>
+</span></span><span style=display:flex><span>rule <span style=color:#f1fa8c>&#39;.html&#39;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#ff79c6>[</span><span style=color:#f1fa8c>&#39;.haml&#39;</span><span style=color:#ff79c6>]</span> <span style=color:#ff79c6>do</span> <span style=color:#ff79c6>|</span>t<span style=color:#ff79c6>|</span>
+</span></span><span style=display:flex><span>    sh <span style=color:#f1fa8c>%{ haml -E utf-8 </span><span style=color:#f1fa8c>#{</span>t<span style=color:#ff79c6>.</span>source<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c> </span><span style=color:#f1fa8c>#{</span>t<span style=color:#ff79c6>.</span>name<span style=color:#ff79c6>.</span>sub(<span style=color:#f1fa8c>/_haml\./</span>,<span style=color:#f1fa8c>&#39;.&#39;</span>)<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c> }</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span></code></pre></td></tr></table></div></div><p>Note the non-standard output filename on line 2, this is needed because
+<a href=http://jekyllrb.com/ title=Jekyll>Jekyll</a> does not use extensions when referring to layouts and it
+chooses any file in the <code>_layout</code> directory with the correct base
+name. With this rule in place I can generate my layout using
+<a href=http://haml-lang.com/ title=Haml>Haml</a>. Since I was rendering the layout HTML locally I decided
+to skip the plugin altogether and generate the CSS with <a href=http://sass-lang.com/ title=Sass>Sass</a>
+locallly as well. Since this also gives me more control and I can be
+sure that the page rendered locally will look exactly the same once
+everything is committed. For generating the CSS I use the following rule:</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">5
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rb data-lang=rb><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>rule <span style=color:#f1fa8c>&#39;.css&#39;</span> <span style=color:#ff79c6>=&gt;</span> <span style=color:#ff79c6>[</span><span style=color:#f1fa8c>&#39;.scss&#39;</span><span style=color:#ff79c6>]</span> <span style=color:#ff79c6>do</span> <span style=color:#ff79c6>|</span>t<span style=color:#ff79c6>|</span>
+</span></span><span style=display:flex><span>    sh <span style=color:#f1fa8c>%{ sass -t compressed </span><span style=color:#f1fa8c>#{</span>t<span style=color:#ff79c6>.</span>source<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c> </span><span style=color:#f1fa8c>#{</span>t<span style=color:#ff79c6>.</span>name<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c> }</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=generating-a-tag-cloud>Generating a tag cloud</h2><p>Using <a href=http://haml-lang.com/ title=Haml>Haml</a> in the layout page opens some interesting
+possibilities since we can embed <a href=http://www.ruby-lang.org/en/ title=Ruby>Ruby</a> code inside the
+template. I found some <a href=http://rake.rubyforge.org/ title=Rake>Rake</a> <a href=https://gist.github.com/143571 title="Gist to generate tag cloud using Rake">snippets</a> to generate
+tag lists using <a href=http://jekyllrb.com/ title=Jekyll>Jekyll</a>&rsquo;s api. Adapt that code a bit and <a href=http://haml-lang.com/ title=Haml>Haml</a>
+can generate the tag cloud using <a href=http://jekyllrb.com/ title=Jekyll>Jekyll</a>. This in turn gets used as part
+of the layout for each post. Isn&rsquo;t that a wonderful self referential
+system. Here&rsquo;s the <a href=http://haml-lang.com/ title=Haml>Haml</a> code to produce the tag list you see
+in the right column.</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rb data-lang=rb><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>%</span>h3 Categories
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>%</span>ul
+</span></span><span style=display:flex><span>  <span style=color:#f1fa8c>:ruby</span>
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>require</span> <span style=color:#f1fa8c>&#39;rubygems&#39;</span>
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>require</span> <span style=color:#f1fa8c>&#39;jekyll&#39;</span>
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>puts</span> <span style=color:#f1fa8c>&#34;&lt;!--&#34;</span>
+</span></span><span style=display:flex><span>  options <span style=color:#ff79c6>=</span> Jekyll<span style=color:#ff79c6>.</span>configuration({})
+</span></span><span style=display:flex><span>  site <span style=color:#ff79c6>=</span> Jekyll<span style=color:#ff79c6>::</span>Site<span style=color:#ff79c6>.</span>new(options)
+</span></span><span style=display:flex><span>  site<span style=color:#ff79c6>.</span>read_posts(<span style=color:#f1fa8c>&#39;&#39;</span>)
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>puts</span> <span style=color:#f1fa8c>&#34;--&gt;&#34;</span>
+</span></span><span style=display:flex><span>  site<span style=color:#ff79c6>.</span>categories<span style=color:#ff79c6>.</span>sort<span style=color:#ff79c6>.</span>each <span style=color:#ff79c6>do</span> <span style=color:#ff79c6>|</span>category, posts<span style=color:#ff79c6>|</span>
+</span></span><span style=display:flex><span>      <span style=color:#8be9fd;font-style:italic>print</span> <span style=color:#f1fa8c>&#34;&lt;li&gt;&#34;</span>
+</span></span><span style=display:flex><span>      <span style=color:#8be9fd;font-style:italic>print</span> <span style=color:#f1fa8c>&#34;&lt;a href=</span><span style=color:#f1fa8c>\&#34;</span><span style=color:#f1fa8c>/tags/</span><span style=color:#f1fa8c>#{</span>category<span style=color:#ff79c6>.</span>gsub(<span style=color:#f1fa8c>/\s+/</span>,<span style=color:#f1fa8c>&#39;-&#39;</span>)<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>.html</span><span style=color:#f1fa8c>\&#34;</span><span style=color:#f1fa8c>&gt;&#34;</span>
+</span></span><span style=display:flex><span>      <span style=color:#8be9fd;font-style:italic>print</span> <span style=color:#f1fa8c>&#34;</span><span style=color:#f1fa8c>#{</span>category<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c> (</span><span style=color:#f1fa8c>#{</span>posts<span style=color:#ff79c6>.</span>length<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>)&lt;/a&gt;&#34;</span>
+</span></span><span style=display:flex><span>      <span style=color:#8be9fd;font-style:italic>print</span> <span style=color:#f1fa8c>&#34;&lt;/li&gt;&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span></code></pre></td></tr></table></div></div><p>Apparently <code>site.read_posts</code> outputs to stdout to avoid it from
+clogging up the page it&rsquo;s output gets rendered as an HTML comment
+(line 6 and 10).</p><h3 id=generating-pages-for-posts-per-tag>Generating pages for posts per tag</h3><p>Also inspired by <a href=https://gist.github.com/143571 title="Gist to generate tag cloud using Rake">this gist</a> I added a <a href=http://rake.rubyforge.org/ title=Rake>Rake</a> task to
+generate a page for each used tag in the site containing all posts
+that refer to the tag. Here&rsquo;s the code:</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rb data-lang=rb><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>namespace <span style=color:#f1fa8c>:tags</span> <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>  task <span style=color:#f1fa8c>:clean</span> <span style=color:#ff79c6>do</span> 
+</span></span><span style=display:flex><span>    rm_rf <span style=color:#f1fa8c>&#34;tags&#34;</span>
+</span></span><span style=display:flex><span>    mkdir <span style=color:#f1fa8c>&#34;tags&#34;</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  task <span style=color:#f1fa8c>:generate</span> <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>puts</span> <span style=color:#f1fa8c>&#39;Generating tags...&#39;</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>require</span> <span style=color:#f1fa8c>&#39;rubygems&#39;</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>require</span> <span style=color:#f1fa8c>&#39;jekyll&#39;</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>include</span> Jekyll<span style=color:#ff79c6>::</span>Filters
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    options <span style=color:#ff79c6>=</span> Jekyll<span style=color:#ff79c6>.</span>configuration({})
+</span></span><span style=display:flex><span>    site <span style=color:#ff79c6>=</span> Jekyll<span style=color:#ff79c6>::</span>Site<span style=color:#ff79c6>.</span>new(options)
+</span></span><span style=display:flex><span>    site<span style=color:#ff79c6>.</span>read_posts(<span style=color:#f1fa8c>&#39;&#39;</span>)
+</span></span><span style=display:flex><span>    site<span style=color:#ff79c6>.</span>categories<span style=color:#ff79c6>.</span>sort<span style=color:#ff79c6>.</span>each <span style=color:#ff79c6>do</span> <span style=color:#ff79c6>|</span>category, posts<span style=color:#ff79c6>|</span>
+</span></span><span style=display:flex><span>      keywords <span style=color:#ff79c6>=</span> aggregate_keywords(category, posts)
+</span></span><span style=display:flex><span>      html<span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&lt;&lt;-HTML
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c></span><span style=color:#ff79c6>+++</span>
+</span></span><span style=display:flex><span><span style=color:#f1fa8c>layout</span>: default
+</span></span><span style=display:flex><span>title <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#34;Posts tagged </span><span style=color:#f1fa8c>#{</span>category<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c>&#34;</span>
+</span></span><span style=display:flex><span><span style=color:#f1fa8c>keywords</span>: <span style=color:#ff79c6>[</span><span style=color:#6272a4>#{keywords}]</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>+++</span>
+</span></span><span style=display:flex><span>HTML
+</span></span><span style=display:flex><span>      posts<span style=color:#ff79c6>.</span>each <span style=color:#ff79c6>do</span> <span style=color:#ff79c6>|</span>post<span style=color:#ff79c6>|</span>
+</span></span><span style=display:flex><span>        post_data <span style=color:#ff79c6>=</span> post<span style=color:#ff79c6>.</span>to_liquid
+</span></span><span style=display:flex><span>        html <span style=color:#ff79c6>&lt;&lt;</span> <span style=color:#f1fa8c>&lt;&lt;-HTML
+</span></span></span><span style=display:flex><span><span style=color:#f1fa8c></span><span style=color:#ff79c6>&lt;</span>h2<span style=color:#ff79c6>&gt;&lt;</span>a href<span style=color:#ff79c6>=</span><span style=color:#f1fa8c>&#34;</span><span style=color:#f1fa8c>#{</span>post_data<span style=color:#ff79c6>[</span><span style=color:#f1fa8c>&#39;url&#39;</span><span style=color:#ff79c6>]</span><span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>&#34;</span><span style=color:#ff79c6>&gt;</span><span style=color:#6272a4>#{post_data[&#39;title&#39;]}&gt;&lt;/a&gt;&lt;/h2&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>#{post_data[&#39;content&#39;]}</span>
+</span></span><span style=display:flex><span>HTML
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>      File<span style=color:#ff79c6>.</span>open(<span style=color:#f1fa8c>&#34;tags/</span><span style=color:#f1fa8c>#{</span>category<span style=color:#ff79c6>.</span>gsub(<span style=color:#f1fa8c>/\s+/</span>,<span style=color:#f1fa8c>&#39;-&#39;</span>)<span style=color:#f1fa8c>}</span><span style=color:#f1fa8c>.md&#34;</span>, <span style=color:#f1fa8c>&#39;w+&#39;</span>) <span style=color:#ff79c6>do</span> <span style=color:#ff79c6>|</span>file<span style=color:#ff79c6>|</span>
+</span></span><span style=display:flex><span>        file<span style=color:#ff79c6>.</span>puts html
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span></code></pre></td></tr></table></div></div><p>To be able to fill the <code>&lt;meta keywords...</code> each post puts keywords
+appropriate for the post in the <a href=https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter title="YAML front matter">Yaml Front Matter</a>.
+The function <code>aggregate_keywords</code> just puts the category at hand
+and all the keywords from all posts in one set and returns them as a comma
+separated list, like so:</p><div class=highlight><div style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><table style=border-spacing:0;padding:0;margin:0;border:0><tr><td style=vertical-align:top;padding:0;margin:0;border:0><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="white-space:pre;user-select:none;margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span></code></pre></td><td style=vertical-align:top;padding:0;margin:0;border:0;width:100%><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-rb data-lang=rb><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>def</span> <span style=color:#50fa7b>aggregate_keywords</span>(category,posts)
+</span></span><span style=display:flex><span>  keywords <span style=color:#ff79c6>=</span> SortedSet<span style=color:#ff79c6>.</span>new()
+</span></span><span style=display:flex><span>  keywords <span style=color:#ff79c6>&lt;&lt;</span> category
+</span></span><span style=display:flex><span>  posts<span style=color:#ff79c6>.</span>each <span style=color:#ff79c6>do</span> <span style=color:#ff79c6>|</span>post<span style=color:#ff79c6>|</span>
+</span></span><span style=display:flex><span>    post_data <span style=color:#ff79c6>=</span> post<span style=color:#ff79c6>.</span>to_liquid
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> post_data<span style=color:#ff79c6>.</span>has_key? <span style=color:#f1fa8c>&#39;keywords&#39;</span> 
+</span></span><span style=display:flex><span>      post_data<span style=color:#ff79c6>[</span><span style=color:#f1fa8c>&#39;keywords&#39;</span><span style=color:#ff79c6>].</span>each <span style=color:#ff79c6>do</span> <span style=color:#ff79c6>|</span>word<span style=color:#ff79c6>|</span>
+</span></span><span style=display:flex><span>        keywords <span style=color:#ff79c6>&lt;&lt;</span> word
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>return</span> keywords<span style=color:#ff79c6>.</span>to_a<span style=color:#ff79c6>.</span>join(<span style=color:#f1fa8c>&#39;,&#39;</span>)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span></code></pre></td></tr></table></div></div><p>Next up from my blog setup backlog is a comments facility.
+If you&rsquo;d like to use any of the code quoted above
+<a href=https://github.com/basbossink/basbossink.github.com title="Github Pages repository">fork me on GitHub</a>.</p></section><div class=post-tags></div></article></main><footer><div style=display:flex><a class=soc href=https://github.com/basbossink/ title=GitHub><i data-feather=github></i></a><a class=soc href=https://twitter.com/basbossink/ title=Twitter><i data-feather=twitter></i></a></div><div class=footer-info>2022 © Bas Bossink | <a href=https://github.com/athul/archie>Archie Theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div></footer><script>feather.replace()</script></div></body></html>
